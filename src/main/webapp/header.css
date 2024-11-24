@@ -1,0 +1,43 @@
+.btnDangNhap{
+    border-radius: 15px;
+    background-color: #53be6a;
+    border: 1px solid gray;
+    color: inherit;   /* Giữ màu chữ theo ngữ cảnh */
+    cursor: pointer;  /* Hiển thị con trỏ khi di chuột */
+    padding: 0;       /* Bỏ đi khoảng cách bên trong */
+    outline: none;    /* Xóa viền khi bấm */
+    color: #fff;
+    height: 40px;
+    width: 120px;
+    transition: 0.3s ease-in-out;
+}
+/* button tìm kiếm */
+#search-box{
+    /* margin-top: 20px; */
+    background: #fff;
+    border-radius: 30px;
+    transition: transform 0.25s ease-in-out;
+    display: flex;
+    align-items: center;
+    /* transform: translateX(25px); */
+    /* box-shadow: 5px 5px 10px gray; */
+    border: 1px solid gray;
+}
+#search-box #search-text{
+    flex: 1;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 15px;
+    width: 200px;
+    padding: 0;
+    transition: all 0.4s ease-in-out;
+    padding: 10px 0px 10px 15px;
+}
+#search-box #search-btn{
+    background-color: rgba(255,255,255,0.7);
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+}

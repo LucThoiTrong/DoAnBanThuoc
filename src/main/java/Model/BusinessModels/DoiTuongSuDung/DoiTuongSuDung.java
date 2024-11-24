@@ -12,15 +12,13 @@ public abstract class DoiTuongSuDung implements Serializable {
     private int id;
     private String ten;
     private String soDienThoai;
-    private String diaChi;
-
+    private String email;
     public DoiTuongSuDung() {}
 
-    public DoiTuongSuDung(int id, String ten, String soDienThoai, String diaChi) {
-        this.id = id;
+    public DoiTuongSuDung(String ten, String soDienThoai, String email) {
         this.ten = ten;
         this.soDienThoai = soDienThoai;
-        this.diaChi = diaChi;
+        this.email = email;
     }
 
     public int getId() {
@@ -47,11 +45,11 @@ public abstract class DoiTuongSuDung implements Serializable {
         this.soDienThoai = soDienThoai;
     }
 
-    public String getDiaChi() {
-        return diaChi;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

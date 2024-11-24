@@ -1,6 +1,5 @@
 package Model.BusinessModels.SanPham;
 
-import Model.BusinessModels.SanPham.ChiTietSanPham.ChiTietSanPham;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -20,8 +19,11 @@ public class DonViTinh implements Serializable {
 
     public DonViTinh() {}
 
-    public DonViTinh(int id, String tenDonViTinh, Set<ChiTietSanPham> cacChiTietSanPham) {
-        this.id = id;
+    public DonViTinh(String tenDonViTinh) {
+        this.tenDonViTinh = tenDonViTinh;
+    }
+
+    public DonViTinh(String tenDonViTinh, Set<ChiTietSanPham> cacChiTietSanPham) {
         this.tenDonViTinh = tenDonViTinh;
         this.cacChiTietSanPham = cacChiTietSanPham;
     }
@@ -48,5 +50,13 @@ public class DonViTinh implements Serializable {
 
     public void setCacChiTietSanPham(Set<ChiTietSanPham> cacChiTietSanPham) {
         this.cacChiTietSanPham = cacChiTietSanPham;
+    }
+
+    public void addChiTietSanPham(ChiTietSanPham chiTietSanPham){
+        this.cacChiTietSanPham.add(chiTietSanPham);
+    }
+
+    public void removeChiTietSanPham(ChiTietSanPham chiTietSanPham){
+        this.cacChiTietSanPham.remove(chiTietSanPham);
     }
 }

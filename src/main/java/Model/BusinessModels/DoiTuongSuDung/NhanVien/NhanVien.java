@@ -19,8 +19,13 @@ public class NhanVien extends DoiTuongSuDung {
         super();
     }
 
-    public NhanVien(int id, String ten, String soDienThoai, String diaChi, ChucVu chucVu, Set<NhapHang> dsNhapHang) {
-        super(id, ten, soDienThoai, diaChi);
+    public NhanVien(String ten, String soDienThoai, String email, ChucVu chucVu) {
+        super(ten, soDienThoai, email);
+        this.chucVu = chucVu;
+    }
+
+    public NhanVien(String ten, String soDienThoai, String email, ChucVu chucVu, Set<NhapHang> dsNhapHang) {
+        super(ten, soDienThoai,email);
         this.chucVu = chucVu;
         this.dsNhapHang = dsNhapHang;
     }

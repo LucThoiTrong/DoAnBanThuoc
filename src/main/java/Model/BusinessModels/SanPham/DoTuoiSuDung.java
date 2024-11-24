@@ -19,8 +19,11 @@ public class DoTuoiSuDung implements Serializable {
 
     public DoTuoiSuDung() {}
 
-    public DoTuoiSuDung(int id, String doiTuongSuDung, Set<SanPham> danhSachSanPham) {
-        this.id = id;
+    public DoTuoiSuDung(String doiTuongSuDung) {
+        this.doiTuongSuDung = doiTuongSuDung;
+    }
+
+    public DoTuoiSuDung(String doiTuongSuDung, Set<SanPham> danhSachSanPham) {
         this.doiTuongSuDung = doiTuongSuDung;
         this.danhSachSanPham = danhSachSanPham;
     }
@@ -47,5 +50,12 @@ public class DoTuoiSuDung implements Serializable {
 
     public void setDanhSachSanPham(Set<SanPham> danhSachSanPham) {
         this.danhSachSanPham = danhSachSanPham;
+    }
+
+    public void addSanPham(SanPham sanPham){
+        danhSachSanPham.add(sanPham);
+    }
+    public void removeSanPham(SanPham sanPham){
+        danhSachSanPham.remove(sanPham);
     }
 }

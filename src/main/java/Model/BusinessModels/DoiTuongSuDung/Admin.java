@@ -8,7 +8,7 @@ public class Admin extends DoiTuongSuDung{
         super();
     }
 
-    public Admin(int id, String ten, String soDienThoai, String diaChi) {
-        super(id, ten, soDienThoai, diaChi);
+    public Admin(String ten, String soDienThoai, String email) {
+        super(ten, soDienThoai, email);
     }
 }

@@ -1,6 +1,5 @@
 package Model.BusinessModels.DoiTuongSuDung.NhanVien;
 
-import Model.BusinessModels.DoiTuongSuDung.NhanVien.ChiTietNhapHang.ChiTietNhapHang;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -12,7 +11,8 @@ import java.util.Set;
 public class NhapHang implements Serializable {
     @Id
     @Column(name = "NhapHangID")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private Date ngayDatHang;
     @OneToMany(mappedBy = "nhapHang", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ChiTietNhapHang> danhSachSanPham = new HashSet<>();
@@ -21,19 +21,17 @@ public class NhapHang implements Serializable {
     private NhanVien nhanVien;
     public NhapHang() {}
 
-    public NhapHang(String id, Date ngayDatHang, Set<ChiTietNhapHang> danhSachSanPham, boolean trangThaiDonHang, NhanVien nhanVien) {
-        this.id = id;
+    public NhapHang(Date ngayDatHang, boolean trangThaiDonHang, NhanVien nhanVien) {
         this.ngayDatHang = ngayDatHang;
-        this.danhSachSanPham = danhSachSanPham;
         this.trangThaiDonHang = trangThaiDonHang;
         this.nhanVien = nhanVien;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

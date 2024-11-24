@@ -1,6 +1,5 @@
 package Model.BusinessModels.DoiTuongSuDung.KhacHang;
 
-import Model.BusinessModels.DoiTuongSuDung.KhacHang.ChiTietDatHang.ChiTietDatHang;
 import Model.BusinessModels.Enum.PhuongThucThanhToan;
 import Model.BusinessModels.Enum.TrangThaiDatHang;
 import jakarta.persistence.*;
@@ -28,6 +27,9 @@ public class DatHang implements Serializable {
 
     @OneToMany(mappedBy = "datHang", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ChiTietDatHang> danhSachSanPham = new HashSet<>();
+
+    @OneToMany(mappedBy = "datHang", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<AnhDonThuoc> danhSachAnhDonThuoc = new HashSet<>();
 
     public DatHang() {}
 

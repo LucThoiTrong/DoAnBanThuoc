@@ -6,16 +6,20 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Set;
 
 @Entity
 public class DanhGia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String noiDungDanhGia;
     private Date ngayDanhGia;
     private Time thoiGianDanhGia;
     private int diemDanhGia;
+
+    @OneToMany(mappedBy = "danhGia", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<BinhLuan> dsBinhLuan;
 
     @ManyToOne
     @JoinColumn(name = "KhachHangID")
@@ -27,22 +31,31 @@ public class DanhGia implements Serializable {
 
     public DanhGia() {}
 
-    public DanhGia(Long id, String noiDungDanhGia, Date ngayDanhGia, Time thoiGianDanhGia, int diemDanhGia, KhachHang khachHang, SanPham sanPham) {
+    public DanhGia(int id, String noiDungDanhGia, Date ngayDanhGia, Time thoiGianDanhGia, int diemDanhGia, Set<BinhLuan> dsBinhLuan, KhachHang khachHang, SanPham sanPham) {
         this.id = id;
         this.noiDungDanhGia = noiDungDanhGia;
         this.ngayDanhGia = ngayDanhGia;
         this.thoiGianDanhGia = thoiGianDanhGia;
         this.diemDanhGia = diemDanhGia;
+        this.dsBinhLuan = dsBinhLuan;
         this.khachHang = khachHang;
         this.sanPham = sanPham;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public Set<BinhLuan> getDsBinhLuan() {
+        return dsBinhLuan;
+    }
+
+    public void setDsBinhLuan(Set<BinhLuan> dsBinhLuan) {
+        this.dsBinhLuan = dsBinhLuan;
     }
 
     public String getNoiDungDanhGia() {

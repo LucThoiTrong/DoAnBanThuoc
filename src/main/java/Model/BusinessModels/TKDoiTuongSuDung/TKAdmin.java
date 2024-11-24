@@ -1,13 +1,14 @@
 package Model.BusinessModels.TKDoiTuongSuDung;
 
 import Model.BusinessModels.DoiTuongSuDung.Admin;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 @Entity
 public class TKAdmin extends TKDoiTuongSuDung{
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "AdminID")
     private Admin admin;
     public TKAdmin() {

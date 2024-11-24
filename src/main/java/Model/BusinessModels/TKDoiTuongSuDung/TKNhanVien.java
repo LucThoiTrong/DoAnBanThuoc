@@ -1,14 +1,11 @@
 package Model.BusinessModels.TKDoiTuongSuDung;
 
 import Model.BusinessModels.DoiTuongSuDung.NhanVien.NhanVien;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class TKNhanVien extends TKDoiTuongSuDung{
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "NhanVienID")
     private NhanVien nhanVien;
     public TKNhanVien() {

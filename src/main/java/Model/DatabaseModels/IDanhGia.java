@@ -1,4 +1,27 @@
 package Model.DatabaseModels;
 
-public class IDanhGia {
+import Model.BusinessModels.SanPham.DanhGia;
+
+import java.util.Set;
+
+public class IDanhGia implements IDAO<DanhGia> {
+    @Override
+    public boolean insert(DanhGia obj) {
+        return false;
+    }
+
+    @Override
+    public boolean update(DanhGia obj) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(DanhGia obj) {
+        return false;
+    }
+
+    @Override
+    public Set<DanhGia> SelectAll() {
+        return Set.of();
+    }
 }

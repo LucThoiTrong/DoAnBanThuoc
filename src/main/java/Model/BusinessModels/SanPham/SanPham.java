@@ -1,6 +1,5 @@
 package Model.BusinessModels.SanPham;
 
-import Model.BusinessModels.SanPham.ChiTietSanPham.ChiTietSanPham;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -11,30 +10,21 @@ import java.util.Set;
 public class SanPham implements Serializable {
     @Id
     @Column(name = "SanPhamID")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String tenSanPham;
-    private String quyCachDongGoi;
-    private boolean thuocKeDon;
     private String thuongHieu;
     private String noiSanXuat;
-    private String cachDung;
-    private String thanhPhan;
-    private String cachBaoQuan;
-    private String khuyenCao;
-    private String tacDungPhu;
-    private String luuY;
-    private String congDung;
-    private byte[] anhSanPham;
-    private String moTa;
+    private String anhSanPham;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "LoaiThuocID")
     private LoaiThuoc loaiThuoc;
 
-    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ChiTietSanPham> cacChiTietSanPham = new HashSet<>();
 
-    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<DanhGia> cacDanhGia = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -46,33 +36,30 @@ public class SanPham implements Serializable {
 
     public SanPham() {}
 
-    public SanPham(String id, String tenSanPham, String quyCachDongGoi, boolean thuocKeDon, String thuongHieu, String noiSanXuat, String cachDung, String thanhPhan, String cachBaoQuan, String khuyenCao, String tacDungPhu, String luuY, String congDung, byte[] anhSanPham, String moTa, LoaiThuoc loaiThuoc, Set<ChiTietSanPham> cacChiTietSanPham, Set<DanhGia> cacDanhGia, Set<DoTuoiSuDung> dsDoTuoiSuDung) {
-        this.id = id;
+    public SanPham(String tenSanPham, String thuongHieu, String noiSanXuat, String anhSanPham, LoaiThuoc loaiThuoc) {
         this.tenSanPham = tenSanPham;
-        this.quyCachDongGoi = quyCachDongGoi;
-        this.thuocKeDon = thuocKeDon;
         this.thuongHieu = thuongHieu;
         this.noiSanXuat = noiSanXuat;
-        this.cachDung = cachDung;
-        this.thanhPhan = thanhPhan;
-        this.cachBaoQuan = cachBaoQuan;
-        this.khuyenCao = khuyenCao;
-        this.tacDungPhu = tacDungPhu;
-        this.luuY = luuY;
-        this.congDung = congDung;
         this.anhSanPham = anhSanPham;
-        this.moTa = moTa;
+        this.loaiThuoc = loaiThuoc;
+    }
+
+    public SanPham(String tenSanPham, String thuongHieu, String noiSanXuat, String anhSanPham, LoaiThuoc loaiThuoc, Set<ChiTietSanPham> cacChiTietSanPham, Set<DanhGia> cacDanhGia, Set<DoTuoiSuDung> dsDoTuoiSuDung) {
+        this.tenSanPham = tenSanPham;
+        this.thuongHieu = thuongHieu;
+        this.noiSanXuat = noiSanXuat;
+        this.anhSanPham = anhSanPham;
         this.loaiThuoc = loaiThuoc;
         this.cacChiTietSanPham = cacChiTietSanPham;
         this.cacDanhGia = cacDanhGia;
         this.dsDoTuoiSuDung = dsDoTuoiSuDung;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -82,22 +69,6 @@ public class SanPham implements Serializable {
 
     public void setTenSanPham(String tenSanPham) {
         this.tenSanPham = tenSanPham;
-    }
-
-    public String getQuyCachDongGoi() {
-        return quyCachDongGoi;
-    }
-
-    public void setQuyCachDongGoi(String quyCachDongGoi) {
-        this.quyCachDongGoi = quyCachDongGoi;
-    }
-
-    public boolean isThuocKeDon() {
-        return thuocKeDon;
-    }
-
-    public void setThuocKeDon(boolean thuocKeDon) {
-        this.thuocKeDon = thuocKeDon;
     }
 
     public String getThuongHieu() {
@@ -116,76 +87,12 @@ public class SanPham implements Serializable {
         this.noiSanXuat = noiSanXuat;
     }
 
-    public String getCachDung() {
-        return cachDung;
-    }
-
-    public void setCachDung(String cachDung) {
-        this.cachDung = cachDung;
-    }
-
-    public String getThanhPhan() {
-        return thanhPhan;
-    }
-
-    public void setThanhPhan(String thanhPhan) {
-        this.thanhPhan = thanhPhan;
-    }
-
-    public String getCachBaoQuan() {
-        return cachBaoQuan;
-    }
-
-    public void setCachBaoQuan(String cachBaoQuan) {
-        this.cachBaoQuan = cachBaoQuan;
-    }
-
-    public String getKhuyenCao() {
-        return khuyenCao;
-    }
-
-    public void setKhuyenCao(String khuyenCao) {
-        this.khuyenCao = khuyenCao;
-    }
-
-    public String getTacDungPhu() {
-        return tacDungPhu;
-    }
-
-    public void setTacDungPhu(String tacDungPhu) {
-        this.tacDungPhu = tacDungPhu;
-    }
-
-    public String getLuuY() {
-        return luuY;
-    }
-
-    public void setLuuY(String luuY) {
-        this.luuY = luuY;
-    }
-
-    public String getCongDung() {
-        return congDung;
-    }
-
-    public void setCongDung(String congDung) {
-        this.congDung = congDung;
-    }
-
-    public byte[] getAnhSanPham() {
+    public String getAnhSanPham() {
         return anhSanPham;
     }
 
-    public void setAnhSanPham(byte[] anhSanPham) {
+    public void setAnhSanPham(String anhSanPham) {
         this.anhSanPham = anhSanPham;
-    }
-
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
     }
 
     public LoaiThuoc getLoaiThuoc() {
@@ -218,5 +125,21 @@ public class SanPham implements Serializable {
 
     public void setDsDoTuoiSuDung(Set<DoTuoiSuDung> dsDoTuoiSuDung) {
         this.dsDoTuoiSuDung = dsDoTuoiSuDung;
+    }
+
+    public void addDoTuoiSuDung(DoTuoiSuDung doTuoiSuDung){
+        this.dsDoTuoiSuDung.add(doTuoiSuDung);
+    }
+
+    public void removeDoTuoiSuDung(DoTuoiSuDung doTuoiSuDung){
+        this.dsDoTuoiSuDung.remove(doTuoiSuDung);
+    }
+
+    public void addChiTietSanPham(ChiTietSanPham chiTietSanPham){
+        this.cacChiTietSanPham.add(chiTietSanPham);
+    }
+
+    public void removeChiTietSanPham(ChiTietSanPham chiTietSanPham){
+        this.cacChiTietSanPham.remove(chiTietSanPham);
     }
 }

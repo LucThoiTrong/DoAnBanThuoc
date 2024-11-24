@@ -2,6 +2,7 @@ package Model.BusinessModels.DoiTuongSuDung.KhacHang;
 
 import Model.BusinessModels.DoiTuongSuDung.DoiTuongSuDung;
 import Model.BusinessModels.SanPham.DanhGia;
+import Model.DatabaseModels.IKhachHang;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -22,8 +23,8 @@ public class KhachHang extends DoiTuongSuDung {
         super();
     }
 
-    public KhachHang(int id, String ten, String soDienThoai, String diaChi, Set<DatHang> lichSuDatHang, Set<DanhGia> lichSuDanhGia) {
-        super(id, ten, soDienThoai, diaChi);
+    public KhachHang(String ten, String soDienThoai, String email, Set<DatHang> lichSuDatHang, Set<DanhGia> lichSuDanhGia) {
+        super(ten, soDienThoai, email);
         this.lichSuDatHang = lichSuDatHang;
         this.lichSuDanhGia = lichSuDanhGia;
     }
@@ -42,5 +43,16 @@ public class KhachHang extends DoiTuongSuDung {
 
     public void setLichSuDanhGia(Set<DanhGia> lichSuDanhGia) {
         this.lichSuDanhGia = lichSuDanhGia;
+    }
+
+    public boolean ThemKhachHang(KhachHang khachHang){
+        try {
+            IKhachHang iKhachHang = new IKhachHang();
+            iKhachHang.insert(khachHang);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 }

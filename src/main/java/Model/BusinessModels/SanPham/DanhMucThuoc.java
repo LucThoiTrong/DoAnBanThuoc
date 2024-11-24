@@ -13,10 +13,19 @@ public class DanhMucThuoc implements Serializable {
     private int id;
     private String tenDanhMucThuoc;
 
-    @OneToMany(mappedBy = "danhMucThuoc")
+    @OneToMany(mappedBy = "danhMucThuoc", cascade = CascadeType.ALL)
     private Set<LoaiThuoc>  danhSachLoaiThuoc = new HashSet<>();
 
     public DanhMucThuoc() {}
+
+    public DanhMucThuoc(String tenDanhMucThuoc) {
+        this.tenDanhMucThuoc = tenDanhMucThuoc;
+    }
+
+    public DanhMucThuoc(String tenDanhMucThuoc, Set<LoaiThuoc> danhSachLoaiThuoc) {
+        this.tenDanhMucThuoc = tenDanhMucThuoc;
+        this.danhSachLoaiThuoc = danhSachLoaiThuoc;
+    }
 
     public int getId() {
         return id;
@@ -40,5 +49,13 @@ public class DanhMucThuoc implements Serializable {
 
     public void setDanhSachLoaiThuoc(Set<LoaiThuoc> danhSachLoaiThuoc) {
         this.danhSachLoaiThuoc = danhSachLoaiThuoc;
+    }
+
+    public void addLoaiThuoc(LoaiThuoc loaiThuoc) {
+        this.danhSachLoaiThuoc.add(loaiThuoc);
+    }
+
+    public void removeThemLoaiThuoc(LoaiThuoc loaiThuoc) {
+        this.danhSachLoaiThuoc.remove(loaiThuoc);
     }
 }
