@@ -24,4 +24,14 @@ public class IDanhGia implements IDAO<DanhGia> {
     public Set<DanhGia> SelectAll() {
         return Set.of();
     }
+
+    @Override
+    public DanhGia SelectById(int id) {
+        return null;
+    }
+
+    @Override
+    public Set<DanhGia> SelectByID(int id) {
+        return Set.of();
+    }
 }

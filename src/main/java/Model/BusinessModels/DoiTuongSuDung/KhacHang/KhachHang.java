@@ -23,6 +23,10 @@ public class KhachHang extends DoiTuongSuDung {
         super();
     }
 
+    public KhachHang(String ten, String soDienThoai, String email) {
+        super(ten, soDienThoai, email);
+    }
+
     public KhachHang(String ten, String soDienThoai, String email, Set<DatHang> lichSuDatHang, Set<DanhGia> lichSuDanhGia) {
         super(ten, soDienThoai, email);
         this.lichSuDatHang = lichSuDatHang;

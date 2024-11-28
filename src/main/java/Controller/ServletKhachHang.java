@@ -1,9 +1,7 @@
 package Controller;
 
-import Model.BusinessModels.DoiTuongSuDung.KhacHang.DatHang;
 import Model.BusinessModels.DoiTuongSuDung.KhacHang.KhachHang;
-import Model.BusinessModels.SanPham.DanhGia;
-import Model.BusinessModels.TKDoiTuongSuDung.TKKhachHang;
+import Model.DatabaseModels.IKhachHang;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.Set;
 
 @WebServlet("/servletKhachHang")
 public class ServletKhachHang extends HttpServlet {
@@ -22,14 +20,8 @@ public class ServletKhachHang extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        try
-        {
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        Set<KhachHang> dsKhachHang = new IKhachHang().SelectAll();
+        req.setAttribute("dsKhachHang", dsKhachHang);
+        getServletContext().getRequestDispatcher("/admin.jsp?page=DSkhachhang").forward(req, resp);
     }
 }

@@ -47,4 +47,14 @@ public class IAdmin implements IDAO<Admin> {
     public Set<Admin> SelectAll() {
         return Set.of();
     }
+
+    @Override
+    public Admin SelectById(int id) {
+        return null;
+    }
+
+    @Override
+    public Set<Admin> SelectByID(int id) {
+        return Set.of();
+    }
 }

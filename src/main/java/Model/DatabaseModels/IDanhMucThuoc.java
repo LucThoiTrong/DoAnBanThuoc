@@ -47,4 +47,14 @@ public class IDanhMucThuoc implements IDAO<DanhMucThuoc> {
     public Set<DanhMucThuoc> SelectAll() {
         return Set.of();
     }
+
+    @Override
+    public DanhMucThuoc SelectById(int id) {
+        return null;
+    }
+
+    @Override
+    public Set<DanhMucThuoc> SelectByID(int id) {
+        return Set.of();
+    }
 }

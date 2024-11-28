@@ -76,5 +76,17 @@ public class IChiTietSanPham implements IDAO<ChiTietSanPham>{
             }
         }
         return result;
-    };
+    }
+
+    @Override
+    public ChiTietSanPham SelectById(int id) {
+        return null;
+    }
+
+    @Override
+    public Set<ChiTietSanPham> SelectByID(int id) {
+        return Set.of();
+    }
+
+    ;
 }

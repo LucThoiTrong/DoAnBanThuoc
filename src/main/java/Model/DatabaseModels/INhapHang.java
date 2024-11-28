@@ -47,4 +47,14 @@ public class INhapHang implements IDAO<NhapHang> {
     public Set<NhapHang> SelectAll() {
         return Set.of();
     }
+
+    @Override
+    public NhapHang SelectById(int id) {
+        return null;
+    }
+
+    @Override
+    public Set<NhapHang> SelectByID(int id) {
+        return Set.of();
+    }
 }

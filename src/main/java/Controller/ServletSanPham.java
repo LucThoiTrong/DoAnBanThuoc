@@ -3,6 +3,7 @@ package Controller;
 import Model.BusinessModels.SanPham.ChiTietSanPham;
 import Model.BusinessModels.SanPham.SanPham;
 import Model.DatabaseModels.IChiTietSanPham;
+import Model.DatabaseModels.ILoaiThuoc;
 import Model.DatabaseModels.ISanPham;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,16 +25,23 @@ public class ServletSanPham extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Lấy toàn bộ sản phẩm từ CSDL
-        Set<SanPham> dssp = new ISanPham().SelectAll();
-        req.setAttribute("dssp", dssp);
+        String action = req.getParameter("action");
+        Set<SanPham> dssp = null;
+        if(action.equals("LaySanPhamTheoIDLoaiThuoc")){
+            int idLoaiThuoc = Integer.parseInt(req.getParameter("idLoaiThuoc"));
+            dssp = new ISanPham().SelectByID(idLoaiThuoc);
+            req.setAttribute("dssp", dssp);
+            getServletContext().getRequestDispatcher("/SanPhamThuocAdmin.jsp").forward(req, resp);
+        }
+        else {
+            // Lấy toàn bộ sản phẩm từ CSDL
+            dssp = new ISanPham().SelectAll();
+            req.setAttribute("dssp", dssp);
 
-        // Chuyển Set thành List
-        List<SanPham> productList = new ArrayList<>(dssp);
+            // Đặt thuộc tính để gửi dữ liệu sang JSP
+            req.setAttribute("productList", dssp);
 
-        // Đặt thuộc tính để gửi dữ liệu sang JSP
-        req.setAttribute("productList", productList);
-
-        req.getServletContext().getRequestDispatcher("/SanPhamThuoc.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher("/SanPhamThuoc.jsp").forward(req, resp);
+        }
     }
 }

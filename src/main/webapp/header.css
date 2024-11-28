@@ -11,6 +11,10 @@
     width: 120px;
     transition: 0.3s ease-in-out;
 }
+.btnDangNhap:hover{
+    transform: scale(1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a shadow effect */
+}
 /* button tìm kiếm */
 #search-box{
     /* margin-top: 20px; */

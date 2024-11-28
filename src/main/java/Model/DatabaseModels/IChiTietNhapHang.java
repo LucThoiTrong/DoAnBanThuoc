@@ -24,4 +24,14 @@ public class IChiTietNhapHang implements IDAO<ChiTietNhapHang> {
     public Set<ChiTietNhapHang> SelectAll() {
         return Set.of();
     }
+
+    @Override
+    public ChiTietNhapHang SelectById(int id) {
+        return null;
+    }
+
+    @Override
+    public Set<ChiTietNhapHang> SelectByID(int id) {
+        return Set.of();
+    }
 }

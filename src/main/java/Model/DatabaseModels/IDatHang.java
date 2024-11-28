@@ -24,4 +24,14 @@ public class IDatHang implements IDAO<DatHang> {
     public Set<DatHang> SelectAll() {
         return Set.of();
     }
+
+    @Override
+    public DatHang SelectById(int id) {
+        return null;
+    }
+
+    @Override
+    public Set<DatHang> SelectByID(int id) {
+        return Set.of();
+    }
 }

@@ -3,6 +3,7 @@ package Model.DatabaseModels;
 import Model.BusinessModels.TKDoiTuongSuDung.TKAdmin;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 
 import java.util.Set;
 
@@ -46,5 +47,47 @@ public class ITKAdmin implements IDAO<TKAdmin> {
     @Override
     public Set<TKAdmin> SelectAll() {
         return Set.of();
+    }
+
+    @Override
+    public TKAdmin SelectById(int id) {
+        return null;
+    }
+
+    @Override
+    public Set<TKAdmin> SelectByID(int id) {
+        return Set.of();
+    }
+
+    public TKAdmin selectTKAdmin(String username, String password) {
+        TKAdmin tkadm = null;
+        EntityManager entityManager = null;
+        try {
+            // Mở EntityManager để tạo giao dịch cho truy vấn
+            entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
+
+            // Câu lệnh JPQL để tìm TKAdmin theo username và password
+            String jpql = "SELECT t FROM TKAdmin t WHERE t.username = :username AND t.password = :password";
+
+            // Thực hiện truy vấn và lấy kết quả
+            tkadm = entityManager.createQuery(jpql, TKAdmin.class)
+                    .setParameter("username", username)  // Gán giá trị cho tham số username
+                    .setParameter("password", password)  // Gán giá trị cho tham số password
+                    .getSingleResult();  // Lấy duy nhất một kết quả
+
+        } catch (NoResultException e) {
+            // Nếu không tìm thấy kết quả nào (NoResultException), trả về null
+            return null;
+        } catch (Exception e) {
+            // Xử lý các ngoại lệ khác, in ra thông báo lỗi
+            e.printStackTrace();
+            return null;
+        } finally {
+            // Đảm bảo EntityManager được đóng sau khi sử dụng
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
+        return tkadm;  // Trả về kết quả nếu tìm thấy
     }
 }

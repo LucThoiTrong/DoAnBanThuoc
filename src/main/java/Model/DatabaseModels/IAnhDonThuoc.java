@@ -24,4 +24,14 @@ public class IAnhDonThuoc implements IDAO<AnhDonThuoc>{
     public Set<AnhDonThuoc> SelectAll() {
         return Set.of();
     }
+
+    @Override
+    public AnhDonThuoc SelectById(int id) {
+        return null;
+    }
+
+    @Override
+    public Set<AnhDonThuoc> SelectByID(int id) {
+        return Set.of();
+    }
 }

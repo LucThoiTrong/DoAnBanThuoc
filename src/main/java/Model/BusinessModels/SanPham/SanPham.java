@@ -16,6 +16,7 @@ public class SanPham implements Serializable {
     private String thuongHieu;
     private String noiSanXuat;
     private String anhSanPham;
+    private String linkChiTietSanPham;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "LoaiThuocID")
@@ -27,7 +28,7 @@ public class SanPham implements Serializable {
     @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<DanhGia> cacDanhGia = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "DoTuoiSuDungThuoc",
             joinColumns = {@JoinColumn(name = "SanPhamID")},
             inverseJoinColumns = {@JoinColumn(name = "DoTuoiSuDungID")}
@@ -36,11 +37,12 @@ public class SanPham implements Serializable {
 
     public SanPham() {}
 
-    public SanPham(String tenSanPham, String thuongHieu, String noiSanXuat, String anhSanPham, LoaiThuoc loaiThuoc) {
+    public SanPham(String tenSanPham, String thuongHieu, String noiSanXuat, String anhSanPham, String linkChiTietSanPham, LoaiThuoc loaiThuoc) {
         this.tenSanPham = tenSanPham;
         this.thuongHieu = thuongHieu;
         this.noiSanXuat = noiSanXuat;
         this.anhSanPham = anhSanPham;
+        this.linkChiTietSanPham = linkChiTietSanPham;
         this.loaiThuoc = loaiThuoc;
     }
 
@@ -61,6 +63,14 @@ public class SanPham implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getlinkChiTietSanPham() {
+        return linkChiTietSanPham;
+    }
+
+    public void setlinkChiTietSanPham(String linkChiTietSanPham) {
+        this.linkChiTietSanPham = linkChiTietSanPham;
     }
 
     public String getTenSanPham() {

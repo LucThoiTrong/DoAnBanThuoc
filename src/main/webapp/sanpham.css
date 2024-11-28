@@ -20,7 +20,20 @@ body{
     font-weight: bold; /* Đậm hơn */
     text-align: center;
 }
+.product_listSP{
+    display: grid; /* Sử dụng CSS Grid */
+    grid-template-columns: repeat(4, 1fr); /* Chia thành 4 cột đều nhau */
+    gap: 20px; /* Khoảng cách giữa các sản phẩm */
+    list-style: none; /* Loại bỏ dấu đầu dòng của danh sách */
+    padding: 0;
+    margin: 0;
+}
 
+.product_listSP li{
+    border-radius: 5px; /* Bo góc */
+    text-align: center;
+    background-color: #fff;
+}
 /* --------------------------- */
 /*button lọc giá bán*/
 .filter-button-group{
@@ -48,14 +61,16 @@ body{
 .product-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    height: 800px;
+    height: auto;
+    gap: 5px;
+    justify-items: center;
 }
 /* @media (min-width: 1400px) {
   .product-list {
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 } */
-@media (max-width: 1250px) {
+@media (max-width: 1280px) {
     .product-list {
         grid-template-columns: 1fr 1fr 1fr;
     }
@@ -81,14 +96,17 @@ body{
 }
 /* Phần chứa tên, ảnh, loại đóng gói */
 .basicInfo {
-    display: flex;
+    display: flex
+;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #f5f5f5;
+    background-color: #f8fffd;
     height: 400px;
     border-radius: 30px;
     padding: 15px;
     position: relative;
+    border-color: #00b100;
+    box-shadow: 0px 1px 5px 2px rgb(181 181 181 / 50%);
 }
 
 .name {
@@ -129,7 +147,7 @@ body{
     border-radius: 50%;
     content: '';
     transform: translate(-50%, -50%);
-    background-color: #e7e7e7;
+    background-color: #ffffff;
     z-index: -2;
     top: 50%;
     left: 50%;
@@ -181,21 +199,14 @@ body{
     margin-top: 10px;
 }
 .mores {
-    margin-top: -0.1cm;
-    padding: 19px;
+    margin-top: -0.15cm;
+    padding: 15px;
     display: flex; /* Sử dụng flexbox */
     align-items: center; /* Căn giữa theo trục dọc */
-    gap: 10px; /* Khoảng cách giữa các phần tử */
     margin-left: -15px;
-}
-.sale{
-    margin-left: -15px;
-    font-size: 0.5cm;
-    font-weight: bold;
-    color: #5CD075;
 }
 .price{
-    font-size: 0.4cm;
+    font-size: 17px;
     font-weight: bold;
     color: rgb(236, 61, 61);
 }
@@ -230,5 +241,3 @@ a.button.selected {
     background-color: #49CC6C;
     color: white;
 }
-
-

@@ -9,6 +9,7 @@ import Model.BusinessModels.SanPham.*;
 import Model.BusinessModels.TKDoiTuongSuDung.TKAdmin;
 import Model.BusinessModels.TKDoiTuongSuDung.TKNhanVien;
 import Model.DatabaseModels.*;
+import Util.MaHoaMatKhau;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
@@ -27,8 +28,8 @@ public class test {
             transaction.begin();
 
             // Thêm Danh Mục Thuốc
-            DanhMucThuoc dm1 = new DanhMucThuoc("Thuốc kê đơn");
-            DanhMucThuoc dm2 = new DanhMucThuoc("Thuốc không kê đơn");
+            DanhMucThuoc dm1 = new DanhMucThuoc("Thuốc không kê đơn");
+            DanhMucThuoc dm2 = new DanhMucThuoc("Thuốc kê đơn");
 
             // Thêm Loại Thuốc
             // Danh mục 1
@@ -74,46 +75,46 @@ public class test {
             DoTuoiSuDung dtsd5 = new DoTuoiSuDung("Người cao tuổi");
 
             // Thêm Sản Phẩm
-            SanPham sp1 = new SanPham("Acritel 10g (Hộp 6 vỉ x 10 viên)", "Davipharm", "Việt Nam", "https://drive.google.com/thumbnail?id=1k1PCGbhhw-phQ90SmM4Lf9QTCONfw9KZ&sz=w1000",lt1);
-            SanPham sp2 = new SanPham("Dung dịch uống A.T Desloratadin 2.5mg trị viêm mũi dị ứng, mày đay, ngứa (30 ống x 5ml)", "An Thiên", "Việt Nam", "https://drive.google.com/thumbnail?id=1q8PmJapcQMRo4yz83ck5vGpy6OG0xEZ5&sz=w1000", lt1);
-            SanPham sp3 = new SanPham("Siro Lorastad SP STELLA điều trị dị ứng (chai 60ml)", "STELLA", "Việt Nam", "https://drive.google.com/thumbnail?id=1rMPj-1ybtYvBWcnKzlYUwmPiehqRNiN_&sz=w1000", lt1);
-            SanPham sp4 = new SanPham("Viên nén Allerfar 4mg điều trị triệu chứng viêm mũi dị ứng, mày đay (10 vỉ x 20 viên)",  "Pharmedic", "Việt Nam","https://drive.google.com/thumbnail?id=1cEC6JMeiSCVpNMiaSzAgnUvgZEJ8oJT4&sz=w1000" ,lt1);
-            SanPham sp5 = new SanPham("Viên bao tan ở ruột BROMANASE 50 UI điều trị viêm sưng, chống phù nề (10 vỉ x 10 viên)",  "Davipharm", "Việt Nam", "https://drive.google.com/thumbnail?id=1x5QoUvPZ0_KqmUAVqMJ3zIoo_BzEtT2e&sz=w1000", lt2);
-            SanPham sp6 = new SanPham("Viên nang Long Huyết P/H điều trị sưng đau, bầm tím, phù nề, chấn thương do va đập (2 vỉ x 12 viên)","Đông dược Phúc Hưng", "Việt Nam", "https://drive.google.com/thumbnail?id=1fRswBR3iRH7oeF6Yr2fP33HwD5rK0ucM&sz=w1000", lt2);
-            SanPham sp7 = new SanPham("Dung dịch Dentanalgi điều trị đau răng, viêm nướu răng, nha chu (chai 7ml)", "OPC", "Việt Nam", "https://drive.google.com/thumbnail?id=1tw_E-Upl8oE_kKKgXEL_1N7iAG2sgE63&sz=w1000", lt2);
-            SanPham sp8 = new SanPham("Viên nén Cetirizine EG Pymepharco 10mg trị triệu chứng viêm mũi dị ứng, mày đay (10 vỉ x 10 viên)", "Pymepharco", "Việt Nam", "https://drive.google.com/thumbnail?id=1xdREqLjCqhVd_99h18sDthTv0rvCsCze&sz=w1000", lt2);
-            SanPham sp9 = new SanPham("Bột pha uống Acehasan 200mg tiêu chất nhầy trong bệnh nhầy nhớt (30 gói x 3g)", "Hasan- Demarpharm", "Việt Nam", "https://drive.google.com/thumbnail?id=1k4zaNjfFDuKjP99w0M7xka0I5S_I1JFS&sz=w1000", lt3);
-            SanPham sp10 = new SanPham("Bột pha uống Macetux 200mg Hasan tiêu chất nhầy trong bệnh nhầy nhớt (30 gói x 1g)", "Hasan- Demarpharm", "Việt Nam", "https://drive.google.com/thumbnail?id=1gPDNcs9IPRR0YCM3fkB0b4e1oDduBcoy&sz=w1000", lt3);
-            SanPham sp11 = new SanPham("Dung dịch uống Cynamus CPC1 tiêu nhầy, loãng đàm, giảm ho (4 vỉ x 5 ống)", "DP Trung ương CPC1", "Việt Nam", "https://drive.google.com/thumbnail?id=1gz9ygUHVIzHGNv6CQOEPZjw9Zyznkf-x&sz=w1000", lt3);
-            SanPham sp12 = new SanPham("Siro Danospan 0.7g/100ml trị viêm đường hô hấp kèm ho, bệnh lý viêm phế quản mạn tính (chai 100ml)", "Danapha", "Việt Nam", "https://drive.google.com/thumbnail?id=1IJopCdjqzJZnHHO5U1EiXnoZkrcKnpHJ&sz=w1000", lt3);
-            SanPham sp13 = new SanPham("Bột pha uống Bioflora 100mg trị tiêu chảy cấp ở trẻ em, người lớn (hộp 20 gói)", "Biocodex, France Kisska Int. Ltd., UK", "Pháp", "https://drive.google.com/thumbnail?id=1hTO1x0cU8a8aR07MsOj0l1kbDDTlIztk&sz=w1000", lt4);
-            SanPham sp14 = new SanPham("Bột pha uống Fortrans làm sạch đại tràng trước nội soi, phẫu thuật (gói 73,69g)", "Ipsen Pharma", "Pháp", "https://drive.google.com/thumbnail?id=13WXDBw2DGMZLj9v42tmutWsNnAJ2P3qc&sz=w1000", lt4);
-            SanPham sp15 = new SanPham("Bột pha uống Smecta 3g Hương Dâu điều trị tiêu chảy, rối loạn tiêu hóa (hộp 12 gói)", "Ipsen Pharma", "Pháp", "https://drive.google.com/thumbnail?id=1X_p7fVSKdt3-ESRzLdZjbDPg9ybvVO9y&sz=w1000", lt4);
-            SanPham sp16 = new SanPham("Dung dịch bơm trực tràng Rectiofar Người lớn trị táo bón (40 ống x 5ml)", "Pharmedic", "Việt Nam", "https://drive.google.com/thumbnail?id=1eG1AKKnziKRUFe3j5jBobqxDBHTq6WSt&sz=w1000", lt4);
-            SanPham sp17 = new SanPham("Dung dịch uống Vasoclean Sol 10ml điều trị sa sút trí tuệ ở người lớn (2 vỉ x 10 ống)", "Cho-a-pharm", "Hàn Quốc", "https://drive.google.com/thumbnail?id=1WJQO84ymCrIkqJ7p1_y6tjYLPwihRQ57&sz=w1000", lt5);
-            SanPham sp18 = new SanPham("Thuốc Hoạt Huyết Dưỡng Não bao phim Traphaco điều trị suy giảm trí nhớ (5 vỉ x 20 viên)", "Hoat Huyet Duong Nao", "Việt Nam", "https://drive.google.com/thumbnail?id=1HVyZryxVnSaaHy1iNzdHWsPZk4zUKFfX&sz=w1000", lt5);
-            SanPham sp19 = new SanPham("Viên nang Bổ Huyết Ích Não BDF Bidipha cải thiện trí nhớ, giảm chóng mặt ù tai (6 vỉ x 10 viên)", "BIDIPHAR", "Việt Nam", "https://drive.google.com/thumbnail?id=1QIBEu56S_w4vVloMoDYpKpflClaDhWwH&sz=w1000", lt5);
-            SanPham sp20 = new SanPham("Viên nén Hoạt Huyết Nhất Nhất giúp hoạt huyết, trị thiểu năng tuần hoàn (3 vỉ x 10 viên)", "Công ty TNHH Dược phẩm Nhất Nhất", "Việt Nam", "https://drive.google.com/thumbnail?id=1DG6rJdGpnVUEuqnN7NOdUXwz4E0EzK4k&sz=w1000", lt5);
-            SanPham sp21 = new SanPham("Bột pha uống Binozyt 200mg/5ml điều trị nhiễm khuẩn đường hô hấp (chai 15ml)", "Glenmark", "Romania", "https://drive.google.com/thumbnail?id=1cyoDlJTmhENO5diyfvqOmGZw9TCC7cgs&sz=w1000", lt6);
-            SanPham sp22 = new SanPham("Bilclamos bid 1000mg (Hộp 2 vỉ x 7 viên)", "Bilim Ilac Sanayi Ve Ticaret Anonim Sirketi", "Thổ Nhĩ Kỳ", "https://drive.google.com/thumbnail?id=1AxM_pIKeTmzlYgWFOtBljgLmEm5_uHas&sz=w1000", lt6);
-            SanPham sp23 = new SanPham("Bột pha uống Cefdinir 125mg S.Pharm kháng sinh điều trị nhiễm khuẩn (30 gói x 1,5g)", "Công ty cổ phần dược S.Pharm", "Việt Nam", "https://drive.google.com/thumbnail?id=1n6Y9OBmjOY5o7iJl7_rlK6yEIxIdLNOF&sz=w1000", lt6);
-            SanPham sp24 = new SanPham("Bột pha uống Claminat 250mg/62.5mg Imexpharm điều trị nhiễm khuẩn (hộp 12 gói)", "Imexpharm", "Việt Nam", "https://drive.google.com/thumbnail?id=1A-nvoFBzqzN-IYbCQYvy-wlmzVZtodOa&sz=w1000", lt6);
-            SanPham sp25 = new SanPham("Viên nén Arimidex 1mg điều trị ung thư vú (2 vỉ x 14 viên)", "AstraZeneca", "Anh", "https://drive.google.com/thumbnail?id=19byScTkmUQ8WkuH6Ae7oLi27VEIbKBFL&sz=w1000", lt7);
-            SanPham sp26 = new SanPham("Viên nén Nolvadex-D 20mg điều trị ung thư vú (3 vỉ x 10 viên)", "AstraZeneca", "Anh", "https://drive.google.com/thumbnail?id=13IuAgsrMn5S05BJ9vY_EjOPu-1fGcfAS&sz=w1000", lt7);
-            SanPham sp27 = new SanPham("Viên nén bao phim Casodex điều trị ung thư tiền liệt tuyến (2 vỉ x 14 viên)", "AstraZeneca", "Anh", "https://drive.google.com/thumbnail?id=19H4mWgI15vVOpDP3Q8xlmS10gTe2Rod1&sz=w1000", lt7);
-            SanPham sp28 = new SanPham("Viên nén bao phim Femara kích trứng trưởng thành và điều trị ung thư vú (3 vỉ x 10 viên)", "Novartis", "Thụy Sĩ", "https://drive.google.com/thumbnail?id=1Xwcuz7eTg6CCI1nu0wNYOMSM5WBa_Rk6&sz=w1000", lt7);
-            SanPham sp29 = new SanPham("Viên bao đường Domitazol Domesco hỗ trợ điều trị nhiễm trùng đường tiết niệu dưới (5 vỉ x 10 viên)", "Domesco", "Việt Nam", "https://drive.google.com/thumbnail?id=1Q3eMLNPFPyh_db0VNcsP68eCW43tvw14&sz=w1000", lt8);
-            SanPham sp30 = new SanPham("Viên giải phóng có kiểm soát Harnal Ocas 0.4mg trị triệu chứng của đường tiểu dưới (3 vỉ x 10 viên)", "Astellas Ireland Co.", "IreLand", "https://drive.google.com/thumbnail?id=1dGI18_ldNBB_N_toTB-S0GNAKrty5lGK&sz=w1000", lt8);
-            SanPham sp31 = new SanPham("Viên giải phóng có kiểm soát Xalgetz 0.4mg trị hội chứng tăng sản tuyến tiền liệt (1 vỉ x 10 viên)", "Getz Pharma (Pvt)., Ltd", "Ấn Độ", "https://drive.google.com/thumbnail?id=1U50oLvosUblayhaRoPsMDFocOSLqtv5X&sz=w1000", lt8);
-            SanPham sp32 = new SanPham("Viên nang Avodart 0.5mg điều trị tăng sản lành tính tuyến tiền liệt (3 vỉ x 10 viên)", "GlaxoSmithKline ETC", "Anh", "https://drive.google.com/thumbnail?id=1OTvwClU-u41PuqLBp59Ef6BLQuOo468o&sz=w1000", lt8);
-            SanPham sp33 = new SanPham("Dung dịch uống A.T Ascorbic 100mg/5ml bổ sung vitamin C (30 ống x 10ml)", "An Thiên", "Việt Nam", "https://drive.google.com/thumbnail?id=1LhfGjzj6--aiDYzY6egrf7bKyO0TjZOG&sz=w1000", lt9);
-            SanPham sp34 = new SanPham("Dung dịch uống Aquadetrim D3 điều trị thiếu vitamin D (chai 10ml)", "Medana Pharma", "Ba Lan", "https://drive.google.com/thumbnail?id=1LUEl7Y0eljVdXJJ2CxBqiNGRrurlqCId&sz=w1000", lt9);
-            SanPham sp35 = new SanPham("Dung dịch uống Conipa Pure 70mg phòng ngừa và điều trị thiếu kẽm (4 vỉ x 5 ống)", "DP Trung ương CPC1", "Việt Nam", "https://drive.google.com/thumbnail?id=1XFiSq3QXxEdcg8Zd-IMuuMnMm-BjHuAC&sz=w1000", lt9);
-            SanPham sp36 = new SanPham("Dung dịch uống Ferlatum 800mg bổ sung sắt, bổ máu (10 chai x 15ml)", "Italfarmaco S.A", "Tây Ban Nha", "https://drive.google.com/thumbnail?id=11WYJ6k8qy29RWAjCeoTXe0LCe0l_PId6&sz=w1000", lt9);
-            SanPham sp37 = new SanPham("Cao lỏng Cortonyl trợ tim, ngất do suy tim, mất ngủ , lao lực, an thần (chai 25ml)", "OPC", "Việt Nam", "https://drive.google.com/thumbnail?id=1PHXfo7EC9FuFJcUeoqJ-TvwRpGLrXfC2&sz=w1000", lt10);
-            SanPham sp38 = new SanPham("Viên giải phóng có kiểm soát Betaloc ZOK 25mg điều trị tăng huyết áp, đau thắt ngực (1 vỉ x 14 viên)", "AstraZeneca", "Anh", "https://drive.google.com/thumbnail?id=1eVd3lbQReI5MJDf4Hg7sNWQuAvMpS4RA&sz=w1000", lt10);
-            SanPham sp39 = new SanPham("Viên bao tan ở ruột Aspilets EC phòng ngừa nhồi máu cơ tim, đau thắt ngực (10 vỉ x 10 viên)", "UNITED PHARMA INC.", "Việt Nam", "https://drive.google.com/thumbnail?id=1LSxyQmUXdihcllL6GFJXa2-NigFxxE7n&sz=w1000", lt10);
-            SanPham sp40 = new SanPham("Viên giải phóng có kiểm soát Trimetazidin Stella 35mg MR trị đau thắt ngực ổn định (3 vỉ x 10 viên)", "Công ty TNHH LD Stellapharm", "Việt Nam", "https://drive.google.com/thumbnail?id=12Gc26-7RYvWf_ZEUpWvCXzsNFHXeih0y&sz=w1000", lt10);
+            SanPham sp1 = new SanPham("Acritel 10g (Hộp 6 vỉ x 10 viên)", "Davipharm", "Việt Nam", "https://drive.google.com/thumbnail?id=1k1PCGbhhw-phQ90SmM4Lf9QTCONfw9KZ&sz=w1000", "1_ThuocKhangDiUng1.jsp",lt1);
+            SanPham sp2 = new SanPham("Dung dịch uống A.T Desloratadin 2.5mg trị viêm mũi dị ứng, mày đay, ngứa (30 ống x 5ml)", "An Thiên", "Việt Nam", "https://drive.google.com/thumbnail?id=1q8PmJapcQMRo4yz83ck5vGpy6OG0xEZ5&sz=w1000", "2_ThuocKhangDiUng2.jsp", lt1);
+            SanPham sp3 = new SanPham("Siro Lorastad SP STELLA điều trị dị ứng (chai 60ml)", "STELLA", "Việt Nam", "https://drive.google.com/thumbnail?id=1rMPj-1ybtYvBWcnKzlYUwmPiehqRNiN_&sz=w1000", "3_ThuocKhangDiUng3.jsp", lt1);
+            SanPham sp4 = new SanPham("Viên nén Allerfar 4mg điều trị triệu chứng viêm mũi dị ứng, mày đay (10 vỉ x 20 viên)",  "Pharmedic", "Việt Nam","https://drive.google.com/thumbnail?id=1cEC6JMeiSCVpNMiaSzAgnUvgZEJ8oJT4&sz=w1000", "4_ThuocKhangDiUng4.jsp",lt1);
+            SanPham sp5 = new SanPham("Viên bao tan ở ruột BROMANASE 50 UI điều trị viêm sưng, chống phù nề (10 vỉ x 10 viên)",  "Davipharm", "Việt Nam", "https://drive.google.com/thumbnail?id=1x5QoUvPZ0_KqmUAVqMJ3zIoo_BzEtT2e&sz=w1000", "5_ThuocKhangViem1.jsp", lt2);
+            SanPham sp6 = new SanPham("Viên nang Long Huyết P/H điều trị sưng đau, bầm tím, phù nề, chấn thương do va đập (2 vỉ x 12 viên)","Đông dược Phúc Hưng", "Việt Nam", "https://drive.google.com/thumbnail?id=1fRswBR3iRH7oeF6Yr2fP33HwD5rK0ucM&sz=w1000", "6_ThuocKhangViem2.jsp", lt2);
+            SanPham sp7 = new SanPham("Dung dịch Dentanalgi điều trị đau răng, viêm nướu răng, nha chu (chai 7ml)", "OPC", "Việt Nam", "https://drive.google.com/thumbnail?id=1tw_E-Upl8oE_kKKgXEL_1N7iAG2sgE63&sz=w1000", "7_ThuocKhangViem3.jsp", lt2);
+            SanPham sp8 = new SanPham("Viên nén Cetirizine EG Pymepharco 10mg trị triệu chứng viêm mũi dị ứng, mày đay (10 vỉ x 10 viên)", "Pymepharco", "Việt Nam", "https://drive.google.com/thumbnail?id=1xdREqLjCqhVd_99h18sDthTv0rvCsCze&sz=w1000", "8_ThuocKhangViem4.jsp", lt2);
+            SanPham sp9 = new SanPham("Bột pha uống Acehasan 200mg tiêu chất nhầy trong bệnh nhầy nhớt (30 gói x 3g)", "Hasan- Demarpharm", "Việt Nam", "https://drive.google.com/thumbnail?id=1k4zaNjfFDuKjP99w0M7xka0I5S_I1JFS&sz=w1000", "9_ThuocCamLanh1.jsp", lt3);
+            SanPham sp10 = new SanPham("Bột pha uống Macetux 200mg Hasan tiêu chất nhầy trong bệnh nhầy nhớt (30 gói x 1g)", "Hasan- Demarpharm", "Việt Nam", "https://drive.google.com/thumbnail?id=1gPDNcs9IPRR0YCM3fkB0b4e1oDduBcoy&sz=w1000", "10_ThuocCamLanh2.jsp", lt3);
+            SanPham sp11 = new SanPham("Dung dịch uống Cynamus CPC1 tiêu nhầy, loãng đàm, giảm ho (4 vỉ x 5 ống)", "DP Trung ương CPC1", "Việt Nam", "https://drive.google.com/thumbnail?id=1gz9ygUHVIzHGNv6CQOEPZjw9Zyznkf-x&sz=w1000", "11_ThuocCamLanh3.jsp", lt3);
+            SanPham sp12 = new SanPham("Siro Danospan 0.7g/100ml trị viêm đường hô hấp kèm ho, bệnh lý viêm phế quản mạn tính (chai 100ml)", "Danapha", "Việt Nam", "https://drive.google.com/thumbnail?id=1IJopCdjqzJZnHHO5U1EiXnoZkrcKnpHJ&sz=w1000", "12_ThuocCamLanh4.jsp", lt3);
+            SanPham sp13 = new SanPham("Bột pha uống Bioflora 100mg trị tiêu chảy cấp ở trẻ em, người lớn (hộp 20 gói)", "Biocodex, France Kisska Int. Ltd., UK", "Pháp", "https://drive.google.com/thumbnail?id=1hTO1x0cU8a8aR07MsOj0l1kbDDTlIztk&sz=w1000", "13_ThuocTieuHoa1.jsp", lt4);
+            SanPham sp14 = new SanPham("Bột pha uống Fortrans làm sạch đại tràng trước nội soi, phẫu thuật (gói 73,69g)", "Ipsen Pharma", "Pháp", "https://drive.google.com/thumbnail?id=13WXDBw2DGMZLj9v42tmutWsNnAJ2P3qc&sz=w1000", "14_ThuocTieuHoa2.jsp", lt4);
+            SanPham sp15 = new SanPham("Bột pha uống Smecta 3g Hương Dâu điều trị tiêu chảy, rối loạn tiêu hóa (hộp 12 gói)", "Ipsen Pharma", "Pháp", "https://drive.google.com/thumbnail?id=1X_p7fVSKdt3-ESRzLdZjbDPg9ybvVO9y&sz=w1000", "15_ThuocTieuHoa3.jsp", lt4);
+            SanPham sp16 = new SanPham("Dung dịch bơm trực tràng Rectiofar Người lớn trị táo bón (40 ống x 5ml)", "Pharmedic", "Việt Nam", "https://drive.google.com/thumbnail?id=1eG1AKKnziKRUFe3j5jBobqxDBHTq6WSt&sz=w1000", "16_ThuocTieuHoa4.jsp", lt4);
+            SanPham sp17 = new SanPham("Dung dịch uống Vasoclean Sol 10ml điều trị sa sút trí tuệ ở người lớn (2 vỉ x 10 ống)", "Cho-a-pharm", "Hàn Quốc", "https://drive.google.com/thumbnail?id=1WJQO84ymCrIkqJ7p1_y6tjYLPwihRQ57&sz=w1000", "17_ThuocThanKinh1.jsp", lt5);
+            SanPham sp18 = new SanPham("Thuốc Hoạt Huyết Dưỡng Não bao phim Traphaco điều trị suy giảm trí nhớ (5 vỉ x 20 viên)", "Hoat Huyet Duong Nao", "Việt Nam", "https://drive.google.com/thumbnail?id=1HVyZryxVnSaaHy1iNzdHWsPZk4zUKFfX&sz=w1000", "18_ThuocThanKinh2.jsp", lt5);
+            SanPham sp19 = new SanPham("Viên nang Bổ Huyết Ích Não BDF Bidipha cải thiện trí nhớ, giảm chóng mặt ù tai (6 vỉ x 10 viên)", "BIDIPHAR", "Việt Nam", "https://drive.google.com/thumbnail?id=1QIBEu56S_w4vVloMoDYpKpflClaDhWwH&sz=w1000", "19_ThuocThanKinh3.jsp", lt5);
+            SanPham sp20 = new SanPham("Viên nén Hoạt Huyết Nhất Nhất giúp hoạt huyết, trị thiểu năng tuần hoàn (3 vỉ x 10 viên)", "Công ty TNHH Dược phẩm Nhất Nhất", "Việt Nam", "https://drive.google.com/thumbnail?id=1DG6rJdGpnVUEuqnN7NOdUXwz4E0EzK4k&sz=w1000", "20_ThuocThanKinh4.jsp", lt5);
+            SanPham sp21 = new SanPham("Bột pha uống Binozyt 200mg/5ml điều trị nhiễm khuẩn đường hô hấp (chai 15ml)", "Glenmark", "Romania", "https://drive.google.com/thumbnail?id=1cyoDlJTmhENO5diyfvqOmGZw9TCC7cgs&sz=w1000", "21_ThuocKhangSinh1.jsp", lt6);
+            SanPham sp22 = new SanPham("Bilclamos bid 1000mg (Hộp 2 vỉ x 7 viên)", "Bilim Ilac Sanayi Ve Ticaret Anonim Sirketi", "Thổ Nhĩ Kỳ", "https://drive.google.com/thumbnail?id=1AxM_pIKeTmzlYgWFOtBljgLmEm5_uHas&sz=w1000", "22_ThuocKhangSinh2.jsp", lt6);
+            SanPham sp23 = new SanPham("Bột pha uống Cefdinir 125mg S.Pharm kháng sinh điều trị nhiễm khuẩn (30 gói x 1,5g)", "Công ty cổ phần dược S.Pharm", "Việt Nam", "https://drive.google.com/thumbnail?id=1n6Y9OBmjOY5o7iJl7_rlK6yEIxIdLNOF&sz=w1000", "23_ThuocKhangSinh3.jsp", lt6);
+            SanPham sp24 = new SanPham("Bột pha uống Claminat 250mg/62.5mg Imexpharm điều trị nhiễm khuẩn (hộp 12 gói)", "Imexpharm", "Việt Nam", "https://drive.google.com/thumbnail?id=1A-nvoFBzqzN-IYbCQYvy-wlmzVZtodOa&sz=w1000", "24_ThuocKhangSinh4.jsp", lt6);
+            SanPham sp25 = new SanPham("Viên nén Arimidex 1mg điều trị ung thư vú (2 vỉ x 14 viên)", "AstraZeneca", "Anh", "https://drive.google.com/thumbnail?id=19byScTkmUQ8WkuH6Ae7oLi27VEIbKBFL&sz=w1000", "25_ThuocUngThu1.jsp", lt7);
+            SanPham sp26 = new SanPham("Viên nén Nolvadex-D 20mg điều trị ung thư vú (3 vỉ x 10 viên)", "AstraZeneca", "Anh", "https://drive.google.com/thumbnail?id=13IuAgsrMn5S05BJ9vY_EjOPu-1fGcfAS&sz=w1000", "26_ThuocUngThu2.jsp", lt7);
+            SanPham sp27 = new SanPham("Viên nén bao phim Casodex điều trị ung thư tiền liệt tuyến (2 vỉ x 14 viên)", "AstraZeneca", "Anh", "https://drive.google.com/thumbnail?id=19H4mWgI15vVOpDP3Q8xlmS10gTe2Rod1&sz=w1000", "27_ThuocUngThu3.jsp", lt7);
+            SanPham sp28 = new SanPham("Viên nén bao phim Femara kích trứng trưởng thành và điều trị ung thư vú (3 vỉ x 10 viên)", "Novartis", "Thụy Sĩ", "https://drive.google.com/thumbnail?id=1Xwcuz7eTg6CCI1nu0wNYOMSM5WBa_Rk6&sz=w1000", "28_ThuocUngThu4.jsp", lt7);
+            SanPham sp29 = new SanPham("Viên bao đường Domitazol Domesco hỗ trợ điều trị nhiễm trùng đường tiết niệu dưới (5 vỉ x 10 viên)", "Domesco", "Việt Nam", "https://drive.google.com/thumbnail?id=1Q3eMLNPFPyh_db0VNcsP68eCW43tvw14&sz=w1000", "29_ThuocTietNieu1.jsp", lt8);
+            SanPham sp30 = new SanPham("Viên giải phóng có kiểm soát Harnal Ocas 0.4mg trị triệu chứng của đường tiểu dưới (3 vỉ x 10 viên)", "Astellas Ireland Co.", "IreLand", "https://drive.google.com/thumbnail?id=1dGI18_ldNBB_N_toTB-S0GNAKrty5lGK&sz=w1000", "30_ThuocTietNieu2.jsp", lt8);
+            SanPham sp31 = new SanPham("Viên giải phóng có kiểm soát Xalgetz 0.4mg trị hội chứng tăng sản tuyến tiền liệt (1 vỉ x 10 viên)", "Getz Pharma (Pvt)., Ltd", "Ấn Độ", "https://drive.google.com/thumbnail?id=1U50oLvosUblayhaRoPsMDFocOSLqtv5X&sz=w1000", "31_ThuocTietNieu3.jsp", lt8);
+            SanPham sp32 = new SanPham("Viên nang Avodart 0.5mg điều trị tăng sản lành tính tuyến tiền liệt (3 vỉ x 10 viên)", "GlaxoSmithKline ETC", "Anh", "https://drive.google.com/thumbnail?id=1OTvwClU-u41PuqLBp59Ef6BLQuOo468o&sz=w1000", "32_ThuocTietNieu4.jsp", lt8);
+            SanPham sp33 = new SanPham("Dung dịch uống A.T Ascorbic 100mg/5ml bổ sung vitamin C (30 ống x 10ml)", "An Thiên", "Việt Nam", "https://drive.google.com/thumbnail?id=1LhfGjzj6--aiDYzY6egrf7bKyO0TjZOG&sz=w1000", "33_VitaminVaKhoangChat1.jsp", lt9);
+            SanPham sp34 = new SanPham("Dung dịch uống Aquadetrim D3 điều trị thiếu vitamin D (chai 10ml)", "Medana Pharma", "Ba Lan", "https://drive.google.com/thumbnail?id=1LUEl7Y0eljVdXJJ2CxBqiNGRrurlqCId&sz=w1000", "34_VitaminVaKhoangChat2.jsp", lt9);
+            SanPham sp35 = new SanPham("Dung dịch uống Conipa Pure 70mg phòng ngừa và điều trị thiếu kẽm (4 vỉ x 5 ống)", "DP Trung ương CPC1", "Việt Nam", "https://drive.google.com/thumbnail?id=1XFiSq3QXxEdcg8Zd-IMuuMnMm-BjHuAC&sz=w1000", "35_VitaminVaKhoangChat3.jsp", lt9);
+            SanPham sp36 = new SanPham("Dung dịch uống Ferlatum 800mg bổ sung sắt, bổ máu (10 chai x 15ml)", "Italfarmaco S.A", "Tây Ban Nha", "https://drive.google.com/thumbnail?id=11WYJ6k8qy29RWAjCeoTXe0LCe0l_PId6&sz=w1000", "36_VitaminVaKhoangChat4.jsp", lt9);
+            SanPham sp37 = new SanPham("Cao lỏng Cortonyl trợ tim, ngất do suy tim, mất ngủ , lao lực, an thần (chai 25ml)", "OPC", "Việt Nam", "https://drive.google.com/thumbnail?id=1PHXfo7EC9FuFJcUeoqJ-TvwRpGLrXfC2&sz=w1000", "37_ThuocTimMachHuyetAp1.jsp", lt10);
+            SanPham sp38 = new SanPham("Viên giải phóng có kiểm soát Betaloc ZOK 25mg điều trị tăng huyết áp, đau thắt ngực (1 vỉ x 14 viên)", "AstraZeneca", "Anh", "https://drive.google.com/thumbnail?id=1eVd3lbQReI5MJDf4Hg7sNWQuAvMpS4RA&sz=w1000", "38_ThuocTimMachHuyetAp2.jsp", lt10);
+            SanPham sp39 = new SanPham("Viên bao tan ở ruột Aspilets EC phòng ngừa nhồi máu cơ tim, đau thắt ngực (10 vỉ x 10 viên)", "UNITED PHARMA INC.", "Việt Nam", "https://drive.google.com/thumbnail?id=1LSxyQmUXdihcllL6GFJXa2-NigFxxE7n&sz=w1000", "39_ThuocTimMachHuyetAp3.jsp", lt10);
+            SanPham sp40 = new SanPham("Viên giải phóng có kiểm soát Trimetazidin Stella 35mg MR trị đau thắt ngực ổn định (3 vỉ x 10 viên)", "Công ty TNHH LD Stellapharm", "Việt Nam", "https://drive.google.com/thumbnail?id=12Gc26-7RYvWf_ZEUpWvCXzsNFHXeih0y&sz=w1000", "40_ThuocTimMachHuyetAp4.jsp", lt10);
 
             //Loại thuốc 1 - sản phẩm
             Set<SanPham> lt1_SanPham = new HashSet<>(Arrays.asList(sp1, sp2, sp3, sp4));
@@ -583,7 +584,7 @@ public class test {
             ChiTietSanPham ctsp15 = new ChiTietSanPham(0, 1050, 1000, dvt6, sp9);
             ChiTietSanPham ctsp16 = new ChiTietSanPham(0, 2000,1500, dvt2, sp10);
             ChiTietSanPham ctsp17 = new ChiTietSanPham(0, 60000, 55000, dvt6, sp10);
-            ChiTietSanPham ctsp18 = new ChiTietSanPham(0, 3300, 3000, dvt2, sp11);
+            ChiTietSanPham ctsp18 = new ChiTietSanPham(0, 3300, 3000, dvt4, sp11);
             ChiTietSanPham ctsp19 = new ChiTietSanPham(0, 66000, 60000, dvt2, sp11);
             ChiTietSanPham ctsp20 = new ChiTietSanPham(0, 60000, 55000, dvt6, sp12);
             ChiTietSanPham ctsp21 = new ChiTietSanPham(0, 119990, 100000, dvt2, sp13);
@@ -628,7 +629,7 @@ public class test {
             dvt1.setCacChiTietSanPham(dvt1_ctsp);
             // Đơn vị tính 2
             Set<ChiTietSanPham> dvt2_ctsp = new HashSet<>(Arrays.asList(
-                    ctsp2, ctsp7, ctsp9, ctsp11, ctsp13, ctsp14, ctsp16, ctsp18, ctsp19, ctsp21,
+                    ctsp2, ctsp7, ctsp9, ctsp11, ctsp13, ctsp14, ctsp16, ctsp19, ctsp21,
                     ctsp23, ctsp25, ctsp27, ctsp29, ctsp31, ctsp33, ctsp35, ctsp36, ctsp37, ctsp38,
                     ctsp39, ctsp40, ctsp41, ctsp42, ctsp43, ctsp44, ctsp45, ctsp46, ctsp47, ctsp48,
                     ctsp50, ctsp51, ctsp53, ctsp54, ctsp55
@@ -640,7 +641,7 @@ public class test {
             dvt3.setCacChiTietSanPham(dvt3_ctsp);
 
             // Đơn vị tính 4
-            Set<ChiTietSanPham> dvt4_ctsp = new HashSet<>(Arrays.asList(ctsp4, ctsp28, ctsp30));
+            Set<ChiTietSanPham> dvt4_ctsp = new HashSet<>(Arrays.asList(ctsp4, ctsp18, ctsp28, ctsp30));
             dvt4.setCacChiTietSanPham(dvt4_ctsp);
 
             // Đơn vị tính 5
@@ -783,10 +784,10 @@ public class test {
             NhanVien nv4 = new NhanVien("Phạm Thị D", "0909988776", "phamthid@gmail.com", ChucVu.QUAN_LY);
 
             // Thêm Tài Khoản Nhân Viên
-            TKNhanVien tknv1 = new TKNhanVien("nv01","",nv1);
-            TKNhanVien tknv2 = new TKNhanVien("nv02","",nv2);
-            TKNhanVien tknv3 = new TKNhanVien("nv03","",nv3);
-            TKNhanVien tknv4 = new TKNhanVien("nv04","",nv4);
+            TKNhanVien tknv1 = new TKNhanVien("nv01",new MaHoaMatKhau().toSHA1("nv01"),nv1);
+            TKNhanVien tknv2 = new TKNhanVien("nv02",new MaHoaMatKhau().toSHA1("nv02"),nv2);
+            TKNhanVien tknv3 = new TKNhanVien("nv03",new MaHoaMatKhau().toSHA1("nv03"),nv3);
+            TKNhanVien tknv4 = new TKNhanVien("nv04",new MaHoaMatKhau().toSHA1("nv04"),nv4);
 
             new ITKNhanVien().insert(tknv1);
             new ITKNhanVien().insert(tknv2);
@@ -881,11 +882,11 @@ public class test {
             new INhapHang().insert(nh);
 
             // Thêm Admin
-            Admin ad1 = new Admin("admin01","","admin01@gmail.com");
-            Admin ad2 = new Admin("admin02","","admin02@gmail.com");
+            Admin ad1 = new Admin("admin01","0935946471","admin01@gmail.com");
+            Admin ad2 = new Admin("admin02","0934072465","admin02@gmail.com");
             // Thêm TKAdmin
-            TKAdmin tkAdmin1 = new TKAdmin("tk01","", ad1);
-            TKAdmin tkAdmin2 = new TKAdmin("tk02","", ad2);
+            TKAdmin tkAdmin1 = new TKAdmin("tk01",new MaHoaMatKhau().toSHA1("admin01"), ad1);
+            TKAdmin tkAdmin2 = new TKAdmin("tk02",new MaHoaMatKhau().toSHA1("admin02"), ad2);
 
             new ITKAdmin().insert(tkAdmin1);
             new ITKAdmin().insert(tkAdmin2);

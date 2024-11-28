@@ -7,4 +7,6 @@ public interface IDAO <T>{
     public boolean update(T obj);
     public boolean delete(T obj);
     public Set<T> SelectAll();
+    public T SelectById(int id);
+    public Set<T> SelectByID(int id);
 }

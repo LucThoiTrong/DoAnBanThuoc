@@ -12,24 +12,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <script>
-        function showPrice(price, unit) {
-            const priceDisplay = document.getElementById('price-display-' + unit);
-            priceDisplay.innerText = price + "đ / " + unit;
-        }
-    </script>
 </head>
 <body>
 <!-- Header -->
-<jsp:include page="header.html"/>
 
 <!-- Body -->
 <!-- my-4 là margin ở trên - dưới -->
+<div class="row">
+    <jsp:include page="header.html"/>
+</div>
 <div class="container my-4" >
-    <div class="row g-0">
+    <div class="row" style="margin-top: 30px">
         <!-- Bộ lọc bên trái -->
-        <div class="col-3">
-            <div class="card" style="margin-right: 10px;">
+        <div class="col-md-3" style="margin-bottom: 15px" >
+            <div class="card" style="margin-right: 10px; position: sticky; top: 0;">
                 <div class="card-header custom-card-header">
                     Bộ lọc nâng cao
                 </div>
@@ -102,7 +98,7 @@
         </div>
 
         <!-- Khu vực sản phẩm bên phải -->
-        <div class="col-9">
+        <div class="col-md-9">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h2 class="h5">Sản phẩm</h2>
                 <div>
@@ -115,58 +111,89 @@
             </div>
             <div class="product-list">
                 <!-- Thẻ sản phẩm -->
-                <c:forEach var="product" items="${productList}">
-                    <div class="product_card">
-                        <div class="basicInfo">
-                            <div class="name">${product.tenSanPham}</div>
-                            <div class="img">
-                                <img src="${product.anhSanPham}" alt="ảnh sản phẩm">
-                            </div>
-                            <div class="button_thuoc">
-                                <c:forEach var="p" items="${product.cacChiTietSanPham}">
-                                    <a href="#" class="button" onclick="showPrice(${p.giaBan}, this)">${p.donViTinh.tenDonViTinh}</a>
-                                </c:forEach>
-                            </div>
-                            <div class="mores">
-                                <div class="price"></div> <!-- Giá sẽ được hiển thị ở đây -->
-                                <button type="button">Xem chi tiết</button>
-                            </div>
-                        </div>
-                    </div>
-                </c:forEach>
+                <ul class="product_listSP">
+                    <c:forEach var="product" items="${productList}">
+                        <li>
+                            <a href="${product.linkChiTietSanPham}" style="text-decoration: none;color: black">
+                                <div class="product_card">
+                                    <div class="basicInfo">
+                                        <div class="name">${product.tenSanPham}</div>
+                                        <div class="img">
+                                            <img src="${product.anhSanPham}" alt="ảnh sản phẩm">
+                                        </div>
+                                        <div>
+                                            <div class="button_thuoc">
+                                                <c:forEach var="p" items="${product.cacChiTietSanPham}">
+                                                    <a class="button" onclick="showPrice(${p.giaBan}, '${p.donViTinh.tenDonViTinh}', this, toggleSelected(this))">
+                                                            ${p.donViTinh.tenDonViTinh}
+                                                    </a>
+                                                </c:forEach>
+                                            </div>
+                                            <div class="mores">
+                                                <div class="price"></div> <!-- Giá sẽ được hiển thị ở đây -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </c:forEach>
+                </ul>
             </div>
         </div>
     </div>
 </div>
 <script>
-    // Hàm showPrice sẽ nhận giá bán và hiển thị nó trong phần tử .price của thẻ sản phẩm tương ứng
-    function showPrice(price, element) {
-        // Tìm phần tử .price trong cùng thẻ sản phẩm chứa nút nhấn
-        var priceElement = element.closest('.product_card').querySelector('.price');
-
-        // Cập nhật giá vào phần tử .price
-        priceElement.innerHTML = price;
-    }
     // Hàm để thiết lập giá của đơn vị tính đầu tiên cho tất cả sản phẩm
-    window.onload = function() {
+    window.onload = function () {
         // Lấy tất cả các thẻ sản phẩm
         var productCards = document.querySelectorAll('.product_card');
 
-        productCards.forEach(function(card) {
-            // Lấy giá của đơn vị tính đầu tiên trong sản phẩm
+        productCards.forEach(function (card) {
+            // Lấy giá và đơn vị tính của đơn vị tính đầu tiên trong sản phẩm
             var firstProductDetail = card.querySelector('.button_thuoc a');
             if (firstProductDetail) {
-                // Lấy giá của đơn vị tính đầu tiên (giả sử giá là thuộc tính 'giaBan')
-                var price = firstProductDetail.getAttribute('onclick').match(/\d+/)[0];
+                // Lấy giá và đơn vị tính từ thuộc tính 'onclick'
+                var match = firstProductDetail.getAttribute('onclick').match(/(\d+), '([^']+)'/);
+                if (match) {
+                    var price = firstProductDetail.getAttribute('onclick').match(/\d+/)[0];
+                    var formattedPrice = parseInt(price).toLocaleString('de-DE');
+                    //var price = match[1];
+                    var unit = match[2];
 
-                // Tìm phần tử .price trong thẻ sản phẩm và thiết lập giá
-                var priceElement = card.querySelector('.price');
-                if (priceElement) {
-                    priceElement.innerHTML = price;
+                    // Tìm phần tử .price trong thẻ sản phẩm và thiết lập giá
+                    var priceElement = card.querySelector('.price');
+                    if (priceElement) {
+                        priceElement.innerHTML = formattedPrice + " VNĐ " + "/ " + unit;
+                    }
                 }
             }
         });
     };
+
+    function showPrice(price, unit, element) {
+        // Tìm phần tử .price trong cùng thẻ sản phẩm chứa nút nhấn
+        var priceElement = element.closest('.product_card').querySelector('.price');
+
+        // Cập nhật giá và đơn vị tính vào phần tử .price
+        if (priceElement) {
+            priceElement.innerHTML = parseInt(price).toLocaleString('de-DE') + " VNĐ" + " / " + unit;
+        }
+    }
+
+    // Giữ đơn vị tính
+    function toggleSelected(element) {
+        // Lấy tất cả các nút có class 'button'
+        var buttons = document.querySelectorAll('.button');
+
+        // Xóa lớp 'selected' khỏi tất cả các nút
+        buttons.forEach(function(button) {
+            button.classList.remove('selected');
+        });
+
+        // Thêm lớp 'selected' vào nút đang được nhấn
+        element.classList.add('selected');
+    }
 </script>
 </body>
 </html>

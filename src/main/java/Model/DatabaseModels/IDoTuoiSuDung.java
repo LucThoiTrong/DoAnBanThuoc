@@ -47,4 +47,14 @@ public class IDoTuoiSuDung implements IDAO<DoTuoiSuDung> {
     public Set<DoTuoiSuDung> SelectAll() {
         return Set.of();
     }
+
+    @Override
+    public DoTuoiSuDung SelectById(int id) {
+        return null;
+    }
+
+    @Override
+    public Set<DoTuoiSuDung> SelectByID(int id) {
+        return Set.of();
+    }
 }

@@ -47,4 +47,14 @@ public class IDonViTinh implements IDAO<DonViTinh> {
     public Set<DonViTinh> SelectAll() {
         return Set.of();
     }
+
+    @Override
+    public DonViTinh SelectById(int id) {
+        return null;
+    }
+
+    @Override
+    public Set<DonViTinh> SelectByID(int id) {
+        return Set.of();
+    }
 }
