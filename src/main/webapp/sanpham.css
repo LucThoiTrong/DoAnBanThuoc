@@ -13,6 +13,7 @@ body{
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-image: linear-gradient(to top right, var(--green), var(--violet));
 }
+/*bộ lọc*/
 /* ------------------------- */
 .custom-card-header{
     background: #29bd0c !important;
@@ -20,21 +21,6 @@ body{
     font-weight: bold; /* Đậm hơn */
     text-align: center;
 }
-.product_listSP{
-    display: grid; /* Sử dụng CSS Grid */
-    grid-template-columns: repeat(4, 1fr); /* Chia thành 4 cột đều nhau */
-    gap: 20px; /* Khoảng cách giữa các sản phẩm */
-    list-style: none; /* Loại bỏ dấu đầu dòng của danh sách */
-    padding: 0;
-    margin: 0;
-}
-
-.product_listSP li{
-    border-radius: 5px; /* Bo góc */
-    text-align: center;
-    background-color: #fff;
-}
-/* --------------------------- */
 /*button lọc giá bán*/
 .filter-button-group{
     width: 100%;
@@ -56,20 +42,24 @@ body{
     background-color: #e7f0ff;
     color: #1b9c02;
 }
-
+/* --------------------------- */
 /* Khu vực chứa các card sản phẩm */
-.product-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+.product-list{
+    display: grid; /* Sử dụng CSS Grid */
+    grid-template-columns: repeat(4, 1fr); /* Chia thành 4 cột đều nhau */
+    gap: 10px; /* Khoảng cách giữa các sản phẩm */
+    list-style: none; /* Loại bỏ dấu đầu dòng của danh sách */
     height: auto;
-    gap: 5px;
     justify-items: center;
+    padding: 0;
 }
-/* @media (min-width: 1400px) {
-  .product-list {
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  }
-} */
+
+.product-list li{
+    border-radius: 5px; /* Bo góc */
+    text-align: center;
+    background-color: #fff;
+}
+
 @media (max-width: 1280px) {
     .product-list {
         grid-template-columns: 1fr 1fr 1fr;
@@ -79,19 +69,26 @@ body{
     .product-list {
         grid-template-columns: 1fr 1fr;
     }
+    /*bộ lọc*/
+    .card .card-body{
+        height: 435px;
+        overflow-y: auto;
+    }
 }
 @media (max-width: 460px) {
     .product-list {
         grid-template-columns: 1fr;
+    }
+    /*bộ lọc*/
+    .card .card-body{
+        height: 435px;
+        overflow-y: auto;
     }
 }
 /* design các thẻ sản phẩm */
 .product_card{
     border-radius: 30px;
     width: 220px; /* Độ rộng thẻ */
-    /* height: 440px;  */
-    margin: 4px;
-    cursor: pointer;
     margin-bottom: 10px;
 }
 /* Phần chứa tên, ảnh, loại đóng gói */
@@ -124,8 +121,10 @@ body{
 
 .product_card .img {
     position: relative;
+    display: flex;
     z-index: 1;
     text-align: center;
+    justify-content: center;
 }
 
 .product_card .img img {
@@ -133,7 +132,6 @@ body{
     transform: scale(1) rotate(0);
     transition: 0.5s;
     display: block;
-    margin-left: 14px;
 }
 
 .img input:checked ~ img {
@@ -198,12 +196,14 @@ body{
 .button_thuoc{
     margin-top: 10px;
 }
+.button_thuoc .button{
+    cursor: pointer;
+}
 .mores {
-    margin-top: -0.15cm;
     padding: 15px;
-    display: flex; /* Sử dụng flexbox */
-    align-items: center; /* Căn giữa theo trục dọc */
-    margin-left: -15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .price{
     font-size: 17px;

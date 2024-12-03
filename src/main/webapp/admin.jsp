@@ -29,23 +29,27 @@
         </div>
         <!--cái sidebar bên trái-->
         <div class="sidebar">
-            <a href="admin.jsp?page=Dashboard" class="${param.page == 'Dashboard' ? 'active' : ''}">
+            <a href="servletDashboard" class="${param.page == 'Dashboard' ? 'active' : ''}">
                 <span class="material-icons-sharp">grid_view</span>
                 <h3>Dashboard</h3>
             </a>
-            <a href="servletLoaiThuoc" class="${param.page == 'DSthuoc' ? 'active' : ''}">
+            <a href="servletLoaiThuoc" id="thuoc-link" class="${param.page == 'DSthuoc' ? 'active' : ''}">
                 <span class="material-icons-sharp">medical_services</span>
                 <h3>Thuốc</h3>
             </a>
-            <a href="servletNhanVien" class="${param.page == 'DSnhanvien' ? 'active' : ''}">
+            <a href="servletNhanVien" id="nv-link" class="${param.page == 'DSnhanvien' ? 'active' : ''}">
                 <span class="material-icons-sharp">diversity_2</span>
                 <h3>Nhân viên</h3>
             </a>
-            <a href="servletKhachHang" class="${param.page == 'DSkhachhang' ? 'active' : ''}">
+            <a href="servletKhachHang" id="kh-link" class="${param.page == 'DSkhachhang' ? 'active' : ''}">
                 <span class="material-icons-sharp">emoji_people</span>
                 <h3>Khách hàng</h3>
             </a>
-            <a href="#">
+            <a href="servletDoanhThu" id="doanhthu-link" class="${param.page == 'DSDoanhThu' ? 'active' : ''}">
+                <span class="material-icons-sharp">bar_chart</span>
+                <h3>Doanh thu</h3>
+            </a>
+            <a href="servletLogout">
                 <span class="material-icons-sharp">logout</span>
                 <h3>Đăng xuất</h3>
             </a>
@@ -140,6 +144,19 @@
 <script>
     // Khởi động PureCounter theo cách thủ công để đảm bảo hoạt động
     new PureCounter();
+    const userRole = '${sessionScope.nhanVien.chucVu.tenChucVu}';
+    const admin_test = ${sessionScope.admin == null}
+    if (userRole === 'Nhân viên' && admin_test) {
+        const thuocLink = document.getElementById('thuoc-link');
+        // Thêm lớp CSS để làm liên kết không nhấn được
+        thuocLink.classList.add('disabled');
+        const nvLink = document.getElementById('nv-link');
+        nvLink.classList.add('disabled');
+        const khLink = document.getElementById('kh-link');
+        khLink.classList.add('disabled');
+        const doanhthuLink = document.getElementById('doanhthu-link');
+        doanhthuLink.classList.add('disabled');
+    }
 </script>
 </body>
 </html>

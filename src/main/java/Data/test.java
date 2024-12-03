@@ -578,7 +578,7 @@ public class test {
             ChiTietSanPham ctsp9 = new ChiTietSanPham(0, 390000, 380000, dvt2, sp5);
             ChiTietSanPham ctsp10 = new ChiTietSanPham(0, 24000, 22000, dvt1, sp6);
             ChiTietSanPham ctsp11 = new ChiTietSanPham(0, 48000, 46000, dvt2, sp6);
-            ChiTietSanPham ctsp12 = new ChiTietSanPham(0, 19000, 18000, dvt6, sp7);
+            ChiTietSanPham ctsp12 = new ChiTietSanPham(0, 19000, 18000, dvt5, sp7);
             ChiTietSanPham ctsp13 = new ChiTietSanPham(0, 45000, 42000, dvt2, sp8);
             ChiTietSanPham ctsp14 = new ChiTietSanPham(0, 31500, 30000, dvt2, sp9);
             ChiTietSanPham ctsp15 = new ChiTietSanPham(0, 1050, 1000, dvt6, sp9);
@@ -645,11 +645,11 @@ public class test {
             dvt4.setCacChiTietSanPham(dvt4_ctsp);
 
             // Đơn vị tính 5
-            Set<ChiTietSanPham> dvt5_ctsp = new HashSet<>(Arrays.asList(ctsp5, ctsp49, ctsp52));
+            Set<ChiTietSanPham> dvt5_ctsp = new HashSet<>(Arrays.asList(ctsp5, ctsp12, ctsp49, ctsp52));
             dvt5.setCacChiTietSanPham(dvt5_ctsp);
 
             // Đơn vị tính 6
-            Set<ChiTietSanPham> dvt6_ctsp = new HashSet<>(Arrays.asList(ctsp12, ctsp15, ctsp17, ctsp20, ctsp22, ctsp24, ctsp26));
+            Set<ChiTietSanPham> dvt6_ctsp = new HashSet<>(Arrays.asList(ctsp15, ctsp17, ctsp20, ctsp22, ctsp24, ctsp26));
             dvt6.setCacChiTietSanPham(dvt6_ctsp);
 
             // Thiết lập mối quan hệ giữa sản phẩm và chi tiết sản phẩm

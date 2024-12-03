@@ -52,7 +52,7 @@
                         </g>
                     </svg>
                 </a>
-                <a href="servletSanPham">
+                <a href="servletSanPham?action=LayAllSanPham">
                     <span>Thuốc</span>
                     <span class="material-symbols-outlined" aria-hidden="true" style="margin-left: 23px;">medication</span>
                     <svg viewBox="0 0 300 300" aria-hidden="true">

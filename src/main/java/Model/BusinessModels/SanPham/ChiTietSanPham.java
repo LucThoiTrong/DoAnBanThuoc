@@ -24,10 +24,10 @@ public class ChiTietSanPham implements Serializable {
     @JoinColumn(name = "SanPhamID")
     private SanPham sanPham;
 
-    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ChiTietNhapHang> chiTietNhapHang = new HashSet<>();
 
-    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ChiTietDatHang> chiTietDatHang = new HashSet<>();
 
     public ChiTietSanPham() {}
@@ -113,4 +113,5 @@ public class ChiTietSanPham implements Serializable {
     public void setChiTietDatHang(Set<ChiTietDatHang> chiTietDatHang) {
         this.chiTietDatHang = chiTietDatHang;
     }
+
 }

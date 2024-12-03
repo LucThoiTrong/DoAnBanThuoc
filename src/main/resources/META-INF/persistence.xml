@@ -19,7 +19,6 @@
 
         <!--DatHang va NhapHang-->
         <class>Model.BusinessModels.DoiTuongSuDung.KhacHang.DatHang</class>
-        <class>Model.BusinessModels.DoiTuongSuDung.KhacHang.AnhDonThuoc</class>
         <class>Model.BusinessModels.DoiTuongSuDung.NhanVien.NhapHang</class>
 
         <!--SanPham-->
@@ -43,7 +42,7 @@
             <property name="jakarta.persistence.jdbc.user" value="root"/>
             <property name="jakarta.persistence.jdbc.password" value=""/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/> <!-- Hoặc create, create-drop tùy thuộc vào nhu cầu -->
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/> <!-- Hoặc create, create-drop tùy thuộc vào nhu cầu -->
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>

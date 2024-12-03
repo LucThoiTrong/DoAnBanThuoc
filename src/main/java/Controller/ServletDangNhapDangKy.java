@@ -54,16 +54,19 @@ public class ServletDangNhapDangKy extends HttpServlet {
 
         if(tkKhachHang != null) {
             KhachHang khachHang = tkKhachHang.getKhachHang();
-            HttpSession session = req.getSession();
-            session.setAttribute("khachHang", khachHang);
-
-            getServletContext().getRequestDispatcher("/servletSanPham").forward(req, resp);
+            if (khachHang != null) {
+                HttpSession session = req.getSession();
+                session.setAttribute("khachHang", khachHang);
+                getServletContext().getRequestDispatcher("/servletSanPham").forward(req, resp);
+            } else {
+                resp.getWriter().println("Không tìm thấy thông tin khách hàng.");
+            }
         }
         else if(tkNhanVien != null) {
             NhanVien nhanVien = tkNhanVien.getNhanVien();
             HttpSession session = req.getSession();
             session.setAttribute("nhanVien", nhanVien);
-            getServletContext().getRequestDispatcher("/admin.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher("/servletDashboard").forward(req, resp);
         }
         else if(tkAdmin != null) {
             Admin admin = tkAdmin.getAdmin();

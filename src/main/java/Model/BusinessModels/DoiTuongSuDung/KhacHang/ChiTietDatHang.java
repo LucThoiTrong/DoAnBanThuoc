@@ -23,6 +23,18 @@ public class ChiTietDatHang implements Serializable {
 
     public ChiTietDatHang() {}
 
+    public ChiTietDatHang(ChiTietSanPham sanPham, int soLuongMua) {
+        this.sanPham = sanPham;
+        this.soLuongMua = soLuongMua;
+    }
+
+    public ChiTietDatHang(ChiTietSanPham sanPham, double tongGiaTien, DatHang datHang) {
+        this.sanPham = sanPham;
+        this.soLuongMua = 1;
+        this.tongGiaTien = tongGiaTien;
+        this.datHang = datHang;
+    }
+
     public ChiTietDatHang(int id, ChiTietSanPham sanPham, int soLuongMua, double tongGiaTien, DatHang datHang) {
         this.id = id;
         this.sanPham = sanPham;
@@ -69,5 +81,9 @@ public class ChiTietDatHang implements Serializable {
 
     public void setDatHang(DatHang datHang) {
         this.datHang = datHang;
+    }
+
+    public double tongGiaTien(int soLuongMua, ChiTietSanPham sanPham) {
+        return soLuongMua*sanPham.getGiaBan();
     }
 }

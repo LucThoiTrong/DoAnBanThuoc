@@ -45,7 +45,22 @@ public class IDanhMucThuoc implements IDAO<DanhMucThuoc> {
 
     @Override
     public Set<DanhMucThuoc> SelectAll() {
-        return Set.of();
+        EntityManager entityManager = null;
+        try {
+            // Lấy EntityManager từ HibernateUtil
+            entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
+
+            // Sử dụng HQL để truy vấn dữ liệu
+            String hql = "FROM DanhMucThuoc"; // HQL truy vấn tất cả từ entity DanhMucThuoc
+            return Set.copyOf(entityManager.createQuery(hql, DanhMucThuoc.class).getResultList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Set.of(); // Trả về tập hợp rỗng nếu có lỗi
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
     }
 
     @Override

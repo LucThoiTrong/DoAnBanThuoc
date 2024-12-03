@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -142,266 +143,48 @@
                     </thead>
                     <tbody>
                     <!-- Sản phẩm sẽ lặp lại như trên -->
-                    <tr>
-                        <td><input type="checkbox" class="checkbox-custom"></td>
-                        <td class="d-flex align-items-center">
-                            <img src="screenshot_1732016932.png" alt="Sản phẩm">
-                            <div class="ms-3 text-start">
-                                <h6 class="mb-1">Hỗn dịch uống men vi sinh Enterogermina Gut Defense Sanofi</h6>
-                                <p class="small text-muted mb-1">Tăng cường tiêu hóa, hỗ trợ bảo vệ...</p>
-                                <div class="badge bg-primary text-white">Giảm ngay 10% áp dụng đến 30/11</div>
-                            </div>
-                        </td>
-                        <td>
-                            <p>
-                                <span class="price-old">184.000đ</span><br>
-                                <span class="price-new">165.000đ</span>
-                            </p>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <button class="btn btn-quantity">-</button>
-                                <input type="text" value="1" class="input-quantity mx-2">
-                                <button class="btn btn-quantity">+</button>
-                            </div>
-                        </td>
-                        <td>Hộp</td>
-                        <td><button class="btn btn-danger">Xóa</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox-custom"></td>
-                        <td class="d-flex align-items-center">
-                            <img src="screenshot_1732016932.png" alt="Sản phẩm">
-                            <div class="ms-3 text-start">
-                                <h6 class="mb-1">Hỗn dịch uống men vi sinh Enterogermina Gut Defense Sanofi</h6>
-                                <p class="small text-muted mb-1">Tăng cường tiêu hóa, hỗ trợ bảo vệ...</p>
-                                <div class="badge bg-primary text-white">Giảm ngay 10% áp dụng đến 30/11</div>
-                            </div>
-                        </td>
-                        <td>
-                            <p>
-                                <span class="price-old">184.000đ</span><br>
-                                <span class="price-new">165.000đ</span>
-                            </p>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <button class="btn btn-quantity">-</button>
-                                <input type="text" value="1" class="input-quantity mx-2">
-                                <button class="btn btn-quantity">+</button>
-                            </div>
-                        </td>
-                        <td>Hộp</td>
-                        <td><button class="btn btn-danger">Xóa</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox-custom"></td>
-                        <td class="d-flex align-items-center">
-                            <img src="screenshot_1732016932.png" alt="Sản phẩm">
-                            <div class="ms-3 text-start">
-                                <h6 class="mb-1">Hỗn dịch uống men vi sinh Enterogermina Gut Defense Sanofi</h6>
-                                <p class="small text-muted mb-1">Tăng cường tiêu hóa, hỗ trợ bảo vệ...</p>
-                                <div class="badge bg-primary text-white">Giảm ngay 10% áp dụng đến 30/11</div>
-                            </div>
-                        </td>
-                        <td>
-                            <p>
-                                <span class="price-old">184.000đ</span><br>
-                                <span class="price-new">165.000đ</span>
-                            </p>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <button class="btn btn-quantity">-</button>
-                                <input type="text" value="1" class="input-quantity mx-2">
-                                <button class="btn btn-quantity">+</button>
-                            </div>
-                        </td>
-                        <td>Hộp</td>
-                        <td><button class="btn btn-danger">Xóa</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox-custom"></td>
-                        <td class="d-flex align-items-center">
-                            <img src="screenshot_1732016932.png" alt="Sản phẩm">
-                            <div class="ms-3 text-start">
-                                <h6 class="mb-1">Hỗn dịch uống men vi sinh Enterogermina Gut Defense Sanofi</h6>
-                                <p class="small text-muted mb-1">Tăng cường tiêu hóa, hỗ trợ bảo vệ...</p>
-                                <div class="badge bg-primary text-white">Giảm ngay 10% áp dụng đến 30/11</div>
-                            </div>
-                        </td>
-                        <td>
-                            <p>
-                                <span class="price-old">184.000đ</span><br>
-                                <span class="price-new">165.000đ</span>
-                            </p>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <button class="btn btn-quantity">-</button>
-                                <input type="text" value="1" class="input-quantity mx-2">
-                                <button class="btn btn-quantity">+</button>
-                            </div>
-                        </td>
-                        <td>Hộp</td>
-                        <td><button class="btn btn-danger">Xóa</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox-custom"></td>
-                        <td class="d-flex align-items-center">
-                            <img src="screenshot_1732016932.png" alt="Sản phẩm">
-                            <div class="ms-3 text-start">
-                                <h6 class="mb-1">Hỗn dịch uống men vi sinh Enterogermina Gut Defense Sanofi</h6>
-                                <p class="small text-muted mb-1">Tăng cường tiêu hóa, hỗ trợ bảo vệ...</p>
-                                <div class="badge bg-primary text-white">Giảm ngay 10% áp dụng đến 30/11</div>
-                            </div>
-                        </td>
-                        <td>
-                            <p>
-                                <span class="price-old">184.000đ</span><br>
-                                <span class="price-new">165.000đ</span>
-                            </p>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <button class="btn btn-quantity">-</button>
-                                <input type="text" value="1" class="input-quantity mx-2">
-                                <button class="btn btn-quantity">+</button>
-                            </div>
-                        </td>
-                        <td>Hộp</td>
-                        <td><button class="btn btn-danger">Xóa</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox-custom"></td>
-                        <td class="d-flex align-items-center">
-                            <img src="screenshot_1732016932.png" alt="Sản phẩm">
-                            <div class="ms-3 text-start">
-                                <h6 class="mb-1">Hỗn dịch uống men vi sinh Enterogermina Gut Defense Sanofi</h6>
-                                <p class="small text-muted mb-1">Tăng cường tiêu hóa, hỗ trợ bảo vệ...</p>
-                                <div class="badge bg-primary text-white">Giảm ngay 10% áp dụng đến 30/11</div>
-                            </div>
-                        </td>
-                        <td>
-                            <p>
-                                <span class="price-old">184.000đ</span><br>
-                                <span class="price-new">165.000đ</span>
-                            </p>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <button class="btn btn-quantity">-</button>
-                                <input type="text" value="1" class="input-quantity mx-2">
-                                <button class="btn btn-quantity">+</button>
-                            </div>
-                        </td>
-                        <td>Hộp</td>
-                        <td><button class="btn btn-danger">Xóa</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox-custom"></td>
-                        <td class="d-flex align-items-center">
-                            <img src="screenshot_1732016932.png" alt="Sản phẩm">
-                            <div class="ms-3 text-start">
-                                <h6 class="mb-1">Hỗn dịch uống men vi sinh Enterogermina Gut Defense Sanofi</h6>
-                                <p class="small text-muted mb-1">Tăng cường tiêu hóa, hỗ trợ bảo vệ...</p>
-                                <div class="badge bg-primary text-white">Giảm ngay 10% áp dụng đến 30/11</div>
-                            </div>
-                        </td>
-                        <td>
-                            <p>
-                                <span class="price-old">184.000đ</span><br>
-                                <span class="price-new">165.000đ</span>
-                            </p>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <button class="btn btn-quantity">-</button>
-                                <input type="text" value="1" class="input-quantity mx-2">
-                                <button class="btn btn-quantity">+</button>
-                            </div>
-                        </td>
-                        <td>Hộp</td>
-                        <td><button class="btn btn-danger">Xóa</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox-custom"></td>
-                        <td class="d-flex align-items-center">
-                            <img src="screenshot_1732016932.png" alt="Sản phẩm">
-                            <div class="ms-3 text-start">
-                                <h6 class="mb-1">Hỗn dịch uống men vi sinh Enterogermina Gut Defense Sanofi</h6>
-                                <p class="small text-muted mb-1">Tăng cường tiêu hóa, hỗ trợ bảo vệ...</p>
-                                <div class="badge bg-primary text-white">Giảm ngay 10% áp dụng đến 30/11</div>
-                            </div>
-                        </td>
-                        <td>
-                            <p>
-                                <span class="price-old">184.000đ</span><br>
-                                <span class="price-new">165.000đ</span>
-                            </p>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <button class="btn btn-quantity">-</button>
-                                <input type="text" value="1" class="input-quantity mx-2">
-                                <button class="btn btn-quantity">+</button>
-                            </div>
-                        </td>
-                        <td>Hộp</td>
-                        <td><button class="btn btn-danger">Xóa</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox-custom"></td>
-                        <td class="d-flex align-items-center">
-                            <img src="screenshot_1732016932.png" alt="Sản phẩm">
-                            <div class="ms-3 text-start">
-                                <h6 class="mb-1">Hỗn dịch uống men vi sinh Enterogermina Gut Defense Sanofi</h6>
-                                <p class="small text-muted mb-1">Tăng cường tiêu hóa, hỗ trợ bảo vệ...</p>
-                                <div class="badge bg-primary text-white">Giảm ngay 10% áp dụng đến 30/11</div>
-                            </div>
-                        </td>
-                        <td>
-                            <p>
-                                <span class="price-old">184.000đ</span><br>
-                                <span class="price-new">165.000đ</span>
-                            </p>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <button class="btn btn-quantity">-</button>
-                                <input type="text" value="1" class="input-quantity mx-2">
-                                <button class="btn btn-quantity">+</button>
-                            </div>
-                        </td>
-                        <td>Hộp</td>
-                        <td><button class="btn btn-danger">Xóa</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox-custom"></td>
-                        <td class="d-flex align-items-center">
-                            <img src="screenshot_1732016932.png" alt="Sản phẩm">
-                            <div class="ms-3 text-start">
-                                <h6 class="mb-1">Hỗn dịch uống men vi sinh Enterogermina Gut Defense Sanofi</h6>
-                                <p class="small text-muted mb-1">Tăng cường tiêu hóa, hỗ trợ bảo vệ...</p>
-                                <div class="badge bg-primary text-white">Giảm ngay 10% áp dụng đến 30/11</div>
-                            </div>
-                        </td>
-                        <td>
-                            <p>
-                                <span class="price-old">184.000đ</span><br>
-                                <span class="price-new">165.000đ</span>
-                            </p>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <button class="btn btn-quantity">-</button>
-                                <input type="text" value="1" class="input-quantity mx-2">
-                                <button class="btn btn-quantity">+</button>
-                            </div>
-                        </td>
-                        <td>Hộp</td>
-                        <td><button class="btn btn-danger">Xóa</button></td>
-                    </tr>
+                    <c:forEach var="p" items="${danhSachOrder}">
+                        <tr>
+                            <input type="hidden" class="idOrder" value="${p.id}">
+                            <td><input type="checkbox" class="checkbox-custom"></td>
+                            <td class="d-flex align-items-center">
+                                <img src="${p.sanPham.sanPham.anhSanPham}" alt="Ảnh Sản phẩm">
+                                <div class="ms-3 text-start">
+                                    <h6 class="mb-1">${p.sanPham.sanPham.tenSanPham}</h6>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <span class="price-new">${p.tongGiaTien}</span><br>
+                                </p>
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <button class="btn btn-quantity">-</button>
+                                    <input type="text" value="${p.soLuongMua}" class="input-quantity mx-2">
+                                    <button class="btn btn-quantity">+</button>
+                                </div>
+                            </td>
+                            <td>${p.sanPham.donViTinh.tenDonViTinh}</td>
+                            <td><button class="btn btn-danger" onclick="XoaSanPham(this)">Xóa</button></td>
+                        </tr>
+                    </c:forEach>
+
+                    <script>
+                        function XoaSanPham(button) {
+                            // Tìm phần tử input hidden trong cùng hàng
+                            const row = button.closest('tr');
+                            const id = row.querySelector('.idOrder').value;
+
+                            // Chuẩn bị URL điều hướng
+                            const action = "removeSanPham";
+                            const newUrl = 'servletDatHangKH?action=' + action + '&id=' + id;
+
+                            // Điều hướng đến URL mới
+                            window.location.href = newUrl;
+                        }
+                    </script>
+
                     </tbody>
                 </table>
             </div>
@@ -412,12 +195,12 @@
                 <h6 class="mb-3"><strong>Tóm tắt thanh toán</strong></h6>
                 <div class="d-flex justify-content-between">
                     <span>Tổng tiền</span>
-                    <span>165.000đ</span>
+                    <span>${tongSoTien}</span>
                 </div>
                 <hr>
                 <div class="d-flex justify-content-between">
                     <strong>Thành tiền</strong>
-                    <strong class="text-danger">165.000đ</strong>
+                    <strong class="text-danger">${tongSoTien}</strong>
                 </div>
                 <button class="btn btn-primary w-100 mt-3">Mua hàng</button>
                 <p class="text-muted small mt-3">

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,14 @@
 <body>
   <div class="container">
     <div class="row">
-      <jsp:include page="header.html"/>
+      <c:choose>
+        <c:when test="${not empty sessionScope.khachHang}">
+          <jsp:include page="headerSauDN.jsp"/>
+        </c:when>
+        <c:otherwise>
+          <jsp:include page="header.html"/>
+        </c:otherwise>
+      </c:choose>
     </div>
   </div>
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -44,30 +52,40 @@
                 <li><span class="detail-title">Xuất xứ thương hiệu:</span>
                   <span class="detail-info">Việt Nam</span></li>
               </ul>
-              <!-- Giá cả -->
               <div class="d-flex align-items-center gap-2">
                 <!-- Giá này sẽ được cập nhật theo javascript bên dưới -->
                 <span id="product-price" class="product-price">189.000</span>
                 <span><span class="product-price"><u> đ</u></span>/</span>
                 <div class="unit-selector">
                   <!-- active là nút sẽ hiện ban đầu khi nào, nút này khớp với giá bên trên -->
-                  <button class="btn unit-btn active" data-unit="Hộp" onclick="updatePrice('Hộp')">Hộp</button>
-                  <button class="btn unit-btn" data-unit="Vỉ" onclick="updatePrice('Vỉ')">Vỉ</button>
+                  <button class="btn unit-btn active" data-unit="Hộp" data-id-don-vi-tinh="2" onclick="updatePrice('Hộp')">Hộp</button>
+                  <button class="btn unit-btn" data-unit="Vỉ" data-id-don-vi-tinh="1" onclick="updatePrice('Vỉ')">Vỉ</button>
                 </div>
               </div>
-
-              <!-- javascript cập nhật giá -->
+              <!-- JavaScript cập nhật giá -->
               <script>
                 function updatePrice(unit) {
+                  // Cập nhật giá của sản phẩm dựa trên đơn vị tính
                   const priceElement = document.getElementById("product-price");
+
+                  // Đặt giá dựa vào đơn vị
                   if (unit === "Hộp") {
                     priceElement.textContent = "189.000";
                   } else if (unit === "Vỉ") {
                     priceElement.textContent = "31.500";
                   }
+
+                  // Cập nhật lớp 'active' cho nút
+                  const buttons = document.querySelectorAll('.unit-btn');
+                  buttons.forEach(button => {
+                    if (button.getAttribute('data-unit') === unit) {
+                      button.classList.add('active');
+                    } else {
+                      button.classList.remove('active');
+                    }
+                  });
                 }
               </script>
-
               <!-- Chọn số lượng -->
               <div class="quantity-selector">
                 <span class="detail-title">Chọn số lượng</span>
@@ -78,12 +96,54 @@
               
               <div class="d-flex flex-column flex-sm-row gap-2 mt-3">
                 <div class="container">
-                  <button class="btnthemGioHang btnthemGioHang-white btnthemGioHang-animate" id="thuocKD">THÊM VÀO GIỎ HÀNG</button>
+                  <button class="btnthemGioHang btnthemGioHang-white btnthemGioHang-animate" id="thuocKD" onclick="ThemSanPham()">THÊM VÀO GIỎ HÀNG</button>
                 </div>
+                <script>
+                  function ThemSanPham() {
+                    // Lấy số lượng sản phẩm từ input
+                    const quantity = document.getElementById('quantity').value;
+
+                    // Lấy giá trị đơn vị tính đang được chọn
+                    const activeUnit = document.querySelector('.unit-btn.active').getAttribute('data-id-don-vi-tinh');
+
+                    // Xuất ra kiểm tra
+                    // console.log("Số lượng sản phẩm: " + quantity);
+                    // console.log("ID đơn vị tính đang được chọn: " + activeUnit);
+
+                    // Thêm biến action với giá trị addSanPham
+                    const action = 'addSanPham'; // Đảm bảo rằng action được khai báo
+
+                    // Xây dựng URL với các tham số
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const productId = urlParams.get('idSanPham');  // Lấy giá trị của tham số idSanPham
+                    // console.log("ID sản phẩm " + productId);
+
+                    // Xây dựng URL mới với các giá trị đã lấy và cộng chuỗi
+                    // const newUrl = 'servletDatHangKH?action=' + action + '&quantity=' + quantity + '&unit=' + activeUnit + '&productId=' + productId;
+                    // console.log("Đường dẫn URL mới: " + newUrl);
+
+                    // Kiểm tra xem khách hàng đã đăng nhập hay chưa
+                    // Kiểm tra đăng nhập
+                    fetch('servletCheckLogin')
+                            .then(response => response.text())
+                            .then(isLoggedIn => {
+                              if (isLoggedIn === 'true') {
+                                // Nếu đã đăng nhập, điều hướng tới servlet DatHangKH
+                                const newUrl = 'servletDatHangKH?action=' + action + '&quantity=' + quantity + '&unit=' + activeUnit + '&productId=' + productId;
+                                window.location.href = newUrl;
+                              } else {
+                                // Nếu chưa đăng nhập, yêu cầu đăng nhập lại
+                                alert("Bạn cần đăng nhập trước khi thực hiện hành động này.");
+                                window.location.href = 'signin.html'; // Điều hướng đến trang đăng nhập
+                              }
+                            })
+                            .catch(error => {
+                              console.error('Lỗi kiểm tra đăng nhập:', error);
+                            });
+                  }
+                </script>
               </div>
-
             </div>
-
           </div>
         </div>
       </div>

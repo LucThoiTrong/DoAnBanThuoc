@@ -2,8 +2,10 @@ package Model.DatabaseModels;
 
 import Model.BusinessModels.SanPham.ChiTietSanPham;
 import Model.BusinessModels.SanPham.DonViTinh;
+import Model.BusinessModels.SanPham.SanPham;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
 import java.util.HashSet;
@@ -88,5 +90,32 @@ public class IChiTietSanPham implements IDAO<ChiTietSanPham>{
         return Set.of();
     }
 
-    ;
+    public ChiTietSanPham SelectBySanPhamDonViTinh(int idSanPham, int idDonViTinh) {
+        ChiTietSanPham ctsp;
+        EntityManager entityManager = null;
+        try {
+            // Mở EntityManager để tạo giao dịch cho truy vấn
+            entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
+
+            // Sử dụng JPQL để truy vấn ChiTietSanPham dựa trên idSanPham và idDonViTinh
+            String jpql = "SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.sanPham.id = :idSanPham AND ctsp.donViTinh.id = :idDonViTinh";
+
+            // Tạo truy vấn và thiết lập tham số
+            TypedQuery<ChiTietSanPham> query = entityManager.createQuery(jpql, ChiTietSanPham.class);
+            query.setParameter("idSanPham", idSanPham);
+            query.setParameter("idDonViTinh", idDonViTinh);
+
+            // Thực thi truy vấn và lấy kết quả
+            ctsp = query.getSingleResult();
+
+        } catch (NoResultException e) {
+            ctsp = null; // Nếu không tìm thấy kết quả, trả về null
+        } finally {
+            // Đảm bảo EntityManager được đóng sau khi sử dụng
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
+        return ctsp;
+    }
 }

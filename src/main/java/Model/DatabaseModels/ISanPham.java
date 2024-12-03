@@ -109,4 +109,135 @@ public class ISanPham implements IDAO<SanPham> {
         }
         return result;
     }
+    //    Tạo ds nơi sản xuất dùng cho bộ lọc
+    public Set<SanPham> dsNoiSanXuat() {
+        Set<SanPham> result = new HashSet<>();
+        EntityManager entityManager = null;
+
+        try {
+            // Lấy EntityManager từ HibernateUtil
+            entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
+
+            // Truy vấn HQL lấy danh sách các nơi sản xuất (NoiSanXuat) không trùng lặp
+            String hql = "SELECT DISTINCT sp.noiSanXuat FROM SanPham sp WHERE sp.noiSanXuat IS NOT NULL";
+            TypedQuery<SanPham> query = entityManager.createQuery(hql, SanPham.class);
+
+            result.addAll(query.getResultList());  // Thêm kết quả vào Set
+        } catch (Exception e) {
+            e.printStackTrace();  // Logging lỗi
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();  // Đảm bảo đóng EntityManager
+            }
+        }
+        return result;
+    }
+
+    //    Tạo ds thương hiệu dùng cho bộ lọc
+    public Set<SanPham> dsThuongHieu() {
+        Set<SanPham> result = new HashSet<>();
+        EntityManager entityManager = null;
+
+        try {
+            // Lấy EntityManager từ HibernateUtil
+            entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
+
+            // Truy vấn HQL lấy danh sách các thương hiệu (ThuongHieu) không trùng lặp
+            String hql = "SELECT DISTINCT sp.thuongHieu FROM SanPham sp WHERE sp.thuongHieu IS NOT NULL";
+            TypedQuery<SanPham> query = entityManager.createQuery(hql, SanPham.class);
+
+            result.addAll(query.getResultList());  // Thêm kết quả vào Set
+        } catch (Exception e) {
+            e.printStackTrace();  // Logging lỗi
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
+        return result;
+    }
+
+    //    Bộ lọc sản phẩm chuẩn
+    public Set<SanPham> filterSanPham(String danhMucID, String loaiThuocID, String priceRange,
+                                      String doTuoiID, String noiSanXuat, String thuongHieu) {
+        EntityManager entityManager = null;
+        Set<SanPham> result = new HashSet<>();
+
+        try {
+            entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
+
+            // Base query
+            StringBuilder hql = new StringBuilder("SELECT sp FROM SanPham sp WHERE 1=1");
+
+            // Danh mục thuốc
+            if (danhMucID != null && !danhMucID.isEmpty()) {
+                hql.append(" AND sp.loaiThuoc.danhMucThuoc.id = :danhMucID");
+            }
+
+            // Loại thuốc
+            if (loaiThuocID != null && !loaiThuocID.isEmpty()) {
+                hql.append(" AND sp.loaiThuoc.id = :loaiThuocID");
+            }
+
+            // Giá
+            if (priceRange != null && !priceRange.isEmpty()) {
+                switch (priceRange) {
+                    case "0-100000":
+                        hql.append(" AND EXISTS (SELECT 1 FROM sp.cacChiTietSanPham c WHERE c.giaBan BETWEEN 0 AND 100000)");
+                        break;
+                    case "100000-300000":
+                        hql.append(" AND EXISTS (SELECT 1 FROM sp.cacChiTietSanPham c WHERE c.giaBan BETWEEN 100000 AND 300000)");
+                        break;
+                    case "300000-500000":
+                        hql.append(" AND EXISTS (SELECT 1 FROM sp.cacChiTietSanPham c WHERE c.giaBan BETWEEN 300000 AND 500000)");
+                        break;
+                    case "500000+":
+                        hql.append(" AND EXISTS (SELECT 1 FROM sp.cacChiTietSanPham c WHERE c.giaBan >= 500000)");
+                        break;
+                }
+            }
+            // Độ tuổi sử dụng
+            if (doTuoiID != null && !doTuoiID.isEmpty()) {
+                hql.append(" AND :doTuoiID IN (SELECT d.id FROM sp.dsDoTuoiSuDung d)");
+            }
+
+            // Độ tuổi sử dụng
+            if (noiSanXuat != null && !noiSanXuat.isEmpty()) {
+                hql.append(" AND sp.noiSanXuat = :noiSanXuat");
+            }
+
+            // Độ tuổi sử dụng
+            if (thuongHieu != null && !thuongHieu.isEmpty()) {
+                hql.append(" AND sp.thuongHieu = :thuongHieu");
+            }
+
+            TypedQuery<SanPham> query = entityManager.createQuery(hql.toString(), SanPham.class);
+
+            // Set parameters
+            if (danhMucID != null && !danhMucID.isEmpty()) {
+                query.setParameter("danhMucID", Integer.parseInt(danhMucID));
+            }
+            if (loaiThuocID != null && !loaiThuocID.isEmpty()) {
+                query.setParameter("loaiThuocID", Integer.parseInt(loaiThuocID));
+            }
+            if (doTuoiID != null && !doTuoiID.isEmpty()) {
+                query.setParameter("doTuoiID", Integer.parseInt(doTuoiID));
+            }
+            if(noiSanXuat != null && !noiSanXuat.isEmpty()) {
+                query.setParameter("noiSanXuat", noiSanXuat);
+            }
+            if(thuongHieu != null && !thuongHieu.isEmpty()) {
+                query.setParameter("thuongHieu", thuongHieu);
+            }
+
+            result.addAll(query.getResultList());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
+        return result;
+    }
 }

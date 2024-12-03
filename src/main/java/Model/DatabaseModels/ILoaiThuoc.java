@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -84,6 +85,26 @@ public class ILoaiThuoc implements IDAO<LoaiThuoc>{
 
     @Override
     public Set<LoaiThuoc> SelectByID(int id) {
-        return Set.of();
+        Set<LoaiThuoc> result = new HashSet<>();
+        EntityManager entityManager = null;
+        try {
+            // Lấy EntityManager từ HibernateUtil
+            entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
+
+            // Thực hiện truy vấn HQL để lấy danh sách sản phẩm theo loại thuốc
+            String hql = "FROM LoaiThuoc lt WHERE lt.danhMucThuoc.id = :idDanhMuc";
+            TypedQuery<LoaiThuoc> query = entityManager.createQuery(hql, LoaiThuoc.class);
+            query.setParameter("idDanhMuc", id);
+
+            result.addAll(query.getResultList());
+        } catch (Exception e) {
+            e.printStackTrace();  // Logging tốt hơn là in ra console
+            return Collections.emptySet();  // Trả về Set rỗng thay vì null
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
+        return result;
     }
 }

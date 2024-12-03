@@ -160,5 +160,12 @@
             document.getElementById('thuocKD').classList.remove('btn-white');
             document.getElementById('thuocKD').classList.add('active-btn');
         });
+        const userRole = '${sessionScope.nhanVien.chucVu.tenChucVu}';
+        if (userRole === 'Quản lý') {
+            document.querySelector('.blob-btn').disabled = true;
+        }
+        else {
+            document.querySelector('.blob-btn').disabled = false;
+        }
     </script>
 </div>

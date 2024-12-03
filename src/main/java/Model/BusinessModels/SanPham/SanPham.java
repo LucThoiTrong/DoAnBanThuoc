@@ -125,6 +125,14 @@ public class SanPham implements Serializable {
         return cacDanhGia;
     }
 
+    public String getLinkChiTietSanPham() {
+        return linkChiTietSanPham;
+    }
+
+    public void setLinkChiTietSanPham(String linkChiTietSanPham) {
+        this.linkChiTietSanPham = linkChiTietSanPham;
+    }
+
     public void setCacDanhGia(Set<DanhGia> cacDanhGia) {
         this.cacDanhGia = cacDanhGia;
     }

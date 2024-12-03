@@ -43,7 +43,7 @@
                 <span class="material-icons-sharp">emoji_people</span>
                 <h3>Khách hàng</h3>
             </a>
-            <a href="#">
+            <a href="servletLogout">
                 <span class="material-icons-sharp">logout</span>
                 <h3>Đăng xuất</h3>
             </a>
@@ -57,8 +57,7 @@
         <div class="recent-orders">
             <div class="header">
                 <h2 style="margin-right: -1cm;">Danh sách thuốc</h2>
-                <a href="#" class="button"style="margin-left: 3cm;">
-                    <!-- button them nhan vien -->
+                <div>
                     <div class="buttons" >
                         <button class="blob-btn">
                             Thêm thuốc
@@ -69,9 +68,8 @@
                                       <span class="blob-btn__blob"></span>
                                       <span class="blob-btn__blob"></span>
                                     </span>
-                                  </span>
+                             </span>
                         </button>
-                        <br/>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
                         <defs>
@@ -82,7 +80,7 @@
                             </filter>
                         </defs>
                     </svg>
-                </a>
+                </div>
             </div>
             <table id="khachhang-table">
                 <thead>
@@ -134,5 +132,10 @@
 <script src=""></script>
 <script src="script.js"></script>
 
+<script>
+    if (userRole === 'Quản lý') {
+        document.querySelector('.blob-btn').disabled = true;
+    }
+</script>
 </body>
 </html>

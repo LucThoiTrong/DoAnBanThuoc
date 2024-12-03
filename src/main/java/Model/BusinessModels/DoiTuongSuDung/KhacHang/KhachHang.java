@@ -8,15 +8,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class KhachHang extends DoiTuongSuDung {
-    @OneToMany(mappedBy = "khachHang", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "khachHang", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<DatHang> lichSuDatHang = new HashSet<>();
 
-    @OneToMany(mappedBy = "khachHang", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "khachHang", fetch = FetchType.EAGER)
     private Set<DanhGia> lichSuDanhGia = new HashSet<>();
 
     public KhachHang() {
@@ -58,5 +59,17 @@ public class KhachHang extends DoiTuongSuDung {
             e.printStackTrace();
             return false;
         }
+    }
+
+    // Lấy lịch sử đặt hàng cuối cùng
+    public DatHang getLastOrder() {
+        return lichSuDatHang.stream()
+                .max(Comparator.comparing(DatHang::getNgayDatHang))
+                .orElse(null);
+    }
+
+    // Thêm đặt hàng
+    public void addDatHang(DatHang datHang){
+        this.lichSuDatHang.add(datHang);
     }
 }
