@@ -26,24 +26,28 @@
                 <span class="material-icons-sharp">close</span>
             </div>
         </div>
-        <div class="sidebar"> <!--cái siderbar bên trái-->
-            <a href="admin.jsp" >
+        <div class="sidebar">
+            <a href="servletDashboard" class="active"}>
                 <span class="material-icons-sharp">grid_view</span>
                 <h3>Dashboard</h3>
             </a>
-            <a href="servletLoaiThuoc" class="active">
+            <a href="servletLoaiThuoc" id="thuoc-link" class="${param.page == 'DSthuoc' ? 'active' : ''}">
                 <span class="material-icons-sharp">medical_services</span>
                 <h3>Thuốc</h3>
             </a>
-            <a href="servletNhanVien">
+            <a href="servletNhanVien" id="nv-link" class="${param.page == 'DSnhanvien' ? 'active' : ''}">
                 <span class="material-icons-sharp">diversity_2</span>
                 <h3>Nhân viên</h3>
             </a>
-            <a href="servletKhachHang">
+            <a href="servletKhachHang" id="kh-link" class="${param.page == 'DSkhachhang' ? 'active' : ''}">
                 <span class="material-icons-sharp">emoji_people</span>
                 <h3>Khách hàng</h3>
             </a>
-            <a href="#">
+            <a href="servletDoanhThu" id="doanhthu-link" class="${param.page == 'DSDoanhThu' ? 'active' : ''}">
+                <span class="material-icons-sharp">bar_chart</span>
+                <h3>Doanh thu</h3>
+            </a>
+            <a href="servletLogout">
                 <span class="material-icons-sharp">logout</span>
                 <h3>Đăng xuất</h3>
             </a>
@@ -59,7 +63,7 @@
                 <div class="order-header">
                     <span id="idDH" data-value="${dh.id}"><strong>Mã Đơn Hàng:   </strong>${dh.id}</span>
                     <span><strong>Ngày Đặt Hàng:  </strong>${dh.ngayDatHang}</span>
-                    <span class="order-status"><strong style="color: white;"> ${dh.trangThaiDatHang.displayName}</strong></span>
+                    <span class="order-status" id="ttDH" data-value1="${dh.trangThaiDatHang.displayName}"><strong style="color: white;"> ${dh.trangThaiDatHang.displayName}</strong></span>
                 </div>
                 <div class="customer-info">
                     <div class="customer">
@@ -70,6 +74,7 @@
                     <div class="receiver">
                         <h3>PHƯƠNG THỨC THANH TOÁN</h3>
                         <p>${dh.phuongThucThanhToan.displayName}</p>
+                        <h4 style="font-size: 0.5cm; color: #f65353">Tổng tiền: ${dh.tinhTongGiaTien()}</h4>
                     </div>
                 </div>
             </div>
@@ -103,7 +108,7 @@
             <a href="#" class="button" style="margin-left: 10cm; ">
                 <!-- button them nhan vien -->
                 <div class="buttons">
-                    <button type="submit" class="blob-btn" onclick="DuyetDonHang()">
+                    <button type="submit" class="blob-btn" onclick="DuyetDonHang()" disabled>
                         Duyệt đơn hàng
                         <span class="blob-btn__inner">
                                     <span class="blob-btn__blobs">
@@ -142,8 +147,16 @@
             </div>
             <div class="profile">
                 <div class="info">
-                    <p>Xin chào, <b>Hoang</b></p>
-                    <small class="text-muted">Admin</small>
+                    <c:choose>
+                        <c:when test="${sessionScope.admin!=null}">
+                            <p>Xin chào, <b>Admin</b></p>
+                            <small class="text-muted">${sessionScope.admin.ten}</small>
+                        </c:when>
+                        <c:otherwise>
+                            <p>Xin chào, <b>${sessionScope.nhanVien.chucVu.tenChucVu}</b></p>
+                            <small class="text-muted">${sessionScope.nhanVien.ten}</small>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 <div class="profile-photo">
                     <img src="imagesAdmin/broccoli.png">
@@ -160,6 +173,26 @@
         const action = 'CapNhatDonHang';
         const newUrl = 'servletDashboard?action=' + action + '&idDatHang=' + idDH;
         window.location.href = newUrl;
+    }
+    const userRole = '${sessionScope.nhanVien.chucVu.tenChucVu}';
+    const admin_test = ${sessionScope.admin == null}
+    if (userRole === 'Nhân viên' && admin_test) {
+        const thuocLink = document.getElementById('thuoc-link');
+        // Thêm lớp CSS để làm liên kết không nhấn được
+        thuocLink.classList.add('disabled');
+        const nvLink = document.getElementById('nv-link');
+        nvLink.classList.add('disabled');
+        const khLink = document.getElementById('kh-link');
+        khLink.classList.add('disabled');
+        const doanhthuLink = document.getElementById('doanhthu-link');
+        doanhthuLink.classList.add('disabled');
+    }
+    const ttDonHang = document.getElementById("ttDH").getAttribute("data-value1");
+    console.log(ttDonHang); // In ra giá trị của ttDonHang
+    if (ttDonHang === 'Đang mua hàng') {
+        document.querySelector('.blob-btn').disabled = true;
+    } else {
+        document.querySelector('.blob-btn').disabled = false;
     }
 </script>
 <script src="script.js"></script>

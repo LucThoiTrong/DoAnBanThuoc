@@ -17,9 +17,15 @@
 <!-- Header -->
 
 <!-- Body -->
-<!-- my-4 là margin ở trên - dưới -->
 <div class="row">
-    <jsp:include page="header.html"/>
+    <c:choose>
+        <c:when test="${not empty sessionScope.khachHang}">
+            <jsp:include page="headerSauDN.jsp"/>
+        </c:when>
+        <c:otherwise>
+            <jsp:include page="header.html"/>
+        </c:otherwise>
+    </c:choose>
 </div>
 <div class="container my-4" >
     <div class="row" style="margin-top: 30px">

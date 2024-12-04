@@ -43,6 +43,10 @@
                 <span class="material-icons-sharp">emoji_people</span>
                 <h3>Khách hàng</h3>
             </a>
+            <a href="servletDoanhThu" id="doanhthu-link" class="${param.page == 'DSDoanhThu' ? 'active' : ''}">
+                <span class="material-icons-sharp">bar_chart</span>
+                <h3>Doanh thu</h3>
+            </a>
             <a href="servletLogout">
                 <span class="material-icons-sharp">logout</span>
                 <h3>Đăng xuất</h3>
@@ -59,7 +63,7 @@
                 <h2 style="margin-right: -1cm;">Danh sách thuốc</h2>
                 <div>
                     <div class="buttons" >
-                        <button class="blob-btn">
+                        <button class="blob-btn" disabled>
                             Thêm thuốc
                             <span class="blob-btn__inner">
                                     <span class="blob-btn__blobs">
@@ -117,8 +121,16 @@
         </div>
         <div class="profile">
             <div class="info">
-                <p>Xin chào, <b>Hoang</b></p>
-                <small class="text-muted">Admin</small>
+                <c:choose>
+                    <c:when test="${sessionScope.admin!=null}">
+                        <p>Xin chào, <b>Admin</b></p>
+                        <small class="text-muted">${sessionScope.admin.ten}</small>
+                    </c:when>
+                    <c:otherwise>
+                        <p>Xin chào, <b>${sessionScope.nhanVien.chucVu.tenChucVu}</b></p>
+                        <small class="text-muted">${sessionScope.nhanVien.ten}</small>
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="profile-photo">
                 <img src="imagesAdmin/broccoli.png">
@@ -133,8 +145,12 @@
 <script src="script.js"></script>
 
 <script>
+    const userRole = '${sessionScope.nhanVien.chucVu.tenChucVu}';
     if (userRole === 'Quản lý') {
         document.querySelector('.blob-btn').disabled = true;
+    }
+    else{
+        document.querySelector('.blob-btn').disabled = false;
     }
 </script>
 </body>

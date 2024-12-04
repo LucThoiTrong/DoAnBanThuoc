@@ -1,8 +1,10 @@
 package Controller;
 
 import Model.BusinessModels.DoiTuongSuDung.Admin;
+import Model.BusinessModels.DoiTuongSuDung.KhacHang.DatHang;
 import Model.BusinessModels.DoiTuongSuDung.KhacHang.KhachHang;
 import Model.BusinessModels.DoiTuongSuDung.NhanVien.NhanVien;
+import Model.BusinessModels.Enum.TrangThaiDatHang;
 import Model.BusinessModels.TKDoiTuongSuDung.TKAdmin;
 import Model.BusinessModels.TKDoiTuongSuDung.TKKhachHang;
 import Model.BusinessModels.TKDoiTuongSuDung.TKNhanVien;
@@ -57,7 +59,11 @@ public class ServletDangNhapDangKy extends HttpServlet {
             if (khachHang != null) {
                 HttpSession session = req.getSession();
                 session.setAttribute("khachHang", khachHang);
-                getServletContext().getRequestDispatcher("/servletSanPham").forward(req, resp);
+                DatHang dh = khachHang.getLastOrder();
+                if(dh != null && dh.getTrangThaiDatHang() == TrangThaiDatHang.DANG_MUA_HANG) {
+                    req.setAttribute("dh",dh);
+                }
+                getServletContext().getRequestDispatcher("/servletSanPham?action=LayAllSanPham").forward(req, resp);
             } else {
                 resp.getWriter().println("Không tìm thấy thông tin khách hàng.");
             }
@@ -72,7 +78,7 @@ public class ServletDangNhapDangKy extends HttpServlet {
             Admin admin = tkAdmin.getAdmin();
             HttpSession session = req.getSession();
             session.setAttribute("admin", admin);
-            getServletContext().getRequestDispatcher("/admin.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher("/servletDashboard").forward(req, resp);
         }
         else {
             req.setAttribute("errorMessage", "Sai tên đăng nhập hoặc mật khẩu!");

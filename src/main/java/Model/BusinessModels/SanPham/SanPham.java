@@ -22,7 +22,7 @@ public class SanPham implements Serializable {
     @JoinColumn(name = "LoaiThuocID")
     private LoaiThuoc loaiThuoc;
 
-    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, fetch = FetchType.EAGER , orphanRemoval = true)
     private Set<ChiTietSanPham> cacChiTietSanPham = new HashSet<>();
 
     @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

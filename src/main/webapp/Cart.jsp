@@ -202,12 +202,17 @@
                     <strong>Thành tiền</strong>
                     <strong class="text-danger">${tongSoTien}</strong>
                 </div>
-                <button class="btn btn-primary w-100 mt-3">Mua hàng</button>
+                <button class="btn btn-primary w-100 mt-3" onclick="CheckOut()">Mua hàng</button>
                 <p class="text-muted small mt-3">
                     Bằng việc tiến hành đặt mua hàng, bạn đồng ý với
                     <a href="#">Điều khoản dịch vụ</a> và
                     <a href="#">Chính sách xử lý dữ liệu cá nhân</a>.
                 </p>
+                <script>
+                    function CheckOut() {
+
+                    }
+                </script>
             </div>
         </div>
     </div>

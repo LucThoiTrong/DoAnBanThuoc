@@ -13,17 +13,15 @@
 
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-      <c:choose>
-        <c:when test="${not empty sessionScope.khachHang}">
-          <jsp:include page="headerSauDN.jsp"/>
-        </c:when>
-        <c:otherwise>
-          <jsp:include page="header.html"/>
-        </c:otherwise>
-      </c:choose>
-    </div>
+  <div class="row">
+    <c:choose>
+      <c:when test="${not empty sessionScope.khachHang}">
+        <jsp:include page="headerSauDN.jsp"/>
+      </c:when>
+      <c:otherwise>
+        <jsp:include page="header.html"/>
+      </c:otherwise>
+    </c:choose>
   </div>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/chiTietSanPham.css">

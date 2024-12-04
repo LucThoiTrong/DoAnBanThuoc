@@ -52,11 +52,15 @@ public class ServletDatHangKH extends HttpServlet {
         // Thực hiện xóa chi tiết đặt hàng ra khỏi giỏ
         dh.removeSanPham(ctdh);
 
+        // Cập nhật lại số lượng từng chi tiết sản phẩm
+        ChiTietSanPham ctsp = ctdh.getSanPham();
+        ctsp.setSoLuongSanPhamTrongKho(ctsp.getSoLuongSanPhamTrongKho() + ctdh.getSoLuongMua());
+
+        new IChiTietSanPham().update(ctsp);
+
         // Thực hiện xóa chi tiết đặt hàng dưới CSDL
         new IChiTietDatHang().delete(ctdh);
 
-        // Cập nhật lại đặt hàng xuống csdl
-//        new IDatHang().update(dh);
         // Sau khi hoàn tất thì điều hướng lại qua servlet giỏ hàng
         getServletContext().getRequestDispatcher("/servletGioHang").forward(req, resp);
     }

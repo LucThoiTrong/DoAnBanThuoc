@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,10 +12,15 @@
 </head>
 <body>
   <!-- Phần giới thiệu chung -->
-  <div class="container">
-    <div class="row">
-      <jsp:include page="header.html"/>
-    </div>
+  <div class="row">
+    <c:choose>
+      <c:when test="${not empty sessionScope.khachHang}">
+        <jsp:include page="headerSauDN.jsp"/>
+      </c:when>
+      <c:otherwise>
+        <jsp:include page="header.html"/>
+      </c:otherwise>
+    </c:choose>
   </div>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/chiTietSanPham.css">

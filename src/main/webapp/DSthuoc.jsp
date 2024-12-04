@@ -11,7 +11,7 @@
             <h2 style="margin-right: -1.5cm;">Danh sách loại thuốc kê đơn</h2>
             <div class="button" style="margin-left: -0.5cm;">
                 <div class="buttons">
-                    <button class="blob-btn">
+                    <button class="blob-btn" disabled>
                         Thêm loại thuốc
                         <span class="blob-btn__inner">
                                 <span class="blob-btn__blobs">
@@ -64,7 +64,7 @@
             <a href="#" class="button" style="margin-left: -2cm;">
                 <!-- button them nhan vien -->
                 <div class="buttons">
-                    <button class="blob-btn">
+                    <button class="blob-btn" disabled>
                         Thêm loại thuốc
                         <span class="blob-btn__inner">
                                 <span class="blob-btn__blobs">
@@ -161,11 +161,14 @@
             document.getElementById('thuocKD').classList.add('active-btn');
         });
         const userRole = '${sessionScope.nhanVien.chucVu.tenChucVu}';
-        if (userRole === 'Quản lý') {
-            document.querySelector('.blob-btn').disabled = true;
-        }
-        else {
-            document.querySelector('.blob-btn').disabled = false;
-        }
+        const buttons = document.querySelectorAll('.blob-btn');
+
+        buttons.forEach(function(button) {
+            if (userRole === 'Quản lý') {
+                button.disabled = true;
+            } else {
+                button.disabled = false;
+            }
+        });
     </script>
 </div>
