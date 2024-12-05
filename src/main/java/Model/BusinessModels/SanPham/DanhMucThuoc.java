@@ -18,6 +18,10 @@ public class DanhMucThuoc implements Serializable {
 
     public DanhMucThuoc() {}
 
+    public DanhMucThuoc(int id) {
+        this.id = id;
+    }
+
     public DanhMucThuoc(String tenDanhMucThuoc) {
         this.tenDanhMucThuoc = tenDanhMucThuoc;
     }

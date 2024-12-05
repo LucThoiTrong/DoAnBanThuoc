@@ -31,6 +31,15 @@ public class DanhGia implements Serializable {
 
     public DanhGia() {}
 
+    public DanhGia(int diemDanhGia, KhachHang khachHang, Date ngayDanhGia, String noiDungDanhGia, SanPham sanPham,  Time thoiGianDanhGia) {
+        this.noiDungDanhGia = noiDungDanhGia;
+        this.ngayDanhGia = ngayDanhGia;
+        this.thoiGianDanhGia = thoiGianDanhGia;
+        this.diemDanhGia = diemDanhGia;
+        this.khachHang = khachHang;
+        this.sanPham = sanPham;
+    }
+
     public DanhGia(int id, String noiDungDanhGia, Date ngayDanhGia, Time thoiGianDanhGia, int diemDanhGia, Set<BinhLuan> dsBinhLuan, KhachHang khachHang, SanPham sanPham) {
         this.id = id;
         this.noiDungDanhGia = noiDungDanhGia;

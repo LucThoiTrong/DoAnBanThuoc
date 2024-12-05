@@ -273,14 +273,18 @@
   <script src="script.js"></script>
 
   <%--Danh Gia--%>
+  <%-- Kiểm tra nếu khách hàng không phải null mới hiển thị phần đánh giá --%>
+  <% KhachHang kh = (KhachHang) session.getAttribute("khachHang");  %>
+  <% if (kh != null) { %>
+
   <div class="container my-5">
     <div class="card shadow-lg">
-      <div class="card-header " >
+      <div class="card-header" >
         <h3><strong>Đánh giá sản phẩm</strong></h3>
       </div>
       <div class="card-body">
         <!-- Form đánh giá -->
-        <form action="" method="post">
+        <form action="<%= request.getRequestURI() %>" method="post">
           <!-- Đánh giá sao -->
           <div class="mb-3">
             <label for="rating" class="form-label font-weight-bold">Xếp hạng:</label>
@@ -307,6 +311,13 @@
       </div>
     </div>
   </div>
+  <% } else { %>
+  <div class="container my-5">
+    <div class="alert alert-warning text-center" role="alert">
+      Bạn cần đăng nhập để gửi đánh giá!
+    </div>
+  </div>
+  <% } %>
 
   <!-- Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -341,42 +352,237 @@
     });
   </script>
 
-  <%--&lt;%&ndash; Phần xử lý dữ liệu &ndash;%&gt;--%>
-  <%--<%--%>
-  <%--    if (request.getMethod().equalsIgnoreCase("POST")) {--%>
-  <%--        // Lấy dữ liệu từ form--%>
-  <%--        String fullName = request.getParameter("fullName");--%>
-  <%--        String phoneNumber = request.getParameter("phoneNumber");--%>
-  <%--        String email = request.getParameter("email");--%>
-  <%--        String rating = request.getParameter("rating");--%>
-  <%--        String comment = request.getParameter("comment");--%>
 
-  <%--        // Kết nối cơ sở dữ liệu--%>
-  <%--        String url = "jdbc:mysql://localhost:3306/your_database_name"; // Thay bằng thông tin của bạn--%>
-  <%--        String username = "your_username"; // Thay bằng tài khoản MySQL--%>
-  <%--        String password = "your_password"; // Thay bằng mật khẩu MySQL--%>
 
-  <%--        try {--%>
-  <%--            Class.forName("com.mysql.cj.jdbc.Driver");--%>
-  <%--            Connection conn = DriverManager.getConnection(url, username, password);--%>
+  <%@ page import="java.sql.*, Model.BusinessModels.SanPham.DanhGia, Model.DatabaseModels.IDanhGia, Model.BusinessModels.SanPham.SanPham, Model.DatabaseModels.ISanPham, Model.BusinessModels.DoiTuongSuDung.KhacHang.KhachHang" %>
+  <%@ page import="Model.DatabaseModels.*" %>
+  <%@ page import="java.time.LocalDate" %>
+  <%@ page import="java.time.LocalTime" %>
+  <%@ page import="java.util.Set" %>
 
-  <%--            String sql = "INSERT INTO reviews (fullName, phoneNumber, email, rating, comment) VALUES (?, ?, ?, ?, ?)";--%>
-  <%--            PreparedStatement stmt = conn.prepareStatement(sql);--%>
+  <%-- Hiển thị đánh giá --%>
+  <%@ page import="java.util.Set, java.util.Date" %>
+  <%@ page import="Model.DatabaseModels.IDanhGia" %>
+  <%@ page import="Model.BusinessModels.SanPham.DanhGia" %>
+  <%@ page import="Model.DatabaseModels.IKhachHang" %>
 
-  <%--            stmt.setString(1, fullName);--%>
-  <%--            stmt.setString(2, phoneNumber);--%>
-  <%--            stmt.setString(3, email);--%>
-  <%--            stmt.setInt(4, Integer.parseInt(rating));--%>
-  <%--            stmt.setString(5, comment);--%>
+  <%
+    // Tạo đối tượng IDanhGia
+    IDanhGia iDanhGia = new IDanhGia();
 
-  <%--            stmt.executeUpdate();--%>
-  <%--            out.println("<script>alert('Đánh giá của bạn đã được lưu thành công!');</script>");--%>
-  <%--        } catch (Exception e) {--%>
-  <%--            e.printStackTrace();--%>
-  <%--            out.println("<script>alert('Có lỗi xảy ra khi lưu dữ liệu. Vui lòng thử lại.');</script>");--%>
-  <%--        }--%>
-  <%--    }--%>
-  <%--%>--%>
+    // Lấy danh sách đánh giá từ phương thức SelectAll
+    Set<DanhGia> danhGiaSet = iDanhGia.SelectAll();
+
+    // Kiểm tra nếu có dữ liệu
+    if (danhGiaSet != null && !danhGiaSet.isEmpty()) {
+  %>
+  <!-- Bắt đầu hiển thị đánh giá -->
+  <div class="reviews-container">
+    <% for (DanhGia dg : danhGiaSet) {
+      // Lấy thông tin khách hàng từ đánh giá
+      int khachHangId = dg.getKhachHang().getId();
+      KhachHang khComment = new IKhachHang().SelectById(khachHangId);
+      String tenKH = khComment.getTen();
+
+      String noiDung = dg.getNoiDungDanhGia();
+      int rating = dg.getDiemDanhGia();
+      Date ngay = dg.getNgayDanhGia();
+
+      if (dg.getSanPham() != null && dg.getSanPham().getId() == 13){
+    %>
+    <div class="container">
+      <!-- Căn giữa bằng cách sử dụng d-flex và các lớp Bootstrap -->
+      <div class="row justify-content-center align-items-center">
+        <div class="col-12"> <!-- Điều chỉnh kích thước của ô review -->
+          <div class="review">
+            <p><strong><%= tenKH %></strong></p>
+            <p class="date"><%= ngay %></p>
+            <p class="rating">
+              <% var out1 = ""; %> <!-- Khai báo biến out ở đây -->
+              <% for (var i = 0; i < 5; i++) { %> <!-- Sử dụng var thay vì let -->
+              <% if (i < rating) { %>
+              <% out1 += '★'; %> <!-- Sao đầy -->
+              <% } else { %>
+              <% out1 += '☆'; %> <!-- Sao rỗng -->
+              <% } %>
+              <% } %>
+              <%= out1 %> <!-- Hiển thị kết quả -->
+            </p>
+            <p class="comment"><%= noiDung %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <% } %>
+
+  <!-- CSS -->
+  <style>
+    /* Mỗi phần tử review */
+    .review {
+      border: 1px solid #e1e1e1;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .review:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Rating - Tạo sao đánh giá hiển thị rõ ràng và dễ nhìn */
+    .rating {
+      font-size: 18px;
+      color: #f39c12;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Sao đánh giá */
+    .rating .star {
+      font-size: 20px;
+      color: #f39c12;
+      margin-right: 5px;
+    }
+
+    /* Nhận xét */
+    .comment {
+      font-size: 15px;
+      margin-top: 10px;
+      color: #333;
+      font-style: italic;
+    }
+
+    /* Ngày tháng */
+    .date {
+      font-size: 13px;
+      color: #888;
+      margin-top: 10px;
+    }
+
+    /* Tạo một kiểu ngắn cho phần tiêu đề khách hàng */
+    .review p strong {
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    /* Thêm hiệu ứng cho hover trong phần đánh giá */
+    .review:hover .rating {
+      color: #f27c1f; /* Màu vàng cam sáng hơn khi hover */
+    }
+
+    /* Cải thiện kiểu chữ và padding cho nội dung */
+    .review p {
+      margin: 5px 0;
+    }
+
+    /* Tạo một thiết kế đồng bộ với background */
+    body {
+      background-color: #f7f8fa;
+    }
+
+    /* Phần gửi đánh giá (Form Đánh Giá) */
+    .review-form {
+      margin-top: 30px;
+      padding: 20px;
+      border: 1px solid #e1e1e1;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Hiển thị sao đánh giá cho form */
+    .review-form .rating {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .review-form .rating .star {
+      font-size: 30px;
+      color: #e1e1e1;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .review-form .rating .star.active {
+      color: #f39c12; /* Màu vàng cho sao đã chọn */
+    }
+
+    /* Khi hover vào sao */
+    .review-form .rating .star:hover,
+    .review-form .rating .star:hover ~ .star {
+      color: #f39c12; /* Khi hover, tất cả các sao trước sao được hover sẽ chuyển sang màu vàng */
+    }
+
+    /* Phần nhận xét trong form */
+    .review-form .comment-input {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #e1e1e1;
+      font-size: 14px;
+      color: #333;
+      resize: none;
+    }
+
+    /* Nút gửi đánh giá */
+    .review-form button {
+      padding: 10px 20px;
+      background-color: #f39c12;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .review-form button:hover {
+      background-color: #f27c1f; /* Màu cam khi hover */
+    }
+  </style>
+
+  <%
+    // Kiểm tra xem người dùng đã đăng nhập chưa
+    if (kh != null && request.getMethod().equalsIgnoreCase("POST")) {
+          if (session.getAttribute("submitted") != null && (Boolean) session.getAttribute("submitted")) {
+        response.getWriter().println("Bạn đã gửi đánh giá.");
+        return;
+    }
+      // Lấy thông tin đánh giá từ form
+      String comment = request.getParameter("comment");
+      String rating1 = request.getParameter("rating");
+      int ratingValue = Integer.parseInt(rating1);
+
+      // Lấy ngày và giờ hiện tại
+      LocalDate currentDate = LocalDate.now();
+      LocalTime currentTime = LocalTime.now();
+      java.sql.Date ngayDanhGia = java.sql.Date.valueOf(currentDate);
+      Time thoiGianDanhGia = Time.valueOf(currentTime);
+
+      // Tạo đối tượng DanhGia và lưu vào cơ sở dữ liệu
+      int SanPhamID = 13;
+      SanPham sp = new ISanPham().SelectById(SanPhamID);
+      DanhGia dg1 = new DanhGia(ratingValue, kh, ngayDanhGia, comment, sp, thoiGianDanhGia);
+
+      IDanhGia danhGiaDAO = new IDanhGia();
+      danhGiaDAO.insert(dg1);
+
+    // Đánh dấu đã gửi và redirect
+    session.setAttribute("submitted", true);
+    response.sendRedirect(request.getRequestURI());
+    }}}
+  %>
+
   <div class="container">
     <div class="row footer">
       <%@ include file="footer.html"%>

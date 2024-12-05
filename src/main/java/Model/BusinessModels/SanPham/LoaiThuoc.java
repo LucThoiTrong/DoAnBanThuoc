@@ -21,6 +21,12 @@ public class LoaiThuoc implements Serializable {
     @OneToMany(mappedBy = "loaiThuoc", cascade = CascadeType.ALL)
     private Set<SanPham> danhSachSanPham = new HashSet<>();
 
+    public LoaiThuoc(int loaiThuocID, String tenLoaiThuoc, DanhMucThuoc dmt) {
+        this.tenLoaiThuoc = tenLoaiThuoc;
+        this.danhMucThuoc = dmt;
+        this.id = loaiThuocID;
+    }
+
     public LoaiThuoc(String tenLoaiThuoc, DanhMucThuoc danhMucThuoc) {
         this.tenLoaiThuoc = tenLoaiThuoc;
         this.danhMucThuoc = danhMucThuoc;

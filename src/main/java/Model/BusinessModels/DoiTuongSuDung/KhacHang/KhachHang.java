@@ -64,7 +64,7 @@ public class KhachHang extends DoiTuongSuDung {
     // Lấy lịch sử đặt hàng cuối cùng
     public DatHang getLastOrder() {
         return lichSuDatHang.stream()
-                .max(Comparator.comparing(DatHang::getNgayDatHang))
+                .max(Comparator.comparingInt(DatHang::getId)) // so sánh theo id
                 .orElse(null);
     }
 

@@ -69,20 +69,10 @@ body{
     .product-list {
         grid-template-columns: 1fr 1fr;
     }
-    /*bộ lọc*/
-    .card .card-body{
-        height: 435px;
-        overflow-y: auto;
-    }
 }
 @media (max-width: 460px) {
     .product-list {
         grid-template-columns: 1fr;
-    }
-    /*bộ lọc*/
-    .card .card-body{
-        height: 435px;
-        overflow-y: auto;
     }
 }
 /* design các thẻ sản phẩm */

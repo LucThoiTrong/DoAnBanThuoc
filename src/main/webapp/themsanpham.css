@@ -1,0 +1,38 @@
+label{
+    font-weight: bold;
+    margin: 10px;
+}
+button{
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 30px !important;
+    cursor: pointer;
+}
+.button-nhom{
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+.close-btn{
+    padding: 10px 20px;
+    background-color: #e3480f;
+    color: white;
+    border: none;
+    border-radius: 30px !important;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+/* Thay đổi màu sắc của checkbox khi được checked */
+input[type="checkbox"]:checked {
+    background-color: #0e9a15 !important; /* Màu nền xanh */
+    border-color: #0e9a15 !important;     /* Đổi màu viền khi checked */
+}
+
+input[type="checkbox"]:checked + label {
+    color: #0e9a15 !important; /* Màu chữ xanh khi checkbox được chọn */
+}
+

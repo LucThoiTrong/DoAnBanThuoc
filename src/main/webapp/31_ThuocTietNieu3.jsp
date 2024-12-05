@@ -233,111 +233,318 @@
 
   <script src="script.js"></script>
 
-  <%--Danh Gia--%>
-  <div class="container my-5">
-    <div class="card shadow-lg">
-      <div class="card-header " >
-        <h3><strong>Đánh giá sản phẩm</strong></h3>
-      </div>
-      <div class="card-body">
-        <!-- Form đánh giá -->
-        <form action="" method="post">
-          <!-- Đánh giá sao -->
-          <div class="mb-3">
-            <label for="rating" class="form-label font-weight-bold">Xếp hạng:</label>
-            <div id="rating" class="d-flex">
-              <i class="rating-star fa fa-star" data-value="1"></i>
-              <i class="rating-star fa fa-star" data-value="2"></i>
-              <i class="rating-star fa fa-star" data-value="3"></i>
-              <i class="rating-star fa fa-star" data-value="4"></i>
-              <i class="rating-star fa fa-star" data-value="5"></i>
-            </div>
-            <div class="rating-feedback font-weight-bold " id="ratingFeedback">
-              <!-- Nội dung đánh giá sẽ được cập nhật ở đây -->
-            </div>
-            <input type="hidden" id="ratingValue" name="rating" required>
+<%--Danh Gia--%>
+<%-- Kiểm tra nếu khách hàng không phải null mới hiển thị phần đánh giá --%>
+<% KhachHang kh = (KhachHang) session.getAttribute("khachHang");  %>
+<% if (kh != null) { %>
+
+<div class="container my-5">
+  <div class="card shadow-lg">
+    <div class="card-header" >
+      <h3><strong>Đánh giá sản phẩm</strong></h3>
+    </div>
+    <div class="card-body">
+      <!-- Form đánh giá -->
+      <form action="<%= request.getRequestURI() %>" method="post">
+        <!-- Đánh giá sao -->
+        <div class="mb-3">
+          <label for="rating" class="form-label font-weight-bold">Xếp hạng:</label>
+          <div id="rating" class="d-flex">
+            <i class="rating-star fa fa-star" data-value="1"></i>
+            <i class="rating-star fa fa-star" data-value="2"></i>
+            <i class="rating-star fa fa-star" data-value="3"></i>
+            <i class="rating-star fa fa-star" data-value="4"></i>
+            <i class="rating-star fa fa-star" data-value="5"></i>
           </div>
-          <!-- Nhận xét -->
-          <div class="mb-3">
-            <label for="comment" class="form-label font-weight-bold">Nhận xét</label>
-            <textarea class="form-control" id="comment" name="comment" rows="4" required placeholder="Nhập nhận xét của bạn"></textarea>
+          <div class="rating-feedback font-weight-bold " id="ratingFeedback">
+            <!-- Nội dung đánh giá sẽ được cập nhật ở đây -->
           </div>
-          <!-- Nút gửi -->
-          <button type="submit" class="btnGuiDanhGia w-50 mx-auto d-block font-weight-bold">GỬI ĐÁNH GIÁ</button>
-        </form>
+          <input type="hidden" id="ratingValue" name="rating" required>
+        </div>
+        <!-- Nhận xét -->
+        <div class="mb-3">
+          <label for="comment" class="form-label font-weight-bold">Nhận xét</label>
+          <textarea class="form-control" id="comment" name="comment" rows="4" required placeholder="Nhập nhận xét của bạn"></textarea>
+        </div>
+        <!-- Nút gửi -->
+        <button type="submit" class="btnGuiDanhGia w-50 mx-auto d-block font-weight-bold">GỬI ĐÁNH GIÁ</button>
+      </form>
+    </div>
+  </div>
+</div>
+<% } else { %>
+<div class="container my-5">
+  <div class="alert alert-warning text-center" role="alert">
+    Bạn cần đăng nhập để gửi đánh giá!
+  </div>
+</div>
+<% } %>
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<!-- Custom JavaScript -->
+<script>
+  const feedbackTexts = {
+    1: "1 sao - Không hài lòng",
+    2: "2 sao - Cũng tạm",
+    3: "3 sao - Bình thường",
+    4: "4 sao - Hài lòng",
+    5: "5 sao - Rất hài lòng"
+  };
+
+  document.querySelectorAll('.rating-star').forEach(star => {
+    star.addEventListener('click', () => {
+      const ratingValue = star.getAttribute('data-value');
+      document.getElementById('ratingValue').value = ratingValue;
+
+      // Highlight stars
+      document.querySelectorAll('.rating-star').forEach(s => s.classList.remove('checked'));
+      for (let i = 0; i < ratingValue; i++) {
+        document.querySelectorAll('.rating-star')[i].classList.add('checked');
+      }
+
+      // Cập nhật nội dung phản hồi và thay đổi màu cho phản hồi
+      const feedbackElement = document.getElementById('ratingFeedback');
+      feedbackElement.textContent = feedbackTexts[ratingValue];
+      feedbackElement.classList.add('checked'); // Thêm lớp để làm màu vàng cho văn bản
+    });
+  });
+</script>
+
+
+
+<%@ page import="java.sql.*, Model.BusinessModels.SanPham.DanhGia, Model.DatabaseModels.IDanhGia, Model.BusinessModels.SanPham.SanPham, Model.DatabaseModels.ISanPham, Model.BusinessModels.DoiTuongSuDung.KhacHang.KhachHang" %>
+<%@ page import="Model.DatabaseModels.*" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalTime" %>
+<%@ page import="java.util.Set" %>
+
+<%-- Hiển thị đánh giá --%>
+<%@ page import="java.util.Set, java.util.Date" %>
+<%@ page import="Model.DatabaseModels.IDanhGia" %>
+<%@ page import="Model.BusinessModels.SanPham.DanhGia" %>
+<%@ page import="Model.DatabaseModels.IKhachHang" %>
+
+<%
+  // Tạo đối tượng IDanhGia
+  IDanhGia iDanhGia = new IDanhGia();
+
+  // Lấy danh sách đánh giá từ phương thức SelectAll
+  Set<DanhGia> danhGiaSet = iDanhGia.SelectAll();
+
+  // Kiểm tra nếu có dữ liệu
+  if (danhGiaSet != null && !danhGiaSet.isEmpty()) {
+%>
+<!-- Bắt đầu hiển thị đánh giá -->
+<div class="reviews-container">
+  <% for (DanhGia dg : danhGiaSet) {
+    // Lấy thông tin khách hàng từ đánh giá
+    int khachHangId = dg.getKhachHang().getId();
+    KhachHang khComment = new IKhachHang().SelectById(khachHangId);
+    String tenKH = khComment.getTen();
+
+    String noiDung = dg.getNoiDungDanhGia();
+    int rating = dg.getDiemDanhGia();
+    Date ngay = dg.getNgayDanhGia();
+
+    if (dg.getSanPham() != null && dg.getSanPham().getId() == 39){
+  %>
+  <div class="container">
+    <!-- Căn giữa bằng cách sử dụng d-flex và các lớp Bootstrap -->
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12"> <!-- Điều chỉnh kích thước của ô review -->
+        <div class="review">
+          <p><strong><%= tenKH %></strong></p>
+          <p class="date"><%= ngay %></p>
+          <p class="rating">
+            <% var out1 = ""; %> <!-- Khai báo biến out ở đây -->
+            <% for (var i = 0; i < 5; i++) { %> <!-- Sử dụng var thay vì let -->
+            <% if (i < rating) { %>
+            <% out1 += '★'; %> <!-- Sao đầy -->
+            <% } else { %>
+            <% out1 += '☆'; %> <!-- Sao rỗng -->
+            <% } %>
+            <% } %>
+            <%= out1 %> <!-- Hiển thị kết quả -->
+          </p>
+          <p class="comment"><%= noiDung %></p>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-  <!-- Custom JavaScript -->
-  <script>
-    const feedbackTexts = {
-      1: "1 sao - Không hài lòng",
-      2: "2 sao - Cũng tạm",
-      3: "3 sao - Bình thường",
-      4: "4 sao - Hài lòng",
-      5: "5 sao - Rất hài lòng"
-    };
+      <% } %>
 
-    document.querySelectorAll('.rating-star').forEach(star => {
-      star.addEventListener('click', () => {
-        const ratingValue = star.getAttribute('data-value');
-        document.getElementById('ratingValue').value = ratingValue;
+<!-- CSS -->
+<style>
+  /* Mỗi phần tử review */
+  .review {
+    border: 1px solid #e1e1e1;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
 
-        // Highlight stars
-        document.querySelectorAll('.rating-star').forEach(s => s.classList.remove('checked'));
-        for (let i = 0; i < ratingValue; i++) {
-          document.querySelectorAll('.rating-star')[i].classList.add('checked');
-        }
+  .review:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
 
-        // Cập nhật nội dung phản hồi và thay đổi màu cho phản hồi
-        const feedbackElement = document.getElementById('ratingFeedback');
-        feedbackElement.textContent = feedbackTexts[ratingValue];
-        feedbackElement.classList.add('checked'); // Thêm lớp để làm màu vàng cho văn bản
-      });
-    });
-  </script>
+  /* Rating - Tạo sao đánh giá hiển thị rõ ràng và dễ nhìn */
+  .rating {
+    font-size: 18px;
+    color: #f39c12;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
 
-  <%--&lt;%&ndash; Phần xử lý dữ liệu &ndash;%&gt;--%>
-  <%--<%--%>
-  <%--    if (request.getMethod().equalsIgnoreCase("POST")) {--%>
-  <%--        // Lấy dữ liệu từ form--%>
-  <%--        String fullName = request.getParameter("fullName");--%>
-  <%--        String phoneNumber = request.getParameter("phoneNumber");--%>
-  <%--        String email = request.getParameter("email");--%>
-  <%--        String rating = request.getParameter("rating");--%>
-  <%--        String comment = request.getParameter("comment");--%>
+  /* Sao đánh giá */
+  .rating .star {
+    font-size: 20px;
+    color: #f39c12;
+    margin-right: 5px;
+  }
 
-  <%--        // Kết nối cơ sở dữ liệu--%>
-  <%--        String url = "jdbc:mysql://localhost:3306/your_database_name"; // Thay bằng thông tin của bạn--%>
-  <%--        String username = "your_username"; // Thay bằng tài khoản MySQL--%>
-  <%--        String password = "your_password"; // Thay bằng mật khẩu MySQL--%>
+  /* Nhận xét */
+  .comment {
+    font-size: 15px;
+    margin-top: 10px;
+    color: #333;
+    font-style: italic;
+  }
 
-  <%--        try {--%>
-  <%--            Class.forName("com.mysql.cj.jdbc.Driver");--%>
-  <%--            Connection conn = DriverManager.getConnection(url, username, password);--%>
+  /* Ngày tháng */
+  .date {
+    font-size: 13px;
+    color: #888;
+    margin-top: 10px;
+  }
 
-  <%--            String sql = "INSERT INTO reviews (fullName, phoneNumber, email, rating, comment) VALUES (?, ?, ?, ?, ?)";--%>
-  <%--            PreparedStatement stmt = conn.prepareStatement(sql);--%>
+  /* Tạo một kiểu ngắn cho phần tiêu đề khách hàng */
+  .review p strong {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+  }
 
-  <%--            stmt.setString(1, fullName);--%>
-  <%--            stmt.setString(2, phoneNumber);--%>
-  <%--            stmt.setString(3, email);--%>
-  <%--            stmt.setInt(4, Integer.parseInt(rating));--%>
-  <%--            stmt.setString(5, comment);--%>
+  /* Thêm hiệu ứng cho hover trong phần đánh giá */
+  .review:hover .rating {
+    color: #f27c1f; /* Màu vàng cam sáng hơn khi hover */
+  }
 
-  <%--            stmt.executeUpdate();--%>
-  <%--            out.println("<script>alert('Đánh giá của bạn đã được lưu thành công!');</script>");--%>
-  <%--        } catch (Exception e) {--%>
-  <%--            e.printStackTrace();--%>
-  <%--            out.println("<script>alert('Có lỗi xảy ra khi lưu dữ liệu. Vui lòng thử lại.');</script>");--%>
-  <%--        }--%>
-  <%--    }--%>
-  <%--%>--%>
+  /* Cải thiện kiểu chữ và padding cho nội dung */
+  .review p {
+    margin: 5px 0;
+  }
+
+  /* Tạo một thiết kế đồng bộ với background */
+  body {
+    background-color: #f7f8fa;
+  }
+
+  /* Phần gửi đánh giá (Form Đánh Giá) */
+  .review-form {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Hiển thị sao đánh giá cho form */
+  .review-form .rating {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
+
+  .review-form .rating .star {
+    font-size: 30px;
+    color: #e1e1e1;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .review-form .rating .star.active {
+    color: #f39c12; /* Màu vàng cho sao đã chọn */
+  }
+
+  /* Khi hover vào sao */
+  .review-form .rating .star:hover,
+  .review-form .rating .star:hover ~ .star {
+    color: #f39c12; /* Khi hover, tất cả các sao trước sao được hover sẽ chuyển sang màu vàng */
+  }
+
+  /* Phần nhận xét trong form */
+  .review-form .comment-input {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #e1e1e1;
+    font-size: 14px;
+    color: #333;
+    resize: none;
+  }
+
+  /* Nút gửi đánh giá */
+  .review-form button {
+    padding: 10px 20px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .review-form button:hover {
+    background-color: #f27c1f; /* Màu cam khi hover */
+  }
+</style>
+
+<%
+  // Kiểm tra xem người dùng đã đăng nhập chưa
+  if (kh != null && request.getMethod().equalsIgnoreCase("POST")) {
+    if (session.getAttribute("submitted") != null && (Boolean) session.getAttribute("submitted")) {
+        response.getWriter().println("Bạn đã gửi đánh giá.");
+        return;
+    }
+    // Lấy thông tin đánh giá từ form
+    String comment = request.getParameter("comment");
+    String rating1 = request.getParameter("rating");
+    int ratingValue = Integer.parseInt(rating1);
+
+    // Lấy ngày và giờ hiện tại
+    LocalDate currentDate = LocalDate.now();
+    LocalTime currentTime = LocalTime.now();
+    java.sql.Date ngayDanhGia = java.sql.Date.valueOf(currentDate);
+    Time thoiGianDanhGia = Time.valueOf(currentTime);
+
+    // Tạo đối tượng DanhGia và lưu vào cơ sở dữ liệu
+    int SanPhamID = 39;
+    SanPham sp = new ISanPham().SelectById(SanPhamID);
+    DanhGia dg1 = new DanhGia(ratingValue, kh, ngayDanhGia, comment, sp, thoiGianDanhGia);
+
+    IDanhGia danhGiaDAO = new IDanhGia();
+    danhGiaDAO.insert(dg1);
+
+    // Đánh dấu đã gửi và redirect
+    session.setAttribute("submitted", true);
+    response.sendRedirect(request.getRequestURI());
+    }}}
+  %>
+
+
 <div class="container">
   <div class="row footer">
     <%@ include file="footer.html"%>

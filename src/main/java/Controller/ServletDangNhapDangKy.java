@@ -61,7 +61,7 @@ public class ServletDangNhapDangKy extends HttpServlet {
                 session.setAttribute("khachHang", khachHang);
                 DatHang dh = khachHang.getLastOrder();
                 if(dh != null && dh.getTrangThaiDatHang() == TrangThaiDatHang.DANG_MUA_HANG) {
-                    req.setAttribute("dh",dh);
+                    session.setAttribute("dh",dh);
                 }
                 getServletContext().getRequestDispatcher("/servletSanPham?action=LayAllSanPham").forward(req, resp);
             } else {

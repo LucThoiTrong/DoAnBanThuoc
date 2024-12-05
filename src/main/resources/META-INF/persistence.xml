@@ -41,6 +41,9 @@
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/banthuoc"/>
             <property name="jakarta.persistence.jdbc.user" value="root"/>
             <property name="jakarta.persistence.jdbc.password" value=""/>
+<!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://103.97.126.29:3306/wqljesqc_banthuoc"/>-->
+<!--            <property name="jakarta.persistence.jdbc.user" value="wqljesqc_banthuoc"/>-->
+<!--            <property name="jakarta.persistence.jdbc.password" value="8Afwabrkee5SAyexhMg8"/>-->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/> <!-- Hoặc create, create-drop tùy thuộc vào nhu cầu -->
             <property name="hibernate.show_sql" value="true"/>

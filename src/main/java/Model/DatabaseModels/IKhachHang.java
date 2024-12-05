@@ -2,10 +2,12 @@ package Model.DatabaseModels;
 
 import Model.BusinessModels.DoiTuongSuDung.KhacHang.KhachHang;
 import Model.BusinessModels.SanPham.LoaiThuoc;
+import Model.BusinessModels.SanPham.SanPham;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -81,7 +83,30 @@ public class IKhachHang implements IDAO<KhachHang> {
 
     @Override
     public KhachHang SelectById(int id) {
-        return null;
+        EntityManager entityManager = null;
+        KhachHang result = null; // We'll return this single KhachHang object
+
+        try {
+            // Lấy EntityManager từ HibernateUtil
+            entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
+
+            // Thực hiện truy vấn HQL để lấy khách hàng theo id
+            TypedQuery<KhachHang> query = entityManager.createQuery("FROM KhachHang kh WHERE kh.id = :idKhachHang", KhachHang.class);
+            query.setParameter("idKhachHang", id);
+
+            // If a record is found, it will be returned as a single object
+            result = query.getSingleResult(); // This returns a single KhachHang object
+
+        } catch (Exception e) {
+            e.printStackTrace(); // Proper logging
+            // Return null or handle the exception as needed
+        } finally {
+            if (entityManager != null) {
+                entityManager.close(); // Always close the entity manager
+            }
+        }
+
+        return result; // Return the KhachHang object or null if not found
     }
 
     @Override

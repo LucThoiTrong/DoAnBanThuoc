@@ -10,60 +10,22 @@
     <link rel="stylesheet" href="admin.css">
     <!-- Material CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <!-- boostrap -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
-
 </head>
 <body>
 <div class="container">
-    <aside>
-        <div class="top"> <!--Phần trên -->
-            <div class="logo">
-                <img src="imagesAdmin/image-removebg-preview.png">
-            </div>
-            <div class="close" id="close-btn">
-                <span class="material-icons-sharp">close</span>
-            </div>
-        </div>
-        <div class="sidebar"> <!--cái siderbar bên trái-->
-            <a href="admin.jsp" >
-                <span class="material-icons-sharp">grid_view</span>
-                <h3>Dashboard</h3>
-            </a>
-            <a href="servletLoaiThuoc" class="active">
-                <span class="material-icons-sharp">medical_services</span>
-                <h3>Thuốc</h3>
-            </a>
-            <a href="servletNhanVien">
-                <span class="material-icons-sharp">diversity_2</span>
-                <h3>Nhân viên</h3>
-            </a>
-            <a href="servletKhachHang">
-                <span class="material-icons-sharp">emoji_people</span>
-                <h3>Khách hàng</h3>
-            </a>
-            <a href="servletDoanhThu" id="doanhthu-link" class="${param.page == 'DSDoanhThu' ? 'active' : ''}">
-                <span class="material-icons-sharp">bar_chart</span>
-                <h3>Doanh thu</h3>
-            </a>
-            <a href="servletLogout">
-                <span class="material-icons-sharp">logout</span>
-                <h3>Đăng xuất</h3>
-            </a>
-        </div>
-    </aside>
+    <%--    <aside>--%>
+
+    <%--    </aside>--%>
     <!-- ---------------hết phần sidebar------------- -->
     <main>
-        <h1>Sản phẩm thuốc</h1>
-        <!-- END OF INSIGHTS -->
-        <!-- Đơn hàng -->
+        <%-- HIỆN DANH SÁCH CÁC SẢN PHẨM THEO LOẠI THUỐC--%>
+<%--        <h1>Sản phẩm thuốc</h1>--%>
         <div class="recent-orders">
             <div class="header">
                 <h2 style="margin-right: -1cm;">Danh sách thuốc</h2>
-                <div>
+                <a href="servletLoaiThuoc?action=themSP&idLoaiThuoc=${idLoaiThuoc}" class="button"style="margin-left: 3cm;">
                     <div class="buttons" >
-                        <button class="blob-btn" disabled>
+                        <button class="blob-btn">
                             Thêm thuốc
                             <span class="blob-btn__inner">
                                     <span class="blob-btn__blobs">
@@ -72,8 +34,9 @@
                                       <span class="blob-btn__blob"></span>
                                       <span class="blob-btn__blob"></span>
                                     </span>
-                             </span>
+                                  </span>
                         </button>
+                        <br/>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
                         <defs>
@@ -84,7 +47,7 @@
                             </filter>
                         </defs>
                     </svg>
-                </div>
+                </a>
             </div>
             <table id="khachhang-table">
                 <thead>
@@ -96,14 +59,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="sp" items="${dssp}">
-                        <tr>
-                            <td>${sp.id}</td>
-                            <td>${sp.tenSanPham}</td>
-                            <td>${sp.thuongHieu}</td>
-                            <td>${sp.noiSanXuat}</td>
-                        </tr>
-                    </c:forEach>
+                <c:forEach var="sp" items="${dssp}">
+                    <tr>
+                        <td>${sp.id}</td>
+                        <td>${sp.tenSanPham}</td>
+                        <td>${sp.thuongHieu}</td>
+                        <td>${sp.noiSanXuat}</td>
+                        <td>
+                            <a href="servletLoaiThuoc?action=hienDSLoaiThuocTrangSuaSP&id=${sp.id}" style="color: #33c633; text-decoration: none; cursor: pointer">
+                                Chi tiết
+                            </a>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -116,42 +84,25 @@
                 <span class="material-icons-sharp">menu</span>
             </button>
             <div class="theme-toggler">
-            <span class="material-icons-sharp active">light_mode</span>
-            <span class="material-icons-sharp">dark_mode</span>
-        </div>
-        <div class="profile">
-            <div class="info">
-                <c:choose>
-                    <c:when test="${sessionScope.admin!=null}">
-                        <p>Xin chào, <b>Admin</b></p>
-                        <small class="text-muted">${sessionScope.admin.ten}</small>
-                    </c:when>
-                    <c:otherwise>
-                        <p>Xin chào, <b>${sessionScope.nhanVien.chucVu.tenChucVu}</b></p>
-                        <small class="text-muted">${sessionScope.nhanVien.ten}</small>
-                    </c:otherwise>
-                </c:choose>
+                <span class="material-icons-sharp active">light_mode</span>
+                <span class="material-icons-sharp">dark_mode</span>
             </div>
-            <div class="profile-photo">
-                <img src="imagesAdmin/broccoli.png">
+            <div class="profile">
+                <div class="info">
+                    <p>Xin chào, <b>Hoang</b></p>
+                    <small class="text-muted">Admin</small>
+                </div>
+                <div class="profile-photo">
+                    <img src="imagesAdmin/broccoli.png">
+                </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 </div>
 
 <script src=""></script>
 <script src="script.js"></script>
 
-<script>
-    const userRole = '${sessionScope.nhanVien.chucVu.tenChucVu}';
-    if (userRole === 'Quản lý') {
-        document.querySelector('.blob-btn').disabled = true;
-    }
-    else{
-        document.querySelector('.blob-btn').disabled = false;
-    }
-</script>
 </body>
 </html>

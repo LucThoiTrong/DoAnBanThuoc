@@ -33,7 +33,7 @@
                 <span class="material-icons-sharp">grid_view</span>
                 <h3>Dashboard</h3>
             </a>
-            <a href="servletLoaiThuoc" id="thuoc-link" class="${param.page == 'DSthuoc' ? 'active' : ''}">
+            <a href="servletLoaiThuoc?action=hienDS" id="thuoc-link" class="${param.page == 'DSthuoc' ? 'active' : ''}">
                 <span class="material-icons-sharp">medical_services</span>
                 <h3>Thuốc</h3>
             </a>
@@ -49,6 +49,10 @@
                 <span class="material-icons-sharp">bar_chart</span>
                 <h3>Doanh thu</h3>
             </a>
+<%--            <a href="NhapHang.jsp" id="nhapthuoc-link">--%>
+<%--                <span class="material-icons-sharp">add_circle</span>--%>
+<%--                <h3>Nhập thuốc</h3>--%>
+<%--            </a>--%>
             <a href="servletLogout" class="logout-btn">
                 <span class="material-icons-sharp">logout</span>
                 <h3>Đăng xuất</h3>

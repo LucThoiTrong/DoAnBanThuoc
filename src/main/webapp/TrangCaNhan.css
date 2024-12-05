@@ -21,3 +21,44 @@ body {
     background-color: #007bff;
     color: white;
 }
+body {
+    background-color: #f8f9fa;
+}
+.profile-header {
+    background: linear-gradient(to left, #a0e7a0, #2bcc51, #a0e7a0);
+    color: white;
+    padding: 20px 0;
+}
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+.profile-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.nav-tabs .nav-link.active {
+    background-color: #36ca58;
+    color: white;
+}
+.btn{
+    background-color: #36ca58;
+    border: 0px solid white;
+    color:white;
+}
+.btn:hover {
+    background-color: white;
+    border: 2px solid #36ca58;
+    color: #36ca58;
+}
+.nav-link {
+    color: #36ca58 !important; /* Xanh lá */
+}
+
+/* Màu khi active */
+.nav-link.active {
+    color: white !important; /* Hoặc màu xanh dương, bạn có thể đổi */
+}

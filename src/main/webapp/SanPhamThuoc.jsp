@@ -17,6 +17,7 @@
 <!-- Header -->
 
 <!-- Body -->
+<!-- my-4 là margin ở trên - dưới -->
 <div class="row">
     <c:choose>
         <c:when test="${not empty sessionScope.khachHang}">
@@ -36,14 +37,14 @@
                     Bộ lọc nâng cao
                 </div>
                 <div class="card-body" style="height: 60vh; overflow-y: auto; margin-bottom: 15px; padding-bottom: 0;">
-                    <form id="filterForm" action="servletSanPham" method="get">
-                        <input type="hidden" name="action" value="XemSanPham">
+                    <form id="filterForm" action="servletSanPham" method="post">
+                        <input type="hidden" name="action" value="LayAllSanPham">
                         <div class="mb-3">
                             <label for="DanhMucThuoc" class="form-label">Danh mục thuốc</label>
                             <select class="form-select" id="DanhMucThuoc" name="danhMucID" onchange="document.getElementById('filterForm').submit();">
                                 <option value="">~Chọn danh mục~</option>
                                 <c:forEach var="DMT" items="${DanhMucThuoc}">
-                                    <option value="${DMT.id}" ${param.danhMucID == DMT.id ? 'selected' : ''}>${DMT.tenDanhMucThuoc}</option>
+                                    <option value="${DMT.id}" ${sessionScope.danhMucID == DMT.id ? 'selected' : ''}>${DMT.tenDanhMucThuoc}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -52,7 +53,7 @@
                             <select class="form-select" id="LoaiThuoc" name="loaiThuocID" onchange="document.getElementById('filterForm').submit();">
                                 <option value="">~Chọn loại thuốc~</option>
                                 <c:forEach var="Lt" items="${LoaiThuoc}">
-                                    <option type="submit" value="${Lt.id}" ${param.loaiThuocID == Lt.id ? 'selected' : ''}>${Lt.tenLoaiThuoc}</option>
+                                    <option type="submit" value="${Lt.id}" ${sessionScope.loaiThuocID == Lt.id ? 'selected' : ''}>${Lt.tenLoaiThuoc}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -60,32 +61,32 @@
                             <div class="form-label">Giá bán</div>
                             <div class="btn-group-vertical filter-button-group" role="group" aria-label="Price Filter">
                                 <button type="submit" name="priceRange"
-                                        value="${param.priceRange == '0-100000' ? '' : '0-100000'}"
-                                        class="btn btn-outline-success ${param.priceRange == '0-100000' ? 'active' : ''}"> Dưới 100.000đ
+                                        value="${sessionScope.priceRange == '0-100000' ? '' : '0-100000'}"
+                                        class="btn btn-outline-success ${sessionScope.priceRange == '0-100000' ? 'active' : ''}"> Dưới 100.000đ
                                 </button>
                                 <button type="submit" name="priceRange"
-                                        value="${param.priceRange == '100000-300000' ? '' : '100000-300000'}"
-                                        class="btn btn-outline-success ${param.priceRange == '100000-300000' ? 'active' : ''}"> 100.000đ đến 300.000đ
+                                        value="${sessionScope.priceRange == '100000-300000' ? '' : '100000-300000'}"
+                                        class="btn btn-outline-success ${sessionScope.priceRange == '100000-300000' ? 'active' : ''}"> 100.000đ đến 300.000đ
                                 </button>
                                 <button type="submit" name="priceRange"
-                                        value="${param.priceRange == '300000-500000' ? '' : '300000-500000'}"
-                                        class="btn btn-outline-success ${param.priceRange == '300000-500000' ? 'active' : ''}"> 300.000đ đến 500.000đ
+                                        value="${sessionScope.priceRange == '300000-500000' ? '' : '300000-500000'}"
+                                        class="btn btn-outline-success ${sessionScope.priceRange == '300000-500000' ? 'active' : ''}"> 300.000đ đến 500.000đ
                                 </button>
                                 <button type="submit" name="priceRange"
-                                        value="${param.priceRange == '500000+' ? '' : '500000+'}"
-                                        class="btn btn-outline-success ${param.priceRange == '500000+' ? 'active' : ''}"> Trên 500.000đ
+                                        value="${sessionScope.priceRange == '500000+' ? '' : '500000+'}"
+                                        class="btn btn-outline-success ${sessionScope.priceRange == '500000+' ? 'active' : ''}"> Trên 500.000đ
                                 </button>
                             </div>
                         </div>
                         <!-- Trường ẩn để giữ giá trị của giá bán -->
-                        <input type="hidden" id="priceRange" name="priceRange" value="${param.priceRange}">
+                        <input type="hidden" name="priceRange" value="${sessionScope.priceRange}">
 
                         <div class="mb-3">
                             <label for="DoTuoiSuDung" class="form-label">Độ tuổi sử dụng</label>
                             <select class="form-select" id="DoTuoiSuDung" name="doTuoiID" onchange="document.getElementById('filterForm').submit();">
                                 <option value="">Tất cả</option>
                                 <c:forEach var="dtsd" items="${DoTuoiSuDung}">
-                                    <option value="${dtsd.id}" ${param.doTuoiID == dtsd.id ? 'selected' : ''}>${dtsd.doiTuongSuDung}</option>
+                                    <option value="${dtsd.id}" ${sessionScope.doTuoiID == dtsd.id ? 'selected' : ''}>${dtsd.doiTuongSuDung}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -94,7 +95,7 @@
                             <select class="form-select" id="NoiSanXuat" name="noiSanXuat" onchange="document.getElementById('filterForm').submit();">
                                 <option value="">Tất cả</option>
                                 <c:forEach var="nsx" items="${NoiSanXuat}">
-                                    <option value="${nsx}" ${param.noiSanXuat == nsx ? 'selected' : ''}>${nsx}</option>
+                                    <option value="${nsx}" ${sessionScope.noiSanXuat == nsx ? 'selected' : ''}>${nsx}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -103,10 +104,11 @@
                             <select class="form-select" id="ThuongHieu" name="thuongHieu" onchange="document.getElementById('filterForm').submit();">
                                 <option value="">Tất cả</option>
                                 <c:forEach var="TH" items="${ThuongHieu}">
-                                    <option value="${TH}" ${param.thuongHieu == TH ? 'selected' : ''}>${TH}</option>
+                                    <option value="${TH}" ${sessionScope.thuongHieu == TH ? 'selected' : ''}>${TH}</option>
                                 </c:forEach>
                             </select>
                         </div>
+                        <input type="hidden" name="sort" value="${sessionScope.sort}">
                     </form>
                 </div>
             </div>
@@ -115,7 +117,24 @@
         <!-- Khu vực sản phẩm bên phải -->
         <div class="col-md-9">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h2 class="h5">Sản phẩm</h2>
+                <h2 class="h5">Danh sách sản phẩm</h2>
+                <form action="servletSanPham" method="post">
+                    <input type="hidden" name="action" value="LayAllSanPham">
+                    <div>
+                        <label for="Sort" class="form-label me-2">Sắp xếp:</label>
+                        <select id="Sort" class="form-select form-select-sm d-inline-block w-auto" name ="sort" onchange="this.form.submit()">
+                            <option value="price-asc" ${sessionScope.sort == 'price-asc' ? 'selected' : ''}>Giá tăng dần</option>
+                            <option value="price-desc" ${sessionScope.sort == 'price-desc' ? 'selected' : ''}>Giá giảm dần</option>
+                        </select>
+                    </div>
+                    <!-- Lưu trữ các tham số khác trong các trường hidden để ko bị mất dấu-->
+                    <input type="hidden" name="danhMucID" value="${sessionScope.danhMucID}">
+                    <input type="hidden" name="loaiThuocID" value="${sessionScope.loaiThuocID}">
+                    <input type="hidden" name="priceRange" value="${sessionScope.priceRange}">
+                    <input type="hidden" name="doTuoiID" value="${sessionScope.doTuoiID}">
+                    <input type="hidden" name="noiSanXuat" value="${sessionScope.noiSanXuat}">
+                    <input type="hidden" name="thuongHieu" value="${sessionScope.thuongHieu}">
+                </form>
             </div>
             <ul class="product-list">
                 <!-- Thẻ sản phẩm -->

@@ -40,7 +40,28 @@ public class ISanPham implements IDAO<SanPham> {
 
     @Override
     public boolean update(SanPham obj) {
-        return false;
+        EntityManager entityManager = null;
+        EntityTransaction transaction = null;
+
+        try {
+            // Lấy EntityManager từ HibernateUtil
+            entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            entityManager.merge(obj);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
     }
 
     @Override
@@ -82,7 +103,29 @@ public class ISanPham implements IDAO<SanPham> {
 
     @Override
     public SanPham SelectById(int id) {
-        return null;
+        SanPham sanpham=null;
+        EntityManager entityManager = null;
+        try {
+            // Lấy EntityManager từ HibernateUtil
+            entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
+
+            // Thực hiện truy vấn HQL để lấy danh sách sản phẩm theo loại thuốc
+            TypedQuery<SanPham> query = entityManager.createQuery("FROM SanPham sp WHERE sp.id = :id", SanPham.class);
+            query.setParameter("id", id);
+            //gan gia tri tra ve
+            sanpham=query.getSingleResult();
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();  // Logging tốt hơn là in ra console
+
+        } finally
+        {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
+        return sanpham;
     }
 
     @Override

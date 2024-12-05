@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="jakarta.tags.core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -97,101 +98,91 @@
         <div class="py-5 text-center">
             <img class="imgCheckout d-block mx-auto mb-4" src="imageCheckout/pack.gif">
         </div>
-
         <%--Phần tổng--%>
         <div class="row g-5">
-
             <div class="col-md-5 col-lg-4 order-md-last">
                 <h4 class="mb-3 text-primary">Địa chỉ nhận hàng</h4>
                 <%--Phần điền thông tin checkout--%>
-                <form class="needs-validation" novalidate enctype="multipart/form-data">
-                    <div class="row g-3">
-
-                        <%--Điển địa chỉ--%>
-                        <div class="col-12">
-                            <label for="address" class="form-label">Địa chỉ</label>
-                            <input type="text" class="form-control" id="address" placeholder="Số 02 đường Nguyễn Duy Trinh" required>
-                            <div class="invalid-feedback">
-                                Hãy điền địa chỉ nhận hàng.
+                <form id="prescriptionForm">
+                    <form class="needs-validation" novalidate enctype="multipart/form-data">
+                        <div class="row g-3">
+                            <%--Điển địa chỉ--%>
+                            <div class="col-12">
+                                <label for="address" class="form-label">Địa chỉ</label>
+                                <input type="text" class="form-control" name="address" id="address" placeholder="Số 02 đường Nguyễn Duy Trinh" required>
+                                <div class="invalid-feedback">
+                                    Hãy điền địa chỉ nhận hàng.
+                                </div>
+                            </div>
+                            <%--Chọn thành phố--%>
+                            <div class="col-md-6">
+                                <label for="City" class="form-label">Thành phố</label>
+                                <select name="city" class="form-select" id="City" required>
+                                    <option value="">Chọn...</option>
+                                    <option value="HoChiMinh">Hồ Chí Minh</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Hãy chọn Thành phố.
+                                </div>
+                            </div>
+                            <%--Chọn quận/huyện--%>
+                            <div class="col-md-6">
+                                <label for="District" class="form-label">Quận/Huyện</label>
+                                <select name="district" class="form-select" id="District" required>
+                                    <option value="">Chọn...</option>
+                                    <option>Quận 1</option>
+                                    <option>Quận 3</option>
+                                    <option>Quận 4</option>
+                                    <option>Quận 5</option>
+                                    <option>Quận 6</option>
+                                    <option>Quận 7</option>
+                                    <option>Quận 8</option>
+                                    <option>Quận 9</option>
+                                    <option>Quận 10</option>
+                                    <option>Quận 11</option>
+                                    <option>Quận 12</option>
+                                    <option>Quận Tân Bình</option>
+                                    <option>Quận Tân Phú</option>
+                                    <option>Quận Bình Tân</option>
+                                    <option>Quận Bình Thạnh</option>
+                                    <option>Quận Gò Vấp</option>
+                                    <option>Quận Phú Nhuận</option>
+                                    <option>Thành phố Thủ Đức</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Hãy chọn Quận/Huyện.
+                                </div>
                             </div>
                         </div>
-
-                        <%--Chọn thành phố--%>
-                        <div class="col-md-6">
-                            <label for="City" class="form-label">Thành phố</label>
-                            <select class="form-select" id="City" required>
-                                <option value="">Chọn...</option>
-                                <option value="HoChiMinh">Hồ Chí Minh</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Hãy chọn Thành phố.
+                        <hr class="my-4">
+                        <%--Điền phương thức thanh toán--%>
+                        <h4 class="mb-3 text-primary">Phương thức thanh toán</h4>
+                        <div class="my-3">
+                            <div class="form-check">
+                                <input id="COD" name="paymentMethod" type="radio" class="form-check-input" value="Tiền mặt" checked required>
+                                <label class="form-check-label" for="COD">Thanh toán khi nhận hàng</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="Momo" name="paymentMethod" type="radio" class="form-check-input" value="Momo" required>
+                                <label class="form-check-label" for="Momo">Thanh toán bằng Momo</label>
                             </div>
                         </div>
-
-                        <%--Chọn quận/huyện--%>
-                        <div class="col-md-6">
-                            <label for="District" class="form-label">Quận/Huyện</label>
-                            <select class="form-select" id="District" required>
-                                <option value="">Chọn...</option>
-                                <option>Quận 1</option>
-                                <option>Quận 3</option>
-                                <option>Quận 4</option>
-                                <option>Quận 5</option>
-                                <option>Quận 6</option>
-                                <option>Quận 7</option>
-                                <option>Quận 8</option>
-                                <option>Quận 9</option>
-                                <option>Quận 10</option>
-                                <option>Quận 11</option>
-                                <option>Quận 12</option>
-                                <option>Quận Tân Bình</option>
-                                <option>Quận Tân Phú</option>
-                                <option>Quận Bình Tân</option>
-                                <option>Quận Bình Thạnh</option>
-                                <option>Quận Gò Vấp</option>
-                                <option>Quận Phú Nhuận</option>
-                                <option>Thành phố Thủ Đức</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Hãy chọn Quận/Huyện.
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr class="my-4">
-
-                    <%--Điền phương thức thanh toán--%>
-                    <h4 class="mb-3 text-primary">Phương thức thanh toán</h4>
-                    <div class="my-3">
-                        <div class="form-check">
-                            <input id="COD" name="paymentMethod" type="radio" class="form-check-input" checked required>
-                            <label class="form-check-label" for="COD">Thanh toán khi nhận hàng</label>
-                        </div>
-                        <div class="form-check">
-                            <input id="Momo" name="paymentMethod" type="radio" class="form-check-input" required>
-                            <label class="form-check-label" for="Momo">Thanh toán bằng Momo</label>
-                        </div>
-                    </div>
-                    <hr class="my-4">
-
-                    <button class="w-100 btn btn-primary btn-primary-animated btn-lg" type="submit">Đặt hàng</button>
+                        <hr class="my-4">
+                        <button class="w-100 btn btn-primary btn-primary-animated btn-lg" id="orderButton" type="button">Đặt hàng</button>
+                    </form>
                 </form>
-
             </div>
 
             <%--Phần các sản phẩm đã mua--%>
-            <div class="col-md-7 col-lg-8">
+            <form class="col-md-7 col-lg-8">
                 <%--Đơn hàng của bạn--%>
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-primary">Đơn hàng của bạn</span>
-                    <%--Số lượng sản phẩm đã mua--%>
-                    <span class="badge bg-primary rounded-pill">3</span>
                 </h4>
 
                 <table class="table mb-3" id="medicinesTable">
                     <thead>
                     <tr>
-                        <th scope="col"></th>
                         <th scope="col">Tên thuốc</th>
                         <th scope="col">Danh mục thuốc</th>
                         <th scope="col">Số lượng</th>
@@ -199,62 +190,53 @@
                     </tr>
                     </thead>
                     <tbody>
-<%--                    Viết code động lụm chi tiết đặt hàng của đơn hàng thuộc khách hàng--%>
+                    <c:forEach var="p" items="${sessionScope.khachHang.getLastOrder().danhSachSanPham}">
+                        <tr data-ke-don="${p.sanPham.sanPham.loaiThuoc.danhMucThuoc.tenDanhMucThuoc == 'Thuốc kê đơn' ? 'true' : 'false'}">
+                            <td>${p.sanPham.sanPham.tenSanPham}</td>
+                            <td>${p.sanPham.sanPham.loaiThuoc.danhMucThuoc.tenDanhMucThuoc}</td>
+                            <td>${p.soLuongMua}</td>
+                            <td>${p.tongGiaTien}</td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
 
-                <form class="needs-validation" novalidate enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <h4 class="mb-3 text-primary">Gửi đơn thuốc</h4>
-                        <input type="text" class="form-control" id="Prescription" placeholder="https://drive.google.com/file/d/<FILE_ID>/view?usp=sharing" required>
-                        <div class="invalid-feedback">
-                            Hãy nhập link drive đơn thuốc.
+                    <form class="needs-validation" novalidate enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <h4 class="mb-3 text-primary">Gửi đơn thuốc</h4>
+                            <input type="text" class="form-control" id="Prescription" placeholder="https://drive.google.com/file/d/<FILE_ID>/view?usp=sharing">
+                            <div class="invalid-feedback">
+                                Hãy nhập link drive đơn thuốc.
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+            </form>
+            <script>
+                document.getElementById("orderButton").addEventListener("click", function (e) {
+                    let requireImage = false;
 
-                <script>
-                    // Lấy bảng và tất cả các hàng trong tbody
-                    const table = document.getElementById('medicinesTable');
-                    const rows = table.querySelectorAll('tbody tr');
-                    const prescriptionDiv = document.getElementById('prescriptionDiv'); // Div chứa nút "Gửi đơn thuốc"
-                    let hasPrescription = false; // Kiểm tra xem có "Thuốc kê đơn" không
-                    const imageInput = document.getElementById('imageInput'); // Input file
-
-                    // Duyệt qua từng hàng
-                    rows.forEach((row) => {
-                        const categoryCell = row.cells[2]; // Cột "Danh mục thuốc"
-
-                        if (categoryCell && categoryCell.innerText.trim() === 'Thuốc kê đơn') {
-                            hasPrescription = true; // Nếu tìm thấy "Thuốc kê đơn", đánh dấu
-                        }
+                    // Kiểm tra nếu có thuốc kê đơn trong danh sách sản phẩm
+                    document.querySelectorAll("tr[data-ke-don='true']").forEach(function (row) {
+                        requireImage = true; // Nếu có ít nhất một sản phẩm kê đơn
                     });
 
-                    // Nếu có thuốc kê đơn, hiển thị div và tạo nút
-                    if (hasPrescription) {
-                        prescriptionDiv.style.display = 'block'; // Hiển thị div
+                    if (requireImage) {
+                        // Lấy giá trị từ trường nhập link ảnh
+                        let imageLink = document.getElementById("Prescription").value.trim();
 
-                        const buttonContainer = document.getElementById('actionButtonContainer');
-                        const imageButton = document.createElement('img');
-
-                        // Đặt thuộc tính cho hình ảnh
-                        imageButton.src = 'imageCheckout/addPic.png'; // Đường dẫn đến hình ảnh nút
-                        imageButton.alt = 'Gửi đơn thuốc';
-                        imageButton.style.cursor = 'pointer'; // Thay đổi con trỏ khi hover
-                        imageButton.style.width = '100px'; // Kích thước nút nhỏ lại
-                        imageButton.style.height = 'auto'; // Đảm bảo tỉ lệ hình ảnh đúng
-
-                        // Thêm sự kiện click vào hình ảnh
-                        imageButton.addEventListener('click', () => {
-                            // Mở input file để người dùng chọn ảnh
-                            imageInput.click();
-                            uploadPrescriptionImage();
-                        });
-
-                        // Thêm hình ảnh vào div
-                        buttonContainer.appendChild(imageButton);
+                        // Kiểm tra nếu chưa nhập link ảnh
+                        if (imageLink === "") {
+                            alert("Vui lòng nhập link ảnh đơn thuốc cho thuốc kê đơn trước khi đặt hàng!");
+                            e.preventDefault(); // Ngừng hành động đặt hàng
+                            return;
+                        }
                     }
-                </script>
+
+                    // Nếu tất cả điều kiện đều thỏa mãn, gửi form đến servletDatHang
+                    document.getElementById("prescriptionForm").action = "servletCheckOut";  // Chuyển hướng action của form tới servletDatHang
+                    document.getElementById("prescriptionForm").submit(); // Gửi form
+                });
+            </script>
             </div>
         </div>
     </main>

@@ -26,28 +26,24 @@
                 <span class="material-icons-sharp">close</span>
             </div>
         </div>
-        <div class="sidebar">
-            <a href="servletDashboard" class="active"}>
+        <div class="sidebar"> <!--cái siderbar bên trái-->
+            <a href="admin.jsp" >
                 <span class="material-icons-sharp">grid_view</span>
                 <h3>Dashboard</h3>
             </a>
-            <a href="servletLoaiThuoc" id="thuoc-link" class="${param.page == 'DSthuoc' ? 'active' : ''}">
+            <a href="servletLoaiThuoc" class="active">
                 <span class="material-icons-sharp">medical_services</span>
                 <h3>Thuốc</h3>
             </a>
-            <a href="servletNhanVien" id="nv-link" class="${param.page == 'DSnhanvien' ? 'active' : ''}">
+            <a href="servletNhanVien">
                 <span class="material-icons-sharp">diversity_2</span>
                 <h3>Nhân viên</h3>
             </a>
-            <a href="servletKhachHang" id="kh-link" class="${param.page == 'DSkhachhang' ? 'active' : ''}">
+            <a href="servletKhachHang">
                 <span class="material-icons-sharp">emoji_people</span>
                 <h3>Khách hàng</h3>
             </a>
-            <a href="servletDoanhThu" id="doanhthu-link" class="${param.page == 'DSDoanhThu' ? 'active' : ''}">
-                <span class="material-icons-sharp">bar_chart</span>
-                <h3>Doanh thu</h3>
-            </a>
-            <a href="servletLogout">
+            <a href="#">
                 <span class="material-icons-sharp">logout</span>
                 <h3>Đăng xuất</h3>
             </a>
@@ -63,7 +59,7 @@
                 <div class="order-header">
                     <span id="idDH" data-value="${dh.id}"><strong>Mã Đơn Hàng:   </strong>${dh.id}</span>
                     <span><strong>Ngày Đặt Hàng:  </strong>${dh.ngayDatHang}</span>
-                    <span class="order-status" id="ttDH" data-value1="${dh.trangThaiDatHang.displayName}"><strong style="color: white;"> ${dh.trangThaiDatHang.displayName}</strong></span>
+                    <span class="order-status"><strong style="color: white;"> ${dh.trangThaiDatHang.displayName}</strong></span>
                 </div>
                 <div class="customer-info">
                     <div class="customer">
@@ -105,12 +101,13 @@
                 </c:forEach>
                 </tbody>
             </table><br>
-            <a href="#" class="button" style="margin-left: 10cm; ">
-                <!-- button them nhan vien -->
-                <div class="buttons">
-                    <button type="submit" class="blob-btn" onclick="DuyetDonHang()" disabled>
-                        Duyệt đơn hàng
-                        <span class="blob-btn__inner">
+            <div class="duyetDonHang" style="margin-left: 6cm; margin-top:1cm;">
+                <a href="#" class="button" style="margin-left: 10cm; ">
+                    <!-- button them nhan vien -->
+                    <div class="buttons">
+                        <button type="submit" class="blob-btn" onclick="DuyetDonHang()">
+                            Duyệt đơn hàng
+                            <span class="blob-btn__inner">
                                     <span class="blob-btn__blobs">
                                       <span class="blob-btn__blob"></span>
                                       <span class="blob-btn__blob"></span>
@@ -118,19 +115,20 @@
                                       <span class="blob-btn__blob"></span>
                                     </span>
                                   </span>
-                    </button>
-                    <br/>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                    <defs>
-                        <filter id="goo">
-                            <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
-                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo"></feColorMatrix>
-                            <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
-                        </filter>
-                    </defs>
-                </svg>
-            </a>
+                        </button>
+                        <br/>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <defs>
+                            <filter id="goo">
+                                <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+                                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo"></feColorMatrix>
+                                <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
+                            </filter>
+                        </defs>
+                    </svg>
+                </a>
+            </div>
             <%--                <button type="submit" class="blob-btn" onclick="DuyetDonHang()">Duyệt đơn hàng</button>--%>
         </div>
     </main>
@@ -147,16 +145,8 @@
             </div>
             <div class="profile">
                 <div class="info">
-                    <c:choose>
-                        <c:when test="${sessionScope.admin!=null}">
-                            <p>Xin chào, <b>Admin</b></p>
-                            <small class="text-muted">${sessionScope.admin.ten}</small>
-                        </c:when>
-                        <c:otherwise>
-                            <p>Xin chào, <b>${sessionScope.nhanVien.chucVu.tenChucVu}</b></p>
-                            <small class="text-muted">${sessionScope.nhanVien.ten}</small>
-                        </c:otherwise>
-                    </c:choose>
+                    <p>Xin chào, <b>Hoang</b></p>
+                    <small class="text-muted">Admin</small>
                 </div>
                 <div class="profile-photo">
                     <img src="imagesAdmin/broccoli.png">
@@ -174,26 +164,21 @@
         const newUrl = 'servletDashboard?action=' + action + '&idDatHang=' + idDH;
         window.location.href = newUrl;
     }
-    const userRole = '${sessionScope.nhanVien.chucVu.tenChucVu}';
-    const admin_test = ${sessionScope.admin == null}
-    if (userRole === 'Nhân viên' && admin_test) {
-        const thuocLink = document.getElementById('thuoc-link');
-        // Thêm lớp CSS để làm liên kết không nhấn được
-        thuocLink.classList.add('disabled');
-        const nvLink = document.getElementById('nv-link');
-        nvLink.classList.add('disabled');
-        const khLink = document.getElementById('kh-link');
-        khLink.classList.add('disabled');
-        const doanhthuLink = document.getElementById('doanhthu-link');
-        doanhthuLink.classList.add('disabled');
+    const themeToggler = document.querySelector(".theme-toggler");
+    const body = document.body;
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+        body.classList.toggle('dark-theme-variables', savedTheme === 'dark');
+        themeToggler.querySelector('span:nth-child(1)').classList.toggle('active', savedTheme === 'light');
+        themeToggler.querySelector('span:nth-child(2)').classList.toggle('active', savedTheme === 'dark');
     }
-    const ttDonHang = document.getElementById("ttDH").getAttribute("data-value1");
-    console.log(ttDonHang); // In ra giá trị của ttDonHang
-    if (ttDonHang === 'Đang mua hàng') {
-        document.querySelector('.blob-btn').disabled = true;
-    } else {
-        document.querySelector('.blob-btn').disabled = false;
-    }
+    // Change theme (sáng/tối)
+    themeToggler.addEventListener('click', () => {
+        const isDark = body.classList.toggle('dark-theme-variables');
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+        themeToggler.querySelector('span:nth-child(1)').classList.toggle('active', !isDark);
+        themeToggler.querySelector('span:nth-child(2)').classList.toggle('active', isDark);
+    });
 </script>
 <script src="script.js"></script>
 

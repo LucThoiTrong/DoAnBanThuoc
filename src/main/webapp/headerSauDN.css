@@ -61,3 +61,17 @@
     cursor: pointer;
     border-radius: 50%;
 }
+#btnListThuoc {
+    background-color: #28a745; /* Màu xanh lá */
+    color: white; /* Màu chữ trắng */
+    border: none; /* Không viền */
+    padding: 10px 20px; /* Khoảng cách bên trong nút */
+    border-radius: 5px; /* Bo tròn góc nút */
+    cursor: pointer; /* Đổi con trỏ thành hình tay */
+    font-size: 16px; /* Kích thước chữ */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi màu */
+}
+
+.btnListThuoc:hover {
+    background-color: #218838; /* Màu xanh đậm hơn khi hover */
+}

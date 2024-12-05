@@ -94,5 +94,65 @@ public class ITKKhachHang implements IDAO<TKKhachHang>{
         }
         return tkkh;  // Trả về kết quả nếu tìm thấy
     }
+    public TKKhachHang selectTKKhachHangByUsername(String username) {
+        TKKhachHang tkkh = null;
+        EntityManager entityManager = null;
+        try {
+            // Mở EntityManager để tạo giao dịch cho truy vấn
+            entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
 
+            // Câu lệnh JPQL để tìm TKKhachHang theo username và password
+            String jpql = "SELECT t FROM TKKhachHang t WHERE t.username = :username";
+
+            // Thực hiện truy vấn và lấy kết quả
+            tkkh = entityManager.createQuery(jpql, TKKhachHang.class)
+                    .setParameter("username", username)  // Gán giá trị cho tham số username
+                    .getSingleResult();  // Lấy duy nhất một kết quả
+
+        } catch (NoResultException e) {
+            // Nếu không tìm thấy kết quả nào (NoResultException), trả về null
+            return null;
+        } catch (Exception e) {
+            // Xử lý các ngoại lệ khác, in ra thông báo lỗi
+            e.printStackTrace();
+            return null;
+        } finally {
+            // Đảm bảo EntityManager được đóng sau khi sử dụng
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
+        return tkkh;  // Trả về kết quả nếu tìm thấy
+    }
+    public boolean updateTKKhachHang(String username, String newPassword) {
+        EntityManager entityManager = null;
+        EntityTransaction transaction = null;
+
+        try {
+            entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+
+            String jpql = "UPDATE TKKhachHang t SET t.password = :password WHERE t.username = :username";
+
+            int rowsUpdated = entityManager.createQuery(jpql)
+                    .setParameter("password", newPassword)
+                    .setParameter("username", username)
+                    .executeUpdate();
+
+            transaction.commit();
+            return rowsUpdated > 0;
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
+    }
 }

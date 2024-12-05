@@ -73,36 +73,19 @@ public class ServletDatHangKH extends HttpServlet {
         // Lấy lần đặt hàng cuối cùng của khách hàng
         DatHang dh = kh.getLastOrder();
 
-        // Kiểm tra nếu lần đặt hàng cuối cùng không tồn tại hoặc đã kết thúc
-        if (dh == null || dh.getTrangThaiDatHang() == TrangThaiDatHang.DA_GIAO) {
-            dh = new DatHang();
-            dh.setKhachHang(kh);
-            new IDatHang().insert(dh);
-        }
+        // Lấy id chi tiết đặt hàng
+        int idDonViTinh = Integer.parseInt(req.getParameter("id"));
+        int soLuongNew = Integer.parseInt(req.getParameter("soLuong"));
 
-        // Lấy id sản phẩm và id đơn vị tính từ request
-        int idDonViTinh = Integer.parseInt(req.getParameter("idDonViTinh"));
-        int idSanPham = Integer.parseInt(req.getParameter("idSanPham"));
+        // Lấy đối tượng chi tiết đặt hàng thông qua id
+        ChiTietDatHang ctdh = new IChiTietDatHang().SelectById(idDonViTinh);
 
-        // Lấy chi tiết sản phẩm từ id sản phẩm và id đơn vị tính
-        ChiTietSanPham ctsp = new IChiTietSanPham().SelectBySanPhamDonViTinh(idSanPham, idDonViTinh);
+        ctdh.setSoLuongMua(soLuongNew);
 
-        // Kiểm tra nếu sản phẩm tồn tại trong giỏ hàng
-        boolean kq = dh.kiemTraSanPhamTrongGio(ctsp);
-
-        // Nếu sản phẩm đã có trong giỏ hàng, cập nhật số lượng
-        if (kq) {
-            int soLuongMoi = Integer.parseInt(req.getParameter("soLuong"));
-            dh.updateSanPham(ctsp, soLuongMoi);
-            // Cập nhật lại sản phẩm trong CSDL
-            new IDatHang().update(dh);
-        }
-
-        // Lưu giỏ hàng cập nhật vào session
-        session.setAttribute("Cart", dh);
+        new IChiTietDatHang().update(ctdh);
 
         // Chuyển hướng hoặc trả về phản hồi phù hợp
-        resp.sendRedirect("gioHang.jsp");
+        getServletContext().getRequestDispatcher("/servletGioHang").forward(req, resp);
     }
 
     private void AddSanPhamTrongGioHang(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -159,4 +142,5 @@ public class ServletDatHangKH extends HttpServlet {
         }
         getServletContext().getRequestDispatcher("/servletGioHang").forward(req, resp);
     }
+
 }

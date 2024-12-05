@@ -2,7 +2,6 @@ package Model.BusinessModels.Enum;
 
 public enum PhuongThucThanhToan {
     MOMO("MoMo","Thanh toán qua MoMo"),
-    ZALOPAY("Zalopay","Thanh toán qua Zalopay"),
     CASH("Tiền mặt", "Thanh toán bằng tiền mặt");
 
     private final String displayName; // Tên hiển thị

@@ -35,6 +35,18 @@
             </div>
             <div class = "col-6" style="display: flex; justify-content: flex-end; align-items: center;">
                 <!--  -->
+                <button id="btnListThuoc" style=" margin-right: 15px; background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-size: 16px;"
+                        onclick="window.location.href='servletSanPham?action=LayAllSanPham';">
+                    Mua thuốc ngay
+                </button>
+<%--                <script>--%>
+<%--                    try {--%>
+<%--                        window.location.href = "/servletSanPhamThuoc?action=LayAllSanPham";--%>
+<%--                    } catch (error) {--%>
+<%--                        console.error("Có lỗi xảy ra:", error);--%>
+<%--                        alert("Không thể chuyển hướng đến trang sản phẩm. Vui lòng thử lại sau.");--%>
+<%--                    }--%>
+<%--                </script>--%>
                 <ul style="list-style: none; padding: 0; margin: 0;">
                     <li class="dropdown no-arrow mx-2">
                         <a class="dropdown-toggle" href="#" id="alertsDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none;">
@@ -43,8 +55,8 @@
 <%--                                Viết động chỗ này để lấy tổng số lượng các sản phẩm đã chọn?--%>
                                 <span class="badge bg-danger badge-counter" style="position: absolute; top: -5px; right: -5px;">
                                     <c:choose>
-                                        <c:when test="${dh != null}">
-                                            ${fn:length(dh.danhSachSanPham)}
+                                        <c:when test="${sessionScope.dh != null}">
+                                            ${fn:length(sessionScope.dh.danhSachSanPham)}
                                         </c:when>
                                         <c:otherwise>
                                             0
@@ -57,7 +69,7 @@
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                             <h6 class="dropdown-header">Sản phẩm trong giỏ hàng</h6>
 <%--                            Viết vòng foreach lụm các sản phẩm từ trong CSDL lên--%>
-                            <c:forEach var="p" items="${dh.danhSachSanPham}">
+                            <c:forEach var="p" items="${sessionScope.dh.danhSachSanPham}">
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3 ml-4">
                                         <div>

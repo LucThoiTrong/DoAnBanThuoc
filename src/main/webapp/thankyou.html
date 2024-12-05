@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cảm ơn đã mua hàng</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #dfcaf0, #80cbc4);
+      font-family: 'Arial', sans-serif;
+    }
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card-header {
+      background-color: #49CC69;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+    .card-body {
+      padding: 30px;
+      text-align: center;
+    }
+    .btn-custom {
+      background-color: #49CC69;
+      color: #fff;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .btn-custom:hover {
+      background-color: #218838;
+      transform: scale(1.05);
+    }
+    .icon {
+      display: block;
+      margin: 20px auto;
+      font-size: 5rem;
+      color: #49CC69;
+    }
+    .animated-images {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .animated-images img {
+      width: 80px;
+      height: auto;
+      border-radius: 10px;
+    }
+    .wave {
+    position: absolute;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    background: url('IMG/wave.png') repeat-x;
+    background-size: 250rem 30rem;
+    animation: animate 15s linear infinite;
+    }
+    /*@keyframes  animate {
+        0% {
+            background-position-x: 0;
+            background-position-x: -250rem;
+        }
+    }*/
+    @keyframes animate {
+        0% {
+            background-position-x: 0;
+        }
+        100% {
+            background-position-x: -250rem;
+        }
+    }
+
+    .wave:nth-child(1) {
+        opacity: 0.9;
+    }
+        
+    .wave:nth-child(2) {
+        opacity: 0.5;
+        animation-delay: 0.2s;
+        animation-direction: reverse;
+    }
+        
+    .wave:nth-child(3) {
+        opacity: 0.7;
+        animation-delay: 5s;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <i class="icon bi bi-check-circle"></i>
+          </div>
+          <div class="card-body">
+            <h1 class="thank-you-message"><strong>Cảm ơn bạn đã mua hàng!</strong></h1>
+            <p class="text-center">Chúng tôi rất trân trọng sự tin tưởng của bạn. Đơn hàng của bạn đang được xử lý và sẽ sớm được giao đến bạn.</p>
+            <div class="text-center mt-4">
+              <a href="servletSanPham?action=LayAllSanPham" class="btn btn-custom px-4 py-2">Tiếp tục mua hàng</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  <!-- Bootstrap icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 public class DonViTinh implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DonViTinhID")
     private int id;
     private String tenDonViTinh;
@@ -21,6 +21,10 @@ public class DonViTinh implements Serializable {
 
     public DonViTinh(String tenDonViTinh) {
         this.tenDonViTinh = tenDonViTinh;
+    }
+
+    public DonViTinh(int id) {
+        this.id = id;
     }
 
     public DonViTinh(String tenDonViTinh, Set<ChiTietSanPham> cacChiTietSanPham) {
